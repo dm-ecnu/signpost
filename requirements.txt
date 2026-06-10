@@ -1,0 +1,39 @@
+# SignPost full-pipeline dependencies (Python 3.11–3.12).
+#
+# NOTE: the offline test suites need NONE of these — only `pip install -e '.[test]'`
+# (pyyaml + pytest). Install this file to run the full offline construction +
+# online serving pipeline (which also needs the backing services in
+# docker/docker-compose.yml plus an Elasticsearch instance and an
+# OpenAI-compatible LLM endpoint; see README "Deployment tiers").
+
+# --- core serving + offline construction ---
+pyyaml>=6.0,<7
+numpy>=1.24,<3
+networkx>=3.1,<4
+pydantic>=2.5,<3
+pydantic-settings>=2.1,<3
+cachetools>=5.3,<6
+filelock>=3.12,<4
+xxhash>=3.4,<4
+json-repair>=0.25,<1
+
+# --- LLM / embedding / rerank client (OpenAI-compatible, e.g. ECNU) ---
+openai>=1.30,<2
+httpx>=0.27,<1
+requests>=2.31,<3
+
+# --- document parsing + retrieval substrate ---
+pdfplumber>=0.11,<1
+jinja2>=3.1,<4
+Pillow>=10.0,<12
+huggingface-hub>=0.23,<1
+click>=8.1,<9
+
+# --- dense retrieval / reranking (heavy; CPU works, GPU recommended) ---
+transformers>=4.40,<5
+
+# Optional extras, only imported by specific baselines / the ReAct UI:
+#   google-generativeai   (Gemini embedding backend in signpost/react)
+#   textual               (terminal UI for the ReAct deepresearch agent)
+#   ruamel.yaml           (alternative YAML loader in some react configs)
+# Install these on demand if you exercise those code paths.

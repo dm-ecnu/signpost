@@ -24,20 +24,46 @@ deterministically — no per-hop LLM calls, no per-query graph reconstruction.
 | `signpost/benchmark/` | Metrics and statistics, incl. bootstrap CIs and paired bootstrap tests |
 | `signpost/llm/` | OpenAI-compatible client (ECNU or any compatible endpoint) |
 | `scripts/` | Dataset preparation, build-and-score pipelines, evaluation suites |
-| `tests/` | Unit tests; the three suites below run fully offline |
+| `tests/` | Unit tests; the four suites in the quickstart run fully offline |
 | `GAPS_IMPLEMENTED.md` | What was added on top of the original system + how to re-run experiments |
+| `METHOD_MAP.md` | Paper concept → code file:symbol map, with paper-vs-code deltas |
 
 Vendored third-party baseline repositories (ClueRAG, HiPRAG, …) and benchmark
 corpora are **not** included; fetch them from their upstreams (see
 `docs/baseline_harness.zh.md`).
 
-## Setup
+## Quick start (reviewers start here)
 
-Requires Python 3.11–3.12.
+Zero-setup check on a fresh clone — no Elasticsearch, no LLM, no corpus, runs in
+seconds (Python 3.11–3.12):
 
 ```bash
-pip install -e '.[test]'
-cp conf/service_conf.example.yaml conf/service_conf.yaml   # then fill it in
+git clone https://github.com/junjie-yao/signpost.git && cd signpost
+pip install -e '.[test]'      # offline-test deps only (pyyaml + pytest)
+make test                     # or: python -m pytest tests/test_sketch_chaining.py \
+                              #         tests/test_stats_ci.py tests/test_iso_call_baseline.py \
+                              #         tests/test_silver_builder.py -q
+```
+
+Expected: `79 passed`. These suites exercise the serving mechanisms directly —
+deterministic sketch chaining (Alg. 3), the iso-call attribution baseline,
+bootstrap CIs, and the in-repo silver-evidence builder — without any external
+service.
+
+## Deployment tiers
+
+| Tier | What runs | Needs |
+|---|---|---|
+| **T0 — offline tests** | the quickstart above; serving-mechanism + builder logic | nothing beyond `pip install -e '.[test]'` |
+| **T1 — full pipeline** | offline construction + online serving over a real corpus | `pip install -r requirements.txt`, the backing services, an Elasticsearch instance, and an OpenAI-compatible LLM key |
+
+For **T1**:
+
+```bash
+pip install -r requirements.txt
+cp conf/service_conf.example.yaml conf/service_conf.yaml      # then fill it in
+make services-up                                              # Postgres / Valkey / MinIO via docker/docker-compose.yml
+# bring up your own Elasticsearch (see docs/environment_setup.md)
 ```
 
 Credentials are read from the environment — never commit them:
@@ -45,16 +71,15 @@ Credentials are read from the environment — never commit them:
 - `ECNU_API_KEY` (or `OPENAI_API_KEY`) — chat/embedding endpoint key
 - `ECNU_EMBEDDING_API_KEY` / `OPENAI_EMBEDDING_API_KEY` — optional separate embedding key
 
-The full pipeline additionally needs Elasticsearch (and optionally
-Postgres/Redis/MinIO, see `conf/service_conf.example.yaml` and
-`docs/environment_setup.md`).
+`docker/docker-compose.yml` starts Postgres, Valkey (Redis), and MinIO;
+Elasticsearch and the LLM endpoint are external (see `docs/environment_setup.md`).
 
-## Offline tests (no ES / LLM / corpus needed)
+## Paper ↔ code
 
-```bash
-python -m pytest tests/test_sketch_chaining.py tests/test_stats_ci.py tests/test_iso_call_baseline.py -q
-# expect: 66 passed
-```
+`METHOD_MAP.md` maps each paper concept (section / algorithm / equation) to its
+implementing file and symbol, with an honest-scope section on paper-vs-code
+deltas. `GAPS_IMPLEMENTED.md` records what was added on top of the original
+system and how to re-run the experiments.
 
 ## Running experiments
 
