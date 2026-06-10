@@ -32,6 +32,16 @@ Vendored third-party baseline repositories (ClueRAG, HiPRAG, …) and benchmark
 corpora are **not** included; fetch them from their upstreams (see
 `docs/baseline_harness.zh.md`).
 
+## Datasets & baselines
+
+Citation-backed documentation of the corpora and compared systems in the paper:
+
+| Doc | What it is |
+|---|---|
+| `DATASETS.md` | The six evaluation workloads — Agriculture, Medical, Novel, Legal, Mix, and the MuSiQue multi-hop set — with official name, one-line description, how to obtain (real upstream URLs), license notes, paper-stated scale, and the in-repo silver-evidence construction (`scripts/build_silver_evidence.py`). Records that reference answers exist but human gold spans do not, and that Medical/Novel are actually fetched from GraphRAG-Bench rather than UltraDomain. |
+| `BASELINES.md` | The eight baselines grouped as the paper groups them (closed-book / flat / index-centric / graph-optimization / single-round graph-memory / multi-round agentic): role, config compared, citation key, and whether code is in-repo or vendored under the gitignored `baselines/` dir. |
+| `CITATIONS.bib` | Real BibTeX for every baseline key, copied verbatim from the paper's `references.bib`. Dataset sources have no key in that bibliography and are marked MISSING rather than invented. |
+
 ## Quick start (reviewers start here)
 
 Zero-setup check on a fresh clone — no Elasticsearch, no LLM, no corpus, runs in

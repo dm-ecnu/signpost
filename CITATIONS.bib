@@ -1,0 +1,78 @@
+% CITATIONS.bib — BibTeX for the baselines and datasets referenced in
+% DATASETS.md and BASELINES.md.
+%
+% Every external-baseline entry below is copied VERBATIM from the paper's
+% bibliography at:
+%   ../signpost-icde/references.bib
+% (signpost-icde repo). Keys were verified to resolve there by grep.
+%
+% Dataset sources (UltraDomain, GraphRAG-Bench, MuSiQue) have NO entry in the
+% paper's references.bib and are NOT cited with keys in the paper; they are
+% marked MISSING below rather than fabricated. See DATASETS.md for the canonical
+% upstream sources used for reproducibility.
+
+% ===========================================================================
+% Baselines — verbatim from references.bib (verified to resolve)
+% ===========================================================================
+
+@inproceedings{zhuang2025linearrag,
+  title={LinearRAG: Linear Graph Retrieval Augmented Generation on Large-Scale Corpora},
+  booktitle = {Proc.\ ICLR},
+  author={Zhuang, Luyao and Chen, Shengyuan and Xiao, Yilin and Zhou, Huachi and Zhang, Yujing and Chen, Hao and Zhang, Qinggang and Huang, Xiao},
+  year={2026}
+}
+
+@article{cluerag2026,
+  title={Clue-RAG: Towards Accurate and Cost-Efficient Graph-based RAG via Multi-Partite Graph and Query-Driven Iterative Retrieval},
+  author={Su, Yaodong and Fang, Yixiang and Zhou, Yingli and Xu, Quanqing and Yang, Chuanhui},
+  journal={arXiv preprint arXiv:2507.08445},
+  year={2025}
+}
+
+@article{agrag2026,
+  title={AGRAG: Advanced Graph-based Retrieval-Augmented Generation for LLMs},
+  author={Wang, Yubo and Li, Haoyang and Teng, Fei and Chen, Lei},
+  journal={arXiv preprint arXiv:2511.05549},
+  year={2025}
+}
+
+@inproceedings{wu2026memgraphrag,
+  author    = {Wu, Chuanjie and Xiang, Zhishang and Tang, Yunbo and Chen, Zerui and Zhang, Qinggang and Su, Jinsong},
+  title     = {{MemGraphRAG}: Memory-based Multi-Agent System for Graph Retrieval-Augmented Generation},
+  year      = {2026},
+  booktitle = {KDD},
+  eprint    = {2606.00610},
+  archivePrefix = {arXiv},}
+
+@article{wu2026hiprag,
+  title={HiPRAG: Hierarchical Process Rewards for Efficient Agentic Retrieval-Augmented Generation},
+  author={Wu, Peilin and Zhang, Mian and Wan, Kun and Zhao, Wentian and He, Kaiyu and Du, Xinya and Chen, Zhiyu},
+  journal={arXiv preprint arXiv:2510.07794},
+  year={2025}
+}
+
+@inproceedings{graphragr12026,
+  title={GraphRAG-R1: Graph Retrieval-Augmented Generation with Process-Constrained Reinforcement Learning},
+  author={Yu, Chuanyue and Zhao, Kuo and Li, Yuhan and Chang, Heng and Feng, Mingjian and Jiang, Xiangzhe and Sun, Yufei and Li, Jia and Zhang, Yuzhi and Sun, Qingyun and Li, Jianxin and Zhang, Ziwei},
+  booktitle={Proc.\ WWW},
+  year={2026}
+}
+
+% ===========================================================================
+% Datasets — NOT present in references.bib (do not fabricate)
+% ===========================================================================
+% UltraDomain (Agriculture, Legal, Mix): MISSING — needs a real entry.
+%   No UltraDomain key in references.bib. Upstream: HuggingFace dataset
+%   TommyChien/UltraDomain (see DATASETS.md).
+%
+% GraphRAG-Bench (Medical, Novel): MISSING — needs a real entry.
+%   No GraphRAG-Bench key in references.bib. Upstream: HuggingFace dataset
+%   GraphRAG-Bench/GraphRAG-Bench (see DATASETS.md).
+%
+% MuSiQue (multi-hop benchmark): MISSING — needs a real entry.
+%   No MuSiQue dataset key in references.bib. Canonical reference is
+%   Trivedi et al., "MuSiQue: Multihop Questions via Single-hop Question
+%   Composition", TACL 2022; upstream https://github.com/StonyBrookNLP/musique.
+%   NOTE: references.bib DOES contain key `trivedi2023ircot` (IRCoT, ACL 2023),
+%   but that is the IRCoT *method* paper, NOT the MuSiQue dataset paper — do not
+%   reuse it as a MuSiQue citation.
