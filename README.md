@@ -1,6 +1,6 @@
 # SignPost
 
-[![CI](https://github.com/junjie-yao/signpost/actions/workflows/ci.yml/badge.svg)](https://github.com/junjie-yao/signpost/actions/workflows/ci.yml)
+[![CI](https://github.com/dm-ecnu/signpost/actions/workflows/ci.yml/badge.svg)](https://github.com/dm-ecnu/signpost/actions/workflows/ci.yml)
 
 SignPost is a materialized action interface for agentic graph RAG serving.
 Offline, it builds source-backed objects (chunks, summaries, entities,
@@ -38,7 +38,7 @@ Zero-setup check on a fresh clone — no Elasticsearch, no LLM, no corpus, runs 
 seconds (Python 3.11–3.12):
 
 ```bash
-git clone https://github.com/junjie-yao/signpost.git && cd signpost
+git clone https://github.com/dm-ecnu/signpost.git && cd signpost
 pip install -e '.[test]'      # offline-test deps only (pyyaml + pytest)
 make test                     # or: python -m pytest tests/test_sketch_chaining.py \
                               #         tests/test_stats_ci.py tests/test_iso_call_baseline.py \
