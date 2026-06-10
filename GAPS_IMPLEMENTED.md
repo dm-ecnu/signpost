@@ -12,6 +12,7 @@ current paper predate these changes.
 | **Sketch chaining** (Alg.3 core) | `signpost/agent/sketch_chaining.py`, `signpost/agent/supervisor.py` | Researcher now follows zoom/read/jump cues to successor objects across multiple hops, maintains the visited set `H_t`, applies priority `verify > read > zoom > jump`, and reads verify cues via ReadFile. **Deterministic** cue-following — no extra LLM call per hop. |
 | **Iso-call baseline** | `signpost/baselines/iso_call.py`, `scripts/baselines/run_iso_call.py` | ReAct over **untyped** neighbors at the same LLM-call budget, for attribution (isolates the benefit of typed cues vs. budget). Registered in `scripts/baselines/run_baseline_method.sh`. |
 | **Confidence intervals** | `signpost/benchmark/stats.py` | `bootstrap_ci`, `paired_bootstrap_diff` (CI + bootstrap p-value), `summarize_with_ci`. Stdlib-only, deterministic (fixed seed). |
+| **Silver-evidence builder** (2026-06-10) | `signpost/evaluation/silver_builder.py`, `scripts/build_silver_evidence.py` | In-repo construction of `llm_target_units.jsonl` + `llm_silver_chunks.jsonl`: LLM decomposes (question, gold answer) into target units, lexical top-K candidates, LLM grounds units per chunk (`supports` lists). Schemas verified against `final_metrics` consumers; resumable CLI; live-tested against the ECNU endpoint. |
 
 ## Run the unit tests first (no ES/LLM/corpus needed)
 
@@ -42,10 +43,13 @@ python3 -m pytest tests/test_sketch_chaining.py tests/test_stats_ci.py tests/tes
   claim as deterministic navigation. (A *full ReAct* port — LLM per hop — would
   instead make it ~11–13 calls/query; that is a different design and is NOT what
   this implements.)
-- **Silver-evidence construction is still external** (`extract_llm_targets_silver.py`
-  on the H200) — not reconstructed here, because rebuilding it could produce a
-  *different* method than what generated the silver targets. Bring the real
-  script into the repo and audit the chunk-level-vs-span self-reference concern.
+- **Silver-evidence construction is now in-repo**
+  (`scripts/build_silver_evidence.py`); the *existing* paper numbers were built
+  by the external H200 script (`extract_llm_targets_silver.py`), so a re-run
+  should regenerate the targets with the in-repo builder and keep them frozen
+  across all compared systems. To limit self-reference bias, build with a model
+  that is not the evaluated backbone (`--model ecnu-max`) and note that silver
+  remains chunk-level (the span-vs-chunk concern from the audit still applies).
 - **Paper text edits (separate from code):** relation objects `V_r` are stored as
   edges, not graph nodes; sketches are computed at query time, not stored inline
   in ES; greedy submodular selection is gated by `SIGNPOST_CUE_SELECT=greedy`
