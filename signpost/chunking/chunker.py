@@ -1,10 +1,14 @@
 from __future__ import annotations
 
-"""F4 tree-aware chunk generation.
+"""Tree-guided chunker producing source chunks V_c (paper Section 3.3,
+BuildSignpostIndex / Alg. 1, "chunk by document-tree boundaries under b_chunk").
 
-The chunker follows the thesis two-stage scheme:
-1. If a subtree fits the token budget, merge it into one chunk.
-2. If a node is still oversized, split it on line boundaries with overlap.
+Two-stage scheme over T_d:
+1. Fold short self-contained sections (subtree under b_chunk) into one chunk.
+2. Split a still-oversized node on line boundaries under the token budget.
+Each chunk keeps doc id, section path, line range, source-order position, token
+count, and prev/next links -- the locator fields C_p (verify) and C_h (read)
+cues are built from.
 """
 
 from typing import Any

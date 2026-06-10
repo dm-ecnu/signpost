@@ -1,6 +1,12 @@
 from __future__ import annotations
 
-"""Elasticsearch schema and adapters for F10 graph-object indexing."""
+"""Elasticsearch schema for the graph-object index I_G over summaries, entities,
+and relation objects (paper Section 3.3, "Indexes and physical schema").
+
+Together with the chunk index I_C this gives the retrieval candidate set
+|I_C| + |I_G| = |O|; structural/sequential/semantic/provenance links are kept as
+action state (cue payloads) rather than as independently retrieved snippets.
+"""
 
 import hashlib
 import json

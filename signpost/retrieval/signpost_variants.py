@@ -1,6 +1,19 @@
 from __future__ import annotations
 
-"""Signpost variant filtering for ablation experiments."""
+"""Cue-family ablations and budgeted top-b_x exposure (paper Section 5, RQ5
+complete vs. budgeted modes; Prop. 1-2).
+
+Two roles:
+1. Variant filtering (FULL / NO_OFFLINE / NO_ONLINE / NO_*_CUES) for the ablation
+   that isolates which cue family carries the quality gain.
+2. apply_cue_topb: per-object top-b_x cue truncation (budgeted mode). The
+   selection rule is gated by env var SIGNPOST_CUE_SELECT:
+     'truncate' (DEFAULT) -> positional value[:b] prefix of the offline order;
+     'greedy'             -> submodular maximum-coverage prefix of Section 4.2 /
+                             Alg. 2 budgeted branch (via cue_coverage.py).
+   So the (1-1/e) greedy guarantee is OFF by default. Truncation caps exposure
+   only; token savings come from the fixed 2 LLM calls + bounded ReadFile.
+"""
 
 import os
 from copy import deepcopy

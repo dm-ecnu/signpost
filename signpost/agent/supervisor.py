@@ -1,10 +1,18 @@
 from __future__ import annotations
 
-"""F15 Supervisor-Researcher agent.
+"""Budgeted controller for ServeSignpostQuery (paper Section 5.1, Alg. 3).
 
-This module implements the paper's closed loop in a deterministic, testable
-form: Supervisor decomposes a question, Researcher searches with Signpost cues,
-ReadFile recovers source evidence, and Supervisor synthesizes a cited answer.
+The default minimal controller of the paper: the Supervisor decomposes q into at
+most three subquestions, each Researcher issues one KnowledgeSearch and follows
+admissible cues in family priority (verify > read > zoom > jump; see
+agent/sketch_chaining.py), every Verify resolves through ReadFile, and final
+synthesis sees only the read set R_t, returning a cited answer or exactly
+"Insufficient evidence".
+
+The per-query model-call cost is fixed at TWO LLM calls -- one decomposition and
+one synthesis -- independent of hop depth. Sketch chaining adds ReadFile calls
+and object lookups, not LLM calls (it is deterministic), which is what preserves
+the paper's 2-LLM-call claim. See METHOD_MAP.md.
 """
 
 from dataclasses import dataclass, field

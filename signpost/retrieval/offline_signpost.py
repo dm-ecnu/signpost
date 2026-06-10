@@ -1,10 +1,24 @@
 from __future__ import annotations
 
-"""F11 offline signposts for retrieved graph results.
+"""Per-object signpost view sigma(o) construction (paper Section 4.1, candidate
+generation for MaterializeSignposts / Alg. 2).
 
-Offline signposts are precomputed navigation cues attached to retrieval results:
-vertical hierarchy cues, horizontal adjacent-position cues, and provenance cues.
-They are deterministic and depend only on the unified graph.
+For every served object o this builds the four cue families
+    sigma(o) = <C_v, C_h, C_s, C_p>  =  zoom / read / jump / verify
+from the unified graph G_D (paper Section 3.3). Mapping of the dict keys
+returned here to the paper's families:
+    vertical   -> C_v (zoom)   : section_path / parent & child summaries / covered chunks
+    horizontal -> C_h (read)   : previous_chunk / next_chunk
+    semantic   -> C_s (jump)   : neighboring entities, relation endpoints/support
+    provenance -> C_p (verify) : source chunk ids and file:line locators
+
+Candidate generation is deterministic and uses only G_D plus stored locators, so
+the same object yields the same action menu across queries (paper Section 4.1).
+NOTE: relation objects V_r are NOT graph nodes here -- they are reified as
+semantic EDGES (see graph/semantic.py); `_relation_signpost` resolves an edge,
+not a node, into a relation cue. See METHOD_MAP.md for this delta.
+The score/cost/label fields of the paper's cue tuple are added later, online, by
+retrieval/cue_record.py; budgeted top-b_x selection is in cue_coverage.py.
 """
 
 import argparse
@@ -20,6 +34,10 @@ from signpost.retrieval.graph_search import search_graph
 
 
 def build_offline_signpost(graph: dict[str, Any], result: dict[str, Any] | str) -> dict[str, Any]:
+    # Dispatch by object role to build sigma(o)=<C_v,C_h,C_s,C_p>. Each branch
+    # emits the candidate cue families per the paper's per-type action contract
+    # (Section 4.1): chunk->read/verify+zoom, summary->zoom/read+verify,
+    # entity->jump/verify, relation(edge)->jump/verify.
     index = GraphIndex(graph)
     node_id = index.resolve_node_id(result)
     edge = index.resolve_edge(result)

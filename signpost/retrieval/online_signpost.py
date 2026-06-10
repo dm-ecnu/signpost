@@ -1,10 +1,13 @@
 from __future__ import annotations
 
-"""F12 online signposts with Personalized PageRank.
+"""Auxiliary group-level jump recommender via Personalized PageRank.
 
-Online signposts are group-level recommendations.  They use the current result
-group as seeds, prune the unified graph by scene, run PPR, and return top entity
-nodes as explainable jump targets.
+This is NOT the core serving loop (that is agent/sketch_chaining.py +
+agent/supervisor.py, Alg. 3). It is an optional online enrichment that augments
+the materialized jump (C_s) family with query-adaptive entity suggestions: it
+uses the current result group as PPR seeds, prunes G_D by scene, and returns top
+entity nodes as explainable jump targets. It is the component ablated by the
+NO_ONLINE / no_online variant (see retrieval/signpost_variants.py).
 """
 
 import argparse

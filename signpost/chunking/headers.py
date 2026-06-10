@@ -1,12 +1,14 @@
 from __future__ import annotations
 
-"""F4 chapter recognition.
+"""Heading recognition for the structural substrate (paper Section 3.3,
+BuildSignpostIndex / Alg. 1, "recognize headings ... build a tree T_d").
 
-The paper describes a dual-path design: short documents can be converted to
-Markdown end-to-end, while long documents use iterative section extraction.
-This module exposes both LLM paths and a deterministic recognizer.  The
-deterministic recognizer is always available for tests and for datasets where a
-model key should not be consumed.
+The deterministic recognizer implements the paper's deterministic heading
+patterns (Markdown, Chinese chapter/section markers, English article/chapter/
+part/section forms, dotted-numbered headings). It is always available for tests
+and for datasets where a model key should not be consumed; the optional LLM
+paths (Markdown conversion / iterative section extraction) are a convenience
+layer over the same heading abstraction.
 """
 
 import json

@@ -1,6 +1,11 @@
 from __future__ import annotations
 
-"""F5 chunk search over the Elasticsearch chunk index."""
+"""Frontier retrieval over the chunk index I_C (paper Section 5.1, the TopK(I_C
+union I_G, q_i, k) seed step of ServeSignpostQuery / Alg. 3).
+
+Lexical/dense hybrid search returning candidate objects; the graph-object half
+(I_G) is in graph_search.py. Their fused top-k forms the initial frontier F_0.
+"""
 
 import argparse
 import json

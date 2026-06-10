@@ -1,10 +1,12 @@
 from __future__ import annotations
 
-"""F8 sequential view graph.
+"""Sequential substrate: edges E_seq over source order (paper Section 3.3,
+"Sequential edges connect adjacent chunks within the same document").
 
-The sequential view keeps the original narrative order of chunks inside each
-document.  It creates bidirectional edges only between adjacent chunks from the
-same document, matching the thesis definition of Eseq.
+Keeps original narrative order: bidirectional prev/next edges only between
+adjacent chunks of the same document. It preserves local reading flow without
+turning nearest-neighbor similarity into graph structure, and backs the read
+(C_h) cue family.
 """
 
 from collections import defaultdict, deque

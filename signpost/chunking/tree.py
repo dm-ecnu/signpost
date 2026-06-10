@@ -1,10 +1,12 @@
 from __future__ import annotations
 
-"""F4 document tree construction.
+"""Source-line-preserving document tree T_d (paper Section 3.3, BuildSignpostIndex
+/ Alg. 1, "build a source-line-preserving tree").
 
-This is the stack algorithm described in the thesis: the stack stores the
-nearest possible parent chain; a new header pops nodes until it finds a shallower
-parent, then becomes that parent's child.
+A stack parser builds T_d: the stack stores the nearest possible parent chain; a
+new header pops nodes until it finds a shallower parent, then becomes that
+parent's child. The tree later anchors structural edges E_str and zoom (C_v)
+cues.
 """
 
 from typing import Any

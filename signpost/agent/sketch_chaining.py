@@ -304,6 +304,10 @@ class SketchChainer:
         return self._apply_budget(filtered)
 
     def _apply_budget(self, cues: list[dict[str, Any]]) -> list[dict[str, Any]]:
+        # Top-b_x prefix per family (paper Prop. 2): caps each family to b_x cues
+        # so per-step exposure is O(b)=O(sum_x b_x). 0 = unlimited (complete mode).
+        # This is a positional prefix of the offline-ordered list; the submodular
+        # greedy variant lives in cue_coverage.py / signpost_variants.py.
         if self.cue_budget_per_family > 0:
             return cues[: self.cue_budget_per_family]
         return cues

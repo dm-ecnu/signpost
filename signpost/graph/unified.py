@@ -1,15 +1,18 @@
 from __future__ import annotations
 
-"""F9 multi-view topological graph merge.
+"""Unified typed object graph G_D = (V, E, tau, mu) (paper Section 3.3,
+BuildSignpostIndex / Alg. 1, "merge and validate G_D").
 
-The unified graph follows the thesis model:
+Merges the structural / sequential / semantic substrates into one graph after
+type normalization, duplicate merging, and referential-integrity validation:
 
-V = Vchunk + Vsummary + Ventity
-E = Estruct + Esem + Eseq + Esource
+    V = V_c (chunk) + V_s (summary) + V_e (entity)
+    E = E_str (structure) + E_sem (semantic) + E_seq (sequence) + E_prov (source)
 
-Input graphs from F6/F7/F8 keep their own local type names.  This module
-normalizes them while preserving the original type fields for downstream
-inspection and indexing.
+NOTE: nodes here are only {chunk, summary, entity}. The paper's relation objects
+V_r are stored as semantic EDGES, not nodes (see graph/semantic.py). Input
+graphs keep their own local type names; this module normalizes them while
+preserving the original type fields for downstream inspection and indexing.
 """
 
 import json

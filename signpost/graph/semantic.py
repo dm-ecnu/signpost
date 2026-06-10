@@ -1,10 +1,17 @@
 from __future__ import annotations
 
-"""F6 semantic graph construction.
+"""Semantic substrate: normalized entities V_e and reified relation objects, plus
+edges E_sem and provenance E_prov (paper Section 3.3, "Semantic and provenance
+substrate").
 
-The graph JSON deliberately keeps source mappings instead of overwriting entity
-descriptions.  This matches the paper's multi-source evidence strategy and lets
-later F11/F14 features trace an entity back to exact chunks and line ranges.
+Entity mentions are normalized to stable ids (type by majority vote over
+mentions); relations are aggregated by endpoint pair and label family,
+accumulating weights, supporting source chunks, and occurrence-level line
+locators. NOTE: each relation aggregate becomes a relation OBJECT that is stored
+as a semantic EDGE (edge_type "semantic_relation"), not as a separate graph node
+-- the paper's V_r. The jump (C_s) cue family is built from these. Source
+mappings are kept (not overwritten onto entity descriptions) so verify (C_p)
+cues can trace every abstract object back to exact chunks and line ranges.
 """
 
 import hashlib

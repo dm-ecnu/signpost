@@ -1,10 +1,14 @@
 from __future__ import annotations
 
-"""F7 structure view and hierarchy-guided RAPTOR graph.
+"""Structural substrate: structural nodes V_s (summaries) and edges E_str (paper
+Section 3.3, BuildSignpostIndex / Alg. 1, "build bottom-up summaries").
 
-The preferred path follows the paper: reconstruct the document tree from F4 and
-summarize it bottom-up.  If no usable hierarchy is present, the builder falls
-back to standard RAPTOR-style recursive grouping over chunk order.
+The preferred path follows the paper: reconstruct the document tree T_d and
+summarize it bottom-up, storing each summary's child objects, covered chunks,
+merged line ranges, and section path. If no usable hierarchy is present, the
+builder falls back to RAPTOR-style recursive token-budget grouping over chunk
+order (paper Section 3.3, "in the spirit of RAPTOR"). These summaries and their
+structural edges back the zoom (C_v) cue family.
 """
 
 import hashlib

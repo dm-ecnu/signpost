@@ -1,6 +1,12 @@
 from __future__ import annotations
 
-"""Elasticsearch schema and document conversion for F5 chunk index."""
+"""Elasticsearch schema for the chunk index I_C over V_c (paper Section 3.3,
+"Indexes and physical schema").
+
+Each document carries lexical fields, a dense-vector field, object type, payload
+text, source-locator fields, and a serialized sketch pointer/payload, so
+query-time routing need not join through the graph.
+"""
 
 import re
 from typing import Any
