@@ -1,0 +1,57 @@
+/* DeepResearch TUI Styles */
+
+Screen { background: $surface; }
+Header { background: $primary; }
+Footer { background: $primary; }
+
+#header-bar {
+    dock: top;
+    height: 3;
+    background: $panel;
+    border: solid $accent;
+    padding: 1;
+    text-align: center;
+    text-style: bold;
+}
+
+#llm-output {
+    border: solid cyan;
+    border-title: "LLM Output";
+    height: 70%;
+    padding: 1;
+    background: $panel;
+    scrollbar-gutter: stable;
+}
+
+#llm-output:focus { border: solid $accent-lighten-1; }
+
+#bottom-container {
+    layout: horizontal;
+    height: 30%;
+}
+
+#stats-panel {
+    width: 30;
+    border: solid green;
+    border-title: "Stats";
+    padding: 1;
+    background: $panel;
+}
+
+#status-log {
+    width: 1fr;
+    border: solid yellow;
+    border-title: "Status Log";
+    padding: 1;
+    background: $panel;
+    scrollbar-gutter: stable;
+}
+
+#status-log:focus { border: solid $warning-lighten-1; }
+
+.success { color: $success; text-style: bold; }
+.error { color: $error; text-style: bold; }
+.warning { color: $warning; }
+.info { color: $accent; }
+.tool-name { color: $accent; text-style: bold; }
+.timestamp { color: $text-muted; }

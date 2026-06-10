@@ -1,0 +1,60 @@
+{
+  "factory_llm_infos": [
+    {
+      "name": "ECNU",
+      "logo": "",
+      "tags": "LLM,Text Embedding,Chat",
+      "llm": [
+        {
+          "llm_name": "ecnu-plus",
+          "model_type": "chat",
+          "fid": "ECNU",
+          "max_tokens": 256000,
+          "tags": "LLM,Chat"
+        },
+        {
+          "llm_name": "ecnu-max",
+          "model_type": "chat",
+          "fid": "ECNU",
+          "max_tokens": 1000000,
+          "tags": "LLM,Chat,Reasoning"
+        },
+        {
+          "llm_name": "ecnu-embedding-small",
+          "model_type": "embedding",
+          "fid": "ECNU",
+          "max_tokens": 8192,
+          "tags": "Text Embedding"
+        },
+        {
+          "llm_name": "ecnu-rerank",
+          "model_type": "rerank",
+          "fid": "ECNU",
+          "max_tokens": 8192,
+          "tags": "Rerank"
+        }
+      ]
+    },
+    {
+      "name": "OpenAI",
+      "logo": "",
+      "tags": "LLM,Text Embedding,Chat",
+      "llm": [
+        {
+          "llm_name": "replace_with_openai_chat_model",
+          "model_type": "chat",
+          "fid": "OpenAI",
+          "max_tokens": 128000,
+          "tags": "LLM,Chat"
+        },
+        {
+          "llm_name": "replace_with_openai_embedding_model",
+          "model_type": "embedding",
+          "fid": "OpenAI",
+          "max_tokens": 8192,
+          "tags": "Text Embedding"
+        }
+      ]
+    }
+  ]
+}

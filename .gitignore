@@ -1,0 +1,26 @@
+# secrets — copy conf/service_conf.example.yaml and keep the real one local
+conf/service_conf.yaml
+.env
+.env.*
+# caches / build
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+build/
+dist/
+.venv/
+.DS_Store
+*.log
+# model weights
+*.pt
+*.pth
+*.bin
+*.safetensors
+# vendored third-party baseline repos (ClueRAG, HiPRAG, ...) — fetch from upstream
+/baselines/
+# results / run outputs
+results/
+outputs/
+runs/
+es_data/

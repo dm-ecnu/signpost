@@ -1,0 +1,38 @@
+database_type: postgres
+
+postgres:
+  name: signpost
+  user: signpost
+  password: CHANGE_ME
+  host: 127.0.0.1
+  port: 5432
+  max_connections: 32
+  stale_timeout: 300
+
+es:
+  hosts: http://127.0.0.1:9200
+  max_result_window: 10000
+  scroll_timeout: 2m
+  scroll_page_size: 1000
+
+redis:
+  host: 127.0.0.1:6379
+  db: 1
+  password:
+
+minio:
+  host: 127.0.0.1:9000
+  user: signpost
+  password: CHANGE_ME
+
+user_default_llm:
+  # ECNU is OpenAI-compatible. Set the API key via the ECNU_API_KEY environment
+  # variable (preferred) or replace the placeholder below. Never commit a real key.
+  factory: ECNU
+  base_url: https://chat.ecnu.edu.cn/open/api/v1
+  api_key: replace_with_your_api_key
+  default_models:
+    chat_model: ecnu-plus
+    reasoning_model: ecnu-max
+    embedding_model: ecnu-embedding-small
+    rerank_model: ecnu-rerank

@@ -1,0 +1,25 @@
+name: offline-tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  offline-tests:
+    name: offline-tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install package with test extras
+        run: pip install -e '.[test]'
+
+      # These suites exercise the serving mechanisms (sketch chaining, iso-call
+      # baseline, bootstrap CIs) and need no Elasticsearch / LLM / corpus.
+      - name: Run offline test suites
+        run: python -m pytest tests/test_sketch_chaining.py tests/test_stats_ci.py tests/test_iso_call_baseline.py -q

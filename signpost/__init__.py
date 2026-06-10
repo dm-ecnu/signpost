@@ -1,0 +1,2 @@
+"""Research-oriented Signpost package."""
+

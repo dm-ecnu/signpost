@@ -1,0 +1,71 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: signpost-postgres
+    environment:
+      POSTGRES_USER: signpost
+      POSTGRES_PASSWORD: signpost
+      POSTGRES_DB: signpost
+    ports:
+      - "5432:5432"
+    volumes:
+      - signpost-postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U signpost -d signpost"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  valkey:
+    image: valkey/valkey:7.2
+    container_name: signpost-valkey
+    ports:
+      - "6379:6379"
+    volumes:
+      - signpost-valkey:/data
+    healthcheck:
+      test: ["CMD", "valkey-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  minio:
+    image: minio/minio:latest
+    container_name: signpost-minio
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: signpost
+      MINIO_ROOT_PASSWORD: signpost123
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - signpost-minio:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.12.1
+    container_name: signpost-es
+    environment:
+      discovery.type: single-node
+      xpack.security.enabled: "false"
+      ES_JAVA_OPTS: "-Xms2g -Xmx2g"
+    ports:
+      - "9200:9200"
+    volumes:
+      - signpost-es:/usr/share/elasticsearch/data
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:9200 >/dev/null || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 30
+
+volumes:
+  signpost-postgres:
+  signpost-valkey:
+  signpost-minio:
+  signpost-es:
