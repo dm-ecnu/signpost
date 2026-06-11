@@ -99,6 +99,14 @@ via `scripts/baselines/run_baseline_method.sh iso_call <dataset>`; report
 confidence intervals with `signpost.benchmark.stats.summarize_with_ci` /
 `paired_bootstrap_diff`.
 
+## Contact
+
+Signpost is maintained by the ECNU Data Management Group (DM Group), Software
+Engineering Institute, East China Normal University.
+
+For questions, issues, or collaboration, contact Junjie Yao at
+<junjie.yao@sei.encu.edu.cn>.
+
 ## License
 
 Apache-2.0 (see `LICENSE`).
