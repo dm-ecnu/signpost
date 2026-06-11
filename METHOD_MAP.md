@@ -1,6 +1,6 @@
-# SignPost: Method Map (paper ↔ code)
+# Signpost: Method Map (paper ↔ code)
 
-Maps the ICDE 2027 SignPost paper's concepts, symbols, and algorithms to the
+Maps the ICDE 2027 Signpost paper's concepts, symbols, and algorithms to the
 implementation in `signpost/`. Paper section/algorithm/equation labels are in the
 left column; verified `file:symbol` locations in the middle. All paths are
 relative to `signpost/`.

@@ -1,7 +1,7 @@
 .PHONY: help install install-full test smoke services-up services-down silver
 
 help:
-	@echo "SignPost artifact targets:"
+	@echo "Signpost artifact targets:"
 	@echo "  install       - install offline-test deps only (pip install -e '.[test]')"
 	@echo "  install-full  - install the full-pipeline deps (requirements.txt)"
 	@echo "  test          - run the offline test suites (no ES / LLM / corpus)"

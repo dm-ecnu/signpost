@@ -36,7 +36,7 @@ See `CITATIONS.bib` for the resolution status of every key.
 | Mix | `TommyChien/UltraDomain` | Mixed shorter sources | 61 docs, 1,287 chunks, 130 Qs, **28,966 objects** | HF resolve URL below |
 | Medical | `GraphRAG-Bench/GraphRAG-Bench` | Domain QA corpus + questions | reported in Table `tab:quality` | HF resolve URLs below |
 | Novel | `GraphRAG-Bench/GraphRAG-Bench` | Domain QA corpus + questions | reported in Table `tab:quality` | HF resolve URLs below |
-| MuSiQue | MuSiQue (Trivedi et al., TACL 2022) | Multi-hop QA benchmark | answer-quality only; `S_LLM`=4.8, J@7=36.0 for SignPost | see below; expected at `datasets/processed/musique/` |
+| MuSiQue | MuSiQue (Trivedi et al., TACL 2022) | Multi-hop QA benchmark | answer-quality only; `S_LLM`=4.8, J@7=36.0 for Signpost | see below; expected at `datasets/processed/musique/` |
 
 "Objects" is the retriever-candidate set `|I_C| + |I_G|` (chunk + graph
 objects), per Table `tab:workloads`. The two corpora analyzed in depth are
@@ -105,7 +105,7 @@ and semantic association).
 - **Citation key:** none in `references.bib` for the MuSiQue dataset.
   (`trivedi2023ircot` exists but is the IRCoT *method* paper, a different work.)
 - **Splits/scale used:** answer-quality rows in Table `tab:quality` (e.g.,
-  SignPost `S_LLM`=4.8, J@7=36.0). HiPRAG did not complete on MuSiQue (context
+  Signpost `S_LLM`=4.8, J@7=36.0). HiPRAG did not complete on MuSiQue (context
   overflow), shown as "--" in the paper.
 
 ## Silver evidence (in-repo)

@@ -1,4 +1,4 @@
-# SignPost full-pipeline dependencies (Python 3.11–3.12).
+# Signpost full-pipeline dependencies (Python 3.11–3.12).
 #
 # NOTE: the offline test suites need NONE of these — only `pip install -e '.[test]'`
 # (pyyaml + pytest). Install this file to run the full offline construction +

@@ -1,7 +1,7 @@
 # Baselines
 
 The paper (`sections/05_experiments.tex`, `\label{sec:baselines}`) compares
-SignPost against **eight** baselines, grouped to make the comparison current
+Signpost against **eight** baselines, grouped to make the comparison current
 rather than canonical: a closed-book control, a flat-retrieval control, an
 index-centric graph method, two graph-optimization methods, a single-round
 graph-memory retriever, and two multi-round agentic graph retrievers.
@@ -58,7 +58,7 @@ All methods share the same generator family (`Llama-3.3-70B-FP8`) and the same
 temperature-zero **ECNU-Plus** answer judge. Quality is scored as
 `S_LLM ∈ [0,10]`, J@7 (acceptable-answer rate), and AnsRec (token-overlap answer
 recall). Multi-round methods are additionally compared on LLM calls, tokens,
-latency, and silver-evidence navigation. SignPost itself runs a fixed two-call
+latency, and silver-evidence navigation. Signpost itself runs a fixed two-call
 budgeted controller (Table `tab:quality`/`tab:online`) and is also stress-tested
 under a multi-step ReAct controller over the same materialized cues (Table
 `tab:dualpolicy`); the in-repo iso-call attribution baseline

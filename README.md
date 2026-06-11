@@ -1,8 +1,8 @@
-# SignPost
+# Signpost
 
 [![CI](https://github.com/dm-ecnu/signpost/actions/workflows/ci.yml/badge.svg)](https://github.com/dm-ecnu/signpost/actions/workflows/ci.yml)
 
-SignPost is a materialized action interface for agentic graph RAG serving.
+Signpost is a materialized action interface for agentic graph RAG serving.
 Offline, it builds source-backed objects (chunks, summaries, entities,
 relations) over a document corpus and compiles, for every retrievable object, a
 *signpost sketch*: four ranked cue lists for the actions **zoom** (broader
