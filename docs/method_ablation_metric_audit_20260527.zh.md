@@ -84,7 +84,7 @@
   - graph expansion
   - rerank
   - final generation
-- `cluerag_prompt_normalized` 是正式纳入论文比较的版本：
+- `cluerag_prompt_normalized` 是正式纳入技术说明比较的版本：
   - 复用 `cluerag` 的 retrieval rows。
   - 只重新跑最终生成 prompt。
 
@@ -335,7 +335,7 @@ group["online_signpost"] = {
 
 - 它不是“no online retrieval”。
 - 它只是“no online signpost recommendations”。
-- 如果论文中把它描述为去掉在线多智能体检索，需要修改描述或改代码。
+- 如果技术说明中把它描述为去掉在线多智能体检索，需要修改描述或改代码。
 
 ### signpost.no_semantic_cues
 
@@ -763,7 +763,7 @@ Silver evidence 是 chunk/span 层级。
 1. `TargetUnitRecall` 的方向是对的，但匹配函数还偏粗，不能单独作为最终答案质量结论。
 2. `SilverHit@5 / SilverRecall@5 / MRR / ClaimCoverage@5` 的定义本身可以保留，但它们应被解释为 evidence access 指标，不应和 answer quality 混用。
 3. 当前 silver 指标对 Hybrid RAG 和 Signpost 的 evidence sequence 口径不同，导致比较不完全公平。
-4. `no_online` 的实验命名/论文描述有明显风险；当前代码不是 no online retrieval。
+4. `no_online` 的实验命名/技术说明描述有明显风险；当前代码不是 no online retrieval。
 5. prompt 控制确实是一个高风险变量，尤其影响 TargetUnitRecall。
 
 所以，不应直接得出“Hybrid RAG 比 Signpost 好”。更准确的解释是：
@@ -818,9 +818,9 @@ Silver evidence 是 chunk/span 层级。
 - 输出格式可保留各自原格式，以免改解析逻辑。
 - 再比较 TargetUnitRecall 和 LLM judge。
 
-### 7.4 明确修改论文里的 ablation 命名
+### 7.4 明确修改技术说明里的 ablation 命名
 
-如果不改代码，论文中建议把：
+如果不改代码，技术说明中建议把：
 
 - `no_online` 改成 `no_online_signpost_cues`
 
@@ -829,5 +829,5 @@ Silver evidence 是 chunk/span 层级。
 - 它不关闭在线检索。
 - 它只删除 group-level online PPR recommendations。
 
-如果论文想表达“无在线多智能体检索”，则代码需要新增一个真正关闭 Supervisor/Researcher online loop 的 baseline，而不是复用当前 `no_online`。
+如果技术说明想表达“无在线多智能体检索”，则代码需要新增一个真正关闭 Supervisor/Researcher online loop 的 baseline，而不是复用当前 `no_online`。
 

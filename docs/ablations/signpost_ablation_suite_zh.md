@@ -153,7 +153,7 @@ signpost/retrieval/signpost_variants.py
 | `no_vertical_cues` | semantic/provenance/horizontal cues、online signposts | offline `vertical` cue | 验证层级/父子摘要等纵向上下文导航是否有价值。 |
 | `no_horizontal_cues` | semantic/provenance/vertical cues、online signposts | offline `horizontal` cue | 验证相邻 chunk、同层结构、顺序上下文等横向导航是否有价值。 |
 
-## 5. 与论文故事的关系
+## 5. 与技术说明故事的关系
 
 这组消融用于回答三个问题：
 
@@ -200,7 +200,7 @@ online stage:
   表示 agent 在不同 navigation cue 可见性下解决同一批问题的开销。
 ```
 
-如果论文里要表达“去掉某类离线 cue 后能否节省索引构建成本”，那需要另做 construction-level ablation，例如真正不构建 semantic graph。当前 suite 不是 construction ablation，而是 navigation-cue visibility ablation。
+如果技术说明里要表达“去掉某类离线 cue 后能否节省索引构建成本”，那需要另做 construction-level ablation，例如真正不构建 semantic graph。当前 suite 不是 construction ablation，而是 navigation-cue visibility ablation。
 
 ## 7. 计时准确性与解释边界
 
@@ -236,7 +236,7 @@ agent read/search/generate
 
 这种设计的优点是控制变量干净：底层检索候选、图索引、ES 索引、LLM、问题集合完全一致，只改变 agent 可见的 navigation cues。缺点是 `no_offline`、`no_online`、`no_semantic_cues` 等 variant 的在线 wall time 会包含一些随后被过滤掉的本地计算开销。
 
-这个额外开销主要是本地图查询、字典查找和 PPR 计算，通常远小于 agent 的 LLM 调用和 read/search 循环。但如果论文要报告“去掉某类 cue 的真实性能节省”，不能使用当前 suite 的时间作为证据。
+这个额外开销主要是本地图查询、字典查找和 PPR 计算，通常远小于 agent 的 LLM 调用和 read/search 循环。但如果技术说明要报告“去掉某类 cue 的真实性能节省”，不能使用当前 suite 的时间作为证据。
 
 若需要严格的成本消融，应新增 construction-level ablation：
 
@@ -246,7 +246,7 @@ agent read/search/generate
 | 在线 PPR 成本 | 在 `run_retrieval` 中提前跳过 `compute_online_signpost` | 测 query-aware online signpost 的纯在线开销 |
 | provenance cue 成本 | 构建时不写 provenance/source_locates，检索时不 attach | 测 source tracing metadata 的空间/时间贡献 |
 
-当前 ICDE 主文建议这样表述：
+当前 项目主文建议这样表述：
 
 ```text
 We use visibility ablations to isolate the utility of each navigation cue under a fixed index and retrieval backend.

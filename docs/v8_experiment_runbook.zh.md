@@ -1,10 +1,10 @@
 # v8 实验执行 Runbook
 
-本文档根据 `paper_drafts/v8` 的论文设计，明确需要做哪些实验、哪些实验先用 `legal_test` 闭环测试、哪些必须在 H200 上正式跑、每一步输入输出是什么，以及最终结果如何整理成论文表格。
+本文档根据 `paper_drafts/v8` 的技术说明设计，明确需要做哪些实验、哪些实验先用 `legal_test` 闭环测试、哪些必须在 H200 上正式跑、每一步输入输出是什么，以及最终结果如何整理成技术说明表格。
 
 ## 1. v8 需要的实验总表
 
-v8 论文不是只做一个 Signpost 主实验。必须包含以下实验组：
+v8 技术说明不是只做一个 Signpost 主实验。必须包含以下实验组：
 
 | RQ | 实验 | 主数据集 | 方法 | 产出 |
 |---|---|---|---|---|
@@ -39,13 +39,13 @@ v8 论文不是只做一个 Signpost 主实验。必须包含以下实验组：
 - 允许 baseline 使用自己的 preprocessing/chunk/index pipeline。
 - 其 preprocessing/index/build time 计入该 baseline 的 offline cost。
 - 不允许 baseline 使用 Signpost 的 signpost annotations。
-- 若使用统一 chunks，需要在论文中写明 `unified-chunk setting`。
+- 若使用统一 chunks，需要在技术说明中写明 `unified-chunk setting`。
 
 当前 `signpost_re` 已经比较完整支持 Signpost 主链路；Vanilla LLM、Vanilla RAG、ablation variants、diagnostics 和外部 baseline runner 还需要补齐或封装。
 
 ## 3. legal_test 闭环测试目标
 
-`legal_test` 不是论文结果，只用于证明：
+`legal_test` 不是技术说明结果，只用于证明：
 
 1. H200 环境可用。
 2. 本地模型 endpoint 可用。
@@ -481,7 +481,7 @@ graph_group.items[].offline_signpost
 graph_group.online_signpost
 ```
 
-这一步验证 v8 论文里的核心对象：signpost-enriched observation。
+这一步验证 v8 技术说明里的核心对象：signpost-enriched observation。
 
 ### Step 11: F15 agent batch smoke
 
@@ -644,7 +644,7 @@ cost_quality.json
 | F15 | `--limit 3` | full questions |
 | baseline | 不需要全跑 | 主表 baseline 都要跑 |
 | ablation | 可只测 1-2 个 | RQ4 全部 Signpost variants |
-| cost | 检查字段存在 | 论文主指标 |
+| cost | 检查字段存在 | 技术说明主指标 |
 
 ## 6. Signpost 消融实验怎么做
 
@@ -771,7 +771,7 @@ LinearRAG、LeanRAG、LightRAG、A-RAG、Youtu-GraphRAG：
 4. 输出转换成 Signpost prediction schema。
 5. 记录 offline build log 和 online query log。
 
-如果某个外部 baseline 不能稳定运行，不要硬放进主表。用 fallback，并在论文中说明 reproducibility constraint。
+如果某个外部 baseline 不能稳定运行，不要硬放进主表。用 fallback，并在技术说明中说明 reproducibility constraint。
 
 ## 9. 最终结果怎么整理
 
@@ -791,9 +791,9 @@ outputs/<dataset>/
     cost_quality.json
 ```
 
-论文表格对应关系：
+技术说明表格对应关系：
 
-| 论文表/图 | 来源 |
+| 技术说明表/图 | 来源 |
 |---|---|
 | Dataset statistics | `chunks.jsonl`, `documents.jsonl`, `questions.jsonl`, `graph.unified.json`, `index_metrics.json` |
 | Baseline matrix | 手工维护的 baseline registry + run manifest |
@@ -838,4 +838,4 @@ outputs/<dataset>/
 6. dataset pipeline shell script。
 7. method batch shell script。
 
-没有这些，H200 上会变成手工实验，后面很难整理成论文指标。
+没有这些，H200 上会变成手工实验，后面很难整理成技术说明指标。

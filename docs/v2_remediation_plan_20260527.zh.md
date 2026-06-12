@@ -84,7 +84,7 @@ V2 整改：
 
 1. Hybrid RAG 不再默认使用 Signpost 的 `signpost-<namespace>-chunks`。
 2. 采用方案 B：给 baseline 建独立 ES index，例如 `baseline-v2-<dataset>-chunks`，只写入 chunk content、基础定位字段、embedding，不写任何 Signpost graph/signpost 字段。
-3. 论文中说明：
+3. 技术说明中说明：
    - Hybrid RAG 使用同一套 chunking 和 embedding model，这是公平共享的数据准备。
    - 它不读取 Signpost offline/online cues。
    - 如果用 ES，则使用独立 baseline chunk index。
@@ -223,7 +223,7 @@ _retrieve_shared_cluerag(...)
 一次问题输入 -> 一个多组件检索 pipeline -> 多批候选合并/扩展/重排 -> top_n chunks
 ```
 
-V2 文档和论文中应表述为：
+V2 文档和技术说明中应表述为：
 
 - one-query multi-stage retrieval pipeline
 - not iterative LLM-agent retrieval
@@ -352,7 +352,7 @@ V2 文档中必须明确：
 no_offline = 删除所有离线 signpost cues，包括 provenance。因此它不仅去掉提示信息，也会削弱 read_file 定位能力。
 ```
 
-V2 保持原本设计，不拆新消融。论文里需要承认：当前 `no_offline` 同时删除 provenance，所以它消融的是完整 offline signpost 信息，而不是只删除提示文字。
+V2 保持原本设计，不拆新消融。技术说明里需要承认：当前 `no_offline` 同时删除 provenance，所以它消融的是完整 offline signpost 信息，而不是只删除提示文字。
 
 ### 9.2 no_online 是不是只去掉 PPR 推荐
 
@@ -382,7 +382,7 @@ no_online_signpost_recommendations
 no_online_retrieval
 ```
 
-V2 保持原本消融设计，不新增消融，不拆分消融。需要做的是在文档和论文里把含义说准确：
+V2 保持原本消融设计，不新增消融，不拆分消融。需要做的是在文档和技术说明里把含义说准确：
 
 ```text
 no_online = 删除 online PPR/signpost recommendations，不是关闭在线检索流程。
@@ -406,7 +406,7 @@ if variant == NO_SEMANTIC_CUES:
 
 这不是单纯的 offline semantic cue ablation，而是 composite ablation。代码可能这样设计的原因是：online PPR recommendations 本质上也会推荐 entity jump，和 semantic navigation 相关。
 
-V2 保持原本设计，不拆成更多消融。文档和论文中必须明确：
+V2 保持原本设计，不拆成更多消融。文档和技术说明中必须明确：
 
 ```text
 no_semantic_cues = 删除 offline semantic cues，同时删除 online signpost recommendations。
@@ -463,7 +463,7 @@ Vanilla LLM 特殊：
 
 - Vanilla LLM 保持原本 prompt，不改。
 - 它作为“无检索参数知识 baseline”，不参与 evidence-grounded prompt 统一。
-- 论文中需要明确它不是 evidence-grounded RAG 方法。
+- 技术说明中需要明确它不是 evidence-grounded RAG 方法。
 
 ## 11. TargetUnitRecall 匹配函数说明
 
@@ -603,7 +603,7 @@ rsync -a --exclude outputs --exclude .git /home/srl/signpost_re/ /home/srl/signp
 - Hybrid RAG 的 ES chunk index：建议建 v2 baseline 独立 index。
 - Signpost 的 v2 `evidence_chunks` 输出：必须重跑在线。
 - HipRAG/GraphRAG-R1：由于要修复当前几乎不触发检索的问题，必须重跑在线；若离线 index 结构不变，可复用离线 cache。
-- Prompt 修改影响最终答案，所有纳入论文质量比较的方法都要重跑 online generation。
+- Prompt 修改影响最终答案，所有纳入技术说明质量比较的方法都要重跑 online generation。
 
 原则：
 
@@ -613,7 +613,7 @@ rsync -a --exclude outputs --exclude .git /home/srl/signpost_re/ /home/srl/signp
 
 ## 15. H200 并发运行设计
 
-因为论文不汇报 online time，本轮 online 可并发。
+因为技术说明不汇报 online time，本轮 online 可并发。
 
 V2 runner 需要支持：
 
@@ -715,7 +715,7 @@ num_evidence_chunks
 - Signpost full / ablations：
   - 输出最终 synthesis prompt 实际使用的 read_file snippets 到 `evidence_chunks`。
   - Silver 指标只计算 `signpost.full`，不计算消融。
-  - 保持原本消融设计，只修正文档/论文解释。
+  - 保持原本消融设计，只修正文档/技术说明解释。
 
 - Evaluation：
   - silver 指标只用 `evidence_chunks`。
@@ -724,7 +724,7 @@ num_evidence_chunks
 
 ### 已确认决策
 
-- `no_online` 保持原本实现，不新增真正 no-online-retrieval；论文中解释为删除 online signpost recommendations。
+- `no_online` 保持原本实现，不新增真正 no-online-retrieval；技术说明中解释为删除 online signpost recommendations。
 - `no_semantic_cues` 保持原本 composite ablation，不拆分。
 - `no_provenance_cues` 保持原本设计，即删除溯源并削弱 read_file。
 - Vanilla LLM 保持原本 prompt。

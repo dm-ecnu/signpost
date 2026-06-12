@@ -1,6 +1,6 @@
 # Baselines
 
-The paper (`sections/05_experiments.tex`, `\label{sec:baselines}`) compares
+The project benchmark compares
 Signpost against **eight** baselines, grouped to make the comparison current
 rather than canonical: a closed-book control, a flat-retrieval control, an
 index-centric graph method, two graph-optimization methods, a single-round
@@ -8,10 +8,10 @@ graph-memory retriever, and two multi-round agentic graph retrievers.
 
 Every external citation key below was verified to resolve in
 `references.bib`; verbatim entries are in `CITATIONS.bib`. The two in-house
-controls (Vanilla LLM, HybridRAG) have no paper citation — they are project
+controls (Vanilla LLM, HybridRAG) have no project citation — they are project
 controls.
 
-## Grouping (as the paper presents it)
+## Grouping (as the benchmark setup presents it)
 
 | Category | Method | Role (one line) | Config compared | Citation key | Baseline code |
 |---|---|---|---|---|---|

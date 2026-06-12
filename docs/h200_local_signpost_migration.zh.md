@@ -445,7 +445,7 @@ curl http://localhost:9200
 
 ### 6.3 临时跳过 ES 的 smoke
 
-正式 full 不建议跳过 ES。可以用 `USE_ES=0` 做本地文件检索 smoke，但论文正式数值建议使用 ES，因为 F5/F10 的时间和索引空间都是 Signpost 成本的一部分。
+正式 full 不建议跳过 ES。可以用 `USE_ES=0` 做本地文件检索 smoke，但技术说明正式数值建议使用 ES，因为 F5/F10 的时间和索引空间都是 Signpost 成本的一部分。
 
 如果 ES 实在暂时启动不了，先继续：
 
@@ -457,7 +457,7 @@ USE_ES=0
 
 ## 7. 先跑 legal\_test 闭环
 
-`legal_test` 是迁移后第一步，只验证环境和闭环，不进论文表格。
+`legal_test` 是迁移后第一步，只验证环境和闭环，不进技术说明表格。
 
 ```bash
 cd /data/srl/signpost_re
@@ -570,7 +570,7 @@ datasets/processed/<dataset>/chunks.jsonl
 datasets/processed/<dataset>/questions.jsonl
 ```
 
-论文主对比表使用 `signpost.full` 对比外部 baselines；Signpost 消融表使用 `signpost.full` 对比 `signpost.no_*`。
+技术说明主对比表使用 `signpost.full` 对比外部 baselines；Signpost 消融表使用 `signpost.full` 对比 `signpost.no_*`。
 
 ### 8.2 用 tmux 跑正式实验
 

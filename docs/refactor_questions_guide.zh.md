@@ -164,7 +164,7 @@ F3.5 输出的 `documents.jsonl`，每行至少包含：
 --use-llm
 ```
 
-则走论文中的双路径章节识别：
+则走技术说明中的双路径章节识别：
 
 - 短文档：LLM 将全文转换成 Markdown，再解析标题。
 - 长文档：分窗口让 LLM 抽取标题 JSON，再合并。
@@ -219,11 +219,11 @@ chunk 内容前会追加章节路径：
 
 这样后续 embedding、BM25、LLM 抽取时，即使只看到一个 chunk，也知道它属于哪个章节。
 
-## Q4. F4 的 `split_long_line` 是什么？是否改变论文设计？
+## Q4. F4 的 `split_long_line` 是什么？是否改变技术说明设计？
 
 ### 简短结论
 
-没有改变文档树逻辑，也没有改变论文中的 tree-aware chunking 设计。
+没有改变文档树逻辑，也没有改变技术说明中的 tree-aware chunking 设计。
 
 `split_long_line` 只是一个边界 fallback：当某个原始逻辑行本身超过 `max_tokens` 时，在这一行内部继续按词切成小 chunk。
 
@@ -915,7 +915,7 @@ graph.semantic.llm.extractions.jsonl
 --extractor deterministic
 ```
 
-如果目标是论文最终质量实验，再用：
+如果目标是技术说明最终质量实验，再用：
 
 ```bash
 --extractor llm
@@ -923,7 +923,7 @@ graph.semantic.llm.extractions.jsonl
 
 并且建议先按数据集抽样检查 `graph.semantic.llm.json` 的实体和关系质量，再做全量。
 
-## Q11：ICDE 实验需要补哪些指标？怎么记录日志？
+## Q11：项目实验需要补哪些指标？怎么记录日志？
 
 实验设计文档里需要的指标不只包括答案 EM/F1，还包括离线索引成本、在线查询成本、图结构指标、弱证据命中、摊销成本和 break-even。现在新增的指标代码集中在：
 

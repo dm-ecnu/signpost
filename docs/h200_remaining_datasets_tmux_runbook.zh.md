@@ -1,6 +1,6 @@
 # H200 全数据集正式实验 tmux 执行手册
 
-本文档用于在 H200 上跑论文数据集：
+本文档用于在 H200 上跑技术说明数据集：
 
 ```text
 agriculture
@@ -24,7 +24,7 @@ graphrag-bench-novel
 ```text
 之后每处理好一个 baseline，必须同步更新本文档：
 1. 在每个相关数据集的操作流程中加入该 baseline 的正式运行命令。
-2. 写清该 baseline 哪些步骤只是中间产物，哪些 prediction 才进入论文。
+2. 写清该 baseline 哪些步骤只是中间产物，哪些 prediction 才进入技术说明。
 3. 在本文档的 prompt registry 中写出该 baseline final generation 阶段使用的完整 prompt。
 4. 如果该 baseline 保留自己的输出格式，必须写清“统一了哪些 Signpost 回答约束，保留了哪些输出格式约束”。
 5. 更新完整性检查清单，加入该 baseline 应产生的 predictions/logs/metrics/run_metrics 文件。
@@ -84,8 +84,8 @@ curl -s http://localhost:8033/v1/rerank \
 2. scripts/run_signpost_ablation_suite.sh <dataset> <namespace>
 3. scripts/baselines/run_baseline_method.sh vanilla_llm <dataset> <namespace>
 4. scripts/baselines/run_baseline_method.sh hybrid_rag <dataset> <namespace>
-5. scripts/baselines/run_cluerag_method.sh <dataset> <namespace>  # 仅用于构建 ClueRAG 图、retrieval 和中间产物；默认 prompt 生成结果不进入论文
-6. 复用 ClueRAG retrieval，正式生成论文 baseline：`cluerag_prompt_normalized`
+5. scripts/baselines/run_cluerag_method.sh <dataset> <namespace>  # 仅用于构建 ClueRAG 图、retrieval 和中间产物；默认 prompt 生成结果不进入技术说明
+6. 复用 ClueRAG retrieval，正式生成技术说明 baseline：`cluerag_prompt_normalized`
 7. AGRAG：使用各数据集小节中的直接命令，例如 `scripts/baselines/run_baseline_method.sh agrag agriculture agriculture`
 8. LinearRAG：使用各数据集小节中的直接命令，例如 `scripts/baselines/run_baseline_method.sh linearrag agriculture agriculture`
 9. HiPRAG：使用各数据集小节中的直接命令，例如 `scripts/baselines/run_baseline_method.sh hiprag agriculture agriculture`
@@ -100,8 +100,8 @@ curl -s http://localhost:8033/v1/rerank \
 注意：
 
 ```text
-默认 scripts/baselines/run_cluerag_method.sh 跑出的 `cluerag` 只作为 ClueRAG 图构建、retrieval 和 raw 中间产物，不进入论文主表。
-论文中的 ClueRAG baseline 使用 `cluerag_prompt_normalized`：设置 CLUERAG_GENERATION_ONLY=1 和 CLUERAG_PROMPT_STYLE=signpost_fewshot 后，复用 ClueRAG retrieval，只重跑 final generation。
+默认 scripts/baselines/run_cluerag_method.sh 跑出的 `cluerag` 只作为 ClueRAG 图构建、retrieval 和 raw 中间产物，不进入技术说明主表。
+技术说明中的 ClueRAG baseline 使用 `cluerag_prompt_normalized`：设置 CLUERAG_GENERATION_ONLY=1 和 CLUERAG_PROMPT_STYLE=signpost_fewshot 后，复用 ClueRAG retrieval，只重跑 final generation。
 cluerag_prompt_normalized 必须在中间 `cluerag` 跑完之后执行，因为它复用 `outputs/<dataset>/baselines/cluerag/shared_outputs/COSINE_1.00/retrieval_results.json`。
 AGRAG 必须在该数据集 Signpost 共享阶段完成后执行；它复用 `chunks.jsonl`、`semantic_llm.extractions.jsonl`、`questions.jsonl`，只在 `outputs/<dataset>/baselines/agrag/` 下构建自己的 graph/triple artifacts。
 LinearRAG 必须在该数据集 Signpost 共享阶段完成后执行；它复用 `chunks.jsonl`、`semantic_llm.extractions.jsonl`、`questions.jsonl`，只在 `outputs/<dataset>/baselines/linearrag/` 下构建自己的 relation-free entity/sentence/passage graph artifacts。
@@ -484,7 +484,7 @@ scripts/baselines/run_cluerag_method.sh mix mix
 unset REUSE_GRAPH
 ```
 
-ClueRAG prompt-normalized 论文正式结果仍然只重跑 final generation：
+ClueRAG prompt-normalized 技术说明正式结果仍然只重跑 final generation：
 
 ```bash
 export REUSE_GRAPH=1
@@ -530,7 +530,7 @@ CLUERAG_EMBED_BATCH_SIZE    正式命令建议显式设为 32
 2. 已应用统计热修：method_summary 和 baseline artifact_summary 只统计 status=ok 的 stage。
 3. 不整套重跑已完成的 suite；用 scripts/run_signpost_method.sh 单独补失败 variant。
 4. 每次最多运行 1 个正式实验任务，尤其是需要 embedding 的 F15/F5/F10/AGRAG/LinearRAG/HiPRAG。否则 wall time 和服务稳定性都会被并发污染。
-5. 如果 legal 仍在 F6_semantic_graph_llm，它主要使用 chat 服务；可以等它自然结束。为了论文时间口径稳定，不建议同时再启动多个 F15/baseline 正式任务。
+5. 如果 legal 仍在 F6_semantic_graph_llm，它主要使用 chat 服务；可以等它自然结束。为了技术说明时间口径稳定，不建议同时再启动多个 F15/baseline 正式任务。
 6. 发生 8001 中断后，必须先盘点所有 tmux 和 stage log，再决定哪些继续观察、哪些单独补跑；不要凭单个窗口的报错推断全局状态。
 ```
 
@@ -744,11 +744,11 @@ POST /v1/embeddings HTTP/1.1 200 OK
 ```text
 cluerag-agriculture:
   cluerag 默认 prompt 已完成两次，最后一次 count=100，stage=baseline_cluerag_full status=ok。
-  注意：outputs/agriculture/predictions/cluerag.jsonl 仍只作为 ClueRAG graph/retrieval 中间/历史产物，不进论文。
+  注意：outputs/agriculture/predictions/cluerag.jsonl 仍只作为 ClueRAG graph/retrieval 中间/历史产物，不进技术说明。
 
 cluerag-prompt-agri:
   cluerag_prompt_normalized 已完成，count=100，stage=baseline_cluerag_prompt_normalized_generation status=ok。
-  论文正式 ClueRAG 使用 outputs/agriculture/predictions/cluerag_prompt_normalized.jsonl。
+  技术说明正式 ClueRAG 使用 outputs/agriculture/predictions/cluerag_prompt_normalized.jsonl。
 
 embed:
   旧 8001 服务因 HTTP 500 退出；20:35 CST 已重启，/v1/models 和 /v1/embeddings smoke 均 200 OK。
@@ -860,7 +860,7 @@ python -m signpost.llm.smoke --embedding
 
 恢复命令按数据集合并为一整条顺序执行命令。命令使用 `&&` 串联：前一个 variant 成功才会继续下一个；任意一步失败会停止，避免在服务异常时继续产生连锁失败。
 
-说明：`tee` 保存的是额外终端日志，便于排查；正式指标不依赖终端复制。论文统计需要的 stage timing、prediction、query metrics、method summary、cost quality 会由脚本写入：
+说明：`tee` 保存的是额外终端日志，便于排查；正式指标不依赖终端复制。技术说明统计需要的 stage timing、prediction、query metrics、method summary、cost quality 会由脚本写入：
 
 ```text
 outputs/<dataset>/logs/stage_timing.jsonl
@@ -1050,8 +1050,8 @@ export RERANK_URL=http://127.0.0.1:8033/v1/rerank
 export RERANK_MODEL=/data/srl/llama-nemotron-rerank-1b-v2
 scripts/baselines/run_cluerag_method.sh "$DATASET" "$NAMESPACE"
 
-# 论文正式 ClueRAG baseline：统一使用 Signpost evidence-grounded 生成约束。
-# 这一步复用上一条 cluerag 的 retrieval_results，只重跑 final generation；上一条 cluerag 默认 prompt 结果不进论文。
+# 技术说明正式 ClueRAG baseline：统一使用 Signpost evidence-grounded 生成约束。
+# 这一步复用上一条 cluerag 的 retrieval_results，只重跑 final generation；上一条 cluerag 默认 prompt 结果不进技术说明。
 export CLUERAG_GENERATION_ONLY=1
 export CLUERAG_PROMPT_STYLE=signpost_fewshot
 export CLUERAG_METHOD_NAME=cluerag_prompt_normalized
@@ -1062,7 +1062,7 @@ unset CLUERAG_PROMPT_STYLE
 unset CLUERAG_METHOD_NAME
 unset CLUERAG_SOURCE_OUTPUT_DIR
 
-# 论文正式 AGRAG baseline：复用 Signpost chunks / semantic_llm extractions / questions，
+# 技术说明正式 AGRAG baseline：复用 Signpost chunks / semantic_llm extractions / questions，
 # 构建 AGRAG-owned entity/relation/passage graph，使用 PPR + MCMI 子图和 hybrid chunk retrieval。
 export USE_ES=1
 export MODE=hybrid
@@ -1079,7 +1079,7 @@ export AGRAG_EMBED_BATCH_SIZE=32
 export EMBEDDING_PROVIDER=ecnu
 scripts/baselines/run_baseline_method.sh agrag agriculture agriculture
 
-# 论文正式 LinearRAG baseline：复用 Signpost chunks / semantic_llm extractions / questions，
+# 技术说明正式 LinearRAG baseline：复用 Signpost chunks / semantic_llm extractions / questions，
 # 构建 LinearRAG-owned relation-free entity/sentence/passage graph，使用 sentence bridging + PPR + hybrid chunk retrieval。
 export USE_ES=1
 export MODE=hybrid
@@ -1102,7 +1102,7 @@ export LINEARRAG_PASSAGE_NODE_WEIGHT=0.05
 export LINEARRAG_DAMPING=0.5
 scripts/baselines/run_baseline_method.sh linearrag agriculture agriculture
 
-# 论文正式 HiPRAG baseline：复用 Signpost chunks / questions，
+# 技术说明正式 HiPRAG baseline：复用 Signpost chunks / questions，
 # 构建 HiPRAG-owned 本地 agentic chunk retrieval index，保留 <think>/<search>/<context>/<answer> XML 输出契约。
 export USE_ES=0
 export MODE=hybrid
@@ -1118,7 +1118,7 @@ export HIPRAG_SEARCH_TOP_K=3
 export HIPRAG_MAX_STEPS=4
 scripts/baselines/run_baseline_method.sh hiprag agriculture agriculture
 
-# 论文正式 GraphRAG-R1 baseline：复用 Signpost chunks / semantic_llm extractions / questions，
+# 技术说明正式 GraphRAG-R1 baseline：复用 Signpost chunks / semantic_llm extractions / questions，
 # 构建 GraphRAG-R1-owned agentic graph retrieval artifacts，保留 <think>/<answer> 和 <|begin_of_query|> 检索标签契约。
 export USE_ES=0
 export MODE=hybrid
@@ -1189,8 +1189,8 @@ export RERANK_URL=http://127.0.0.1:8033/v1/rerank
 export RERANK_MODEL=/data/srl/llama-nemotron-rerank-1b-v2
 scripts/baselines/run_cluerag_method.sh "$DATASET" "$NAMESPACE"
 
-# 论文正式 ClueRAG baseline：统一使用 Signpost evidence-grounded 生成约束。
-# 这一步复用上一条 cluerag 的 retrieval_results，只重跑 final generation；上一条 cluerag 默认 prompt 结果不进论文。
+# 技术说明正式 ClueRAG baseline：统一使用 Signpost evidence-grounded 生成约束。
+# 这一步复用上一条 cluerag 的 retrieval_results，只重跑 final generation；上一条 cluerag 默认 prompt 结果不进技术说明。
 export CLUERAG_GENERATION_ONLY=1
 export CLUERAG_PROMPT_STYLE=signpost_fewshot
 export CLUERAG_METHOD_NAME=cluerag_prompt_normalized
@@ -1201,7 +1201,7 @@ unset CLUERAG_PROMPT_STYLE
 unset CLUERAG_METHOD_NAME
 unset CLUERAG_SOURCE_OUTPUT_DIR
 
-# 论文正式 AGRAG baseline：复用 Signpost chunks / semantic_llm extractions / questions。
+# 技术说明正式 AGRAG baseline：复用 Signpost chunks / semantic_llm extractions / questions。
 # 非首次执行复用 outputs/${DATASET}/baselines/agrag/index.pkl，只重跑 PPR + MCMI 子图检索、hybrid chunk retrieval 和 final generation。
 export USE_ES=1
 export MODE=hybrid
@@ -1218,7 +1218,7 @@ export AGRAG_EMBED_BATCH_SIZE=32
 export EMBEDDING_PROVIDER=ecnu
 scripts/baselines/run_baseline_method.sh agrag agriculture agriculture
 
-# 论文正式 LinearRAG baseline：复用 Signpost chunks / semantic_llm extractions / questions。
+# 技术说明正式 LinearRAG baseline：复用 Signpost chunks / semantic_llm extractions / questions。
 # 非首次执行复用 outputs/${DATASET}/baselines/linearrag/index.pkl，只重跑 sentence bridging + PPR、hybrid chunk retrieval 和 final generation。
 export USE_ES=1
 export MODE=hybrid
@@ -1241,7 +1241,7 @@ export LINEARRAG_PASSAGE_NODE_WEIGHT=0.05
 export LINEARRAG_DAMPING=0.5
 scripts/baselines/run_baseline_method.sh linearrag agriculture agriculture
 
-# 论文正式 HiPRAG baseline：复用 Signpost chunks / questions。
+# 技术说明正式 HiPRAG baseline：复用 Signpost chunks / questions。
 # 非首次执行复用 outputs/${DATASET}/baselines/hiprag/index.pkl，只重跑 agentic chunk retrieval 和 final generation，保留 <think>/<search>/<context>/<answer> XML 输出契约。
 export USE_ES=0
 export MODE=hybrid
@@ -1257,7 +1257,7 @@ export HIPRAG_SEARCH_TOP_K=3
 export HIPRAG_MAX_STEPS=4
 scripts/baselines/run_baseline_method.sh hiprag agriculture agriculture
 
-# 论文正式 GraphRAG-R1 baseline：复用 Signpost chunks / semantic_llm extractions / questions。
+# 技术说明正式 GraphRAG-R1 baseline：复用 Signpost chunks / semantic_llm extractions / questions。
 # 非首次执行复用 outputs/${DATASET}/baselines/graphrag_r1/index.pkl，只重跑 agentic graph retrieval 和 final generation，保留 <think>/<answer> 和 <|begin_of_query|> 检索标签契约。
 export USE_ES=0
 export MODE=hybrid
@@ -1278,7 +1278,7 @@ export GRAPHRAG_R1_PPR_ITERATIONS=20
 scripts/baselines/run_baseline_method.sh graphrag_r1 agriculture agriculture
 ```
 
-Agriculture 当前论文口径中，`outputs/agriculture/predictions/cluerag.jsonl` 不进入论文；使用：
+Agriculture 当前技术说明口径中，`outputs/agriculture/predictions/cluerag.jsonl` 不进入技术说明；使用：
 
 ```text
 outputs/agriculture/predictions/cluerag_prompt_normalized.jsonl
@@ -1318,7 +1318,7 @@ outputs/legal/logs/F10_graph_es_sync.recovery_decisions.jsonl
 outputs/legal/logs/F10_graph_es_sync.multivector_objects.jsonl
 ```
 
-论文说明记录在：
+技术说明说明记录在：
 
 ```text
 signpost/paper_drafts/v10_metric_revision/f10_legal_embedding_recovery.md
@@ -1417,8 +1417,8 @@ export RERANK_URL=http://127.0.0.1:8033/v1/rerank
 export RERANK_MODEL=/data/srl/llama-nemotron-rerank-1b-v2
 scripts/baselines/run_cluerag_method.sh "$DATASET" "$NAMESPACE"
 
-# 论文正式 ClueRAG baseline：统一使用 Signpost evidence-grounded 生成约束。
-# 这一步复用上一条 cluerag 的 retrieval_results，只重跑 final generation；上一条 cluerag 默认 prompt 结果不进论文。
+# 技术说明正式 ClueRAG baseline：统一使用 Signpost evidence-grounded 生成约束。
+# 这一步复用上一条 cluerag 的 retrieval_results，只重跑 final generation；上一条 cluerag 默认 prompt 结果不进技术说明。
 export CLUERAG_GENERATION_ONLY=1
 export CLUERAG_PROMPT_STYLE=signpost_fewshot
 export CLUERAG_METHOD_NAME=cluerag_prompt_normalized
@@ -1429,7 +1429,7 @@ unset CLUERAG_PROMPT_STYLE
 unset CLUERAG_METHOD_NAME
 unset CLUERAG_SOURCE_OUTPUT_DIR
 
-# 论文正式 AGRAG baseline：复用 Signpost chunks / semantic_llm extractions / questions，
+# 技术说明正式 AGRAG baseline：复用 Signpost chunks / semantic_llm extractions / questions，
 # 构建 AGRAG-owned entity/relation/passage graph，使用 PPR + MCMI 子图和 hybrid chunk retrieval。
 export USE_ES=1
 export MODE=hybrid
@@ -1446,7 +1446,7 @@ export AGRAG_EMBED_BATCH_SIZE=32
 export EMBEDDING_PROVIDER=ecnu
 scripts/baselines/run_baseline_method.sh agrag legal legal
 
-# 论文正式 LinearRAG baseline：复用 Signpost chunks / semantic_llm extractions / questions，
+# 技术说明正式 LinearRAG baseline：复用 Signpost chunks / semantic_llm extractions / questions，
 # 构建 LinearRAG-owned relation-free entity/sentence/passage graph，使用 sentence bridging + PPR + hybrid chunk retrieval。
 export USE_ES=1
 export MODE=hybrid
@@ -1469,7 +1469,7 @@ export LINEARRAG_PASSAGE_NODE_WEIGHT=0.05
 export LINEARRAG_DAMPING=0.5
 scripts/baselines/run_baseline_method.sh linearrag legal legal
 
-# 论文正式 HiPRAG baseline：复用 Signpost chunks / questions，
+# 技术说明正式 HiPRAG baseline：复用 Signpost chunks / questions，
 # 构建 HiPRAG-owned 本地 agentic chunk retrieval index，保留 <think>/<search>/<context>/<answer> XML 输出契约。
 export USE_ES=0
 export MODE=hybrid
@@ -1485,7 +1485,7 @@ export HIPRAG_SEARCH_TOP_K=3
 export HIPRAG_MAX_STEPS=4
 scripts/baselines/run_baseline_method.sh hiprag legal legal
 
-# 论文正式 GraphRAG-R1 baseline：复用 Signpost chunks / semantic_llm extractions / questions，
+# 技术说明正式 GraphRAG-R1 baseline：复用 Signpost chunks / semantic_llm extractions / questions，
 # 构建 GraphRAG-R1-owned agentic graph retrieval artifacts，保留 <think>/<answer> 和 <|begin_of_query|> 检索标签契约。
 export USE_ES=0
 export MODE=hybrid
@@ -1556,8 +1556,8 @@ export RERANK_URL=http://127.0.0.1:8033/v1/rerank
 export RERANK_MODEL=/data/srl/llama-nemotron-rerank-1b-v2
 scripts/baselines/run_cluerag_method.sh "$DATASET" "$NAMESPACE"
 
-# 论文正式 ClueRAG baseline：统一使用 Signpost evidence-grounded 生成约束。
-# 这一步复用上一条 cluerag 的 retrieval_results，只重跑 final generation；上一条 cluerag 默认 prompt 结果不进论文。
+# 技术说明正式 ClueRAG baseline：统一使用 Signpost evidence-grounded 生成约束。
+# 这一步复用上一条 cluerag 的 retrieval_results，只重跑 final generation；上一条 cluerag 默认 prompt 结果不进技术说明。
 export CLUERAG_GENERATION_ONLY=1
 export CLUERAG_PROMPT_STYLE=signpost_fewshot
 export CLUERAG_METHOD_NAME=cluerag_prompt_normalized
@@ -1568,7 +1568,7 @@ unset CLUERAG_PROMPT_STYLE
 unset CLUERAG_METHOD_NAME
 unset CLUERAG_SOURCE_OUTPUT_DIR
 
-# 论文正式 AGRAG baseline：复用 Signpost chunks / semantic_llm extractions / questions。
+# 技术说明正式 AGRAG baseline：复用 Signpost chunks / semantic_llm extractions / questions。
 # 非首次执行复用 outputs/${DATASET}/baselines/agrag/index.pkl，只重跑 PPR + MCMI 子图检索、hybrid chunk retrieval 和 final generation。
 export USE_ES=1
 export MODE=hybrid
@@ -1585,7 +1585,7 @@ export AGRAG_EMBED_BATCH_SIZE=32
 export EMBEDDING_PROVIDER=ecnu
 scripts/baselines/run_baseline_method.sh agrag legal legal
 
-# 论文正式 LinearRAG baseline：复用 Signpost chunks / semantic_llm extractions / questions。
+# 技术说明正式 LinearRAG baseline：复用 Signpost chunks / semantic_llm extractions / questions。
 # 非首次执行复用 outputs/${DATASET}/baselines/linearrag/index.pkl，只重跑 sentence bridging + PPR、hybrid chunk retrieval 和 final generation。
 export USE_ES=1
 export MODE=hybrid
@@ -1608,7 +1608,7 @@ export LINEARRAG_PASSAGE_NODE_WEIGHT=0.05
 export LINEARRAG_DAMPING=0.5
 scripts/baselines/run_baseline_method.sh linearrag legal legal
 
-# 论文正式 HiPRAG baseline：复用 Signpost chunks / questions。
+# 技术说明正式 HiPRAG baseline：复用 Signpost chunks / questions。
 # 非首次执行复用 outputs/${DATASET}/baselines/hiprag/index.pkl，只重跑 agentic chunk retrieval 和 final generation，保留 <think>/<search>/<context>/<answer> XML 输出契约。
 export USE_ES=0
 export MODE=hybrid
@@ -1624,7 +1624,7 @@ export HIPRAG_SEARCH_TOP_K=3
 export HIPRAG_MAX_STEPS=4
 scripts/baselines/run_baseline_method.sh hiprag legal legal
 
-# 论文正式 GraphRAG-R1 baseline：复用 Signpost chunks / semantic_llm extractions / questions。
+# 技术说明正式 GraphRAG-R1 baseline：复用 Signpost chunks / semantic_llm extractions / questions。
 # 非首次执行复用 outputs/${DATASET}/baselines/graphrag_r1/index.pkl，只重跑 agentic graph retrieval 和 final generation，保留 <think>/<answer> 和 <|begin_of_query|> 检索标签契约。
 export USE_ES=0
 export MODE=hybrid
@@ -1645,7 +1645,7 @@ export GRAPHRAG_R1_PPR_ITERATIONS=20
 scripts/baselines/run_baseline_method.sh graphrag_r1 legal legal
 ```
 
-Legal 当前论文口径中，`outputs/legal/predictions/cluerag.jsonl` 不进入论文；使用：
+Legal 当前技术说明口径中，`outputs/legal/predictions/cluerag.jsonl` 不进入技术说明；使用：
 
 ```text
 outputs/legal/predictions/cluerag_prompt_normalized.jsonl
@@ -1706,8 +1706,8 @@ export RERANK_URL=http://127.0.0.1:8033/v1/rerank
 export RERANK_MODEL=/data/srl/llama-nemotron-rerank-1b-v2
 scripts/baselines/run_cluerag_method.sh "$DATASET" "$NAMESPACE"
 
-# 论文正式 ClueRAG baseline：统一使用 Signpost evidence-grounded 生成约束。
-# 这一步复用上一条 cluerag 的 retrieval_results，只重跑 final generation；上一条 cluerag 默认 prompt 结果不进论文。
+# 技术说明正式 ClueRAG baseline：统一使用 Signpost evidence-grounded 生成约束。
+# 这一步复用上一条 cluerag 的 retrieval_results，只重跑 final generation；上一条 cluerag 默认 prompt 结果不进技术说明。
 export CLUERAG_GENERATION_ONLY=1
 export CLUERAG_PROMPT_STYLE=signpost_fewshot
 export CLUERAG_METHOD_NAME=cluerag_prompt_normalized
@@ -1718,7 +1718,7 @@ unset CLUERAG_PROMPT_STYLE
 unset CLUERAG_METHOD_NAME
 unset CLUERAG_SOURCE_OUTPUT_DIR
 
-# 论文正式 AGRAG baseline：复用 Signpost chunks / semantic_llm extractions / questions，
+# 技术说明正式 AGRAG baseline：复用 Signpost chunks / semantic_llm extractions / questions，
 # 构建 AGRAG-owned entity/relation/passage graph，使用 PPR + MCMI 子图和 hybrid chunk retrieval。
 export USE_ES=1
 export MODE=hybrid
@@ -1735,7 +1735,7 @@ export AGRAG_EMBED_BATCH_SIZE=32
 export EMBEDDING_PROVIDER=ecnu
 scripts/baselines/run_baseline_method.sh agrag mix mix
 
-# 论文正式 LinearRAG baseline：复用 Signpost chunks / semantic_llm extractions / questions，
+# 技术说明正式 LinearRAG baseline：复用 Signpost chunks / semantic_llm extractions / questions，
 # 构建 LinearRAG-owned relation-free entity/sentence/passage graph，使用 sentence bridging + PPR + hybrid chunk retrieval。
 export USE_ES=1
 export MODE=hybrid
@@ -1758,7 +1758,7 @@ export LINEARRAG_PASSAGE_NODE_WEIGHT=0.05
 export LINEARRAG_DAMPING=0.5
 scripts/baselines/run_baseline_method.sh linearrag mix mix
 
-# 论文正式 HiPRAG baseline：复用 Signpost chunks / questions，
+# 技术说明正式 HiPRAG baseline：复用 Signpost chunks / questions，
 # 构建 HiPRAG-owned 本地 agentic chunk retrieval index，保留 <think>/<search>/<context>/<answer> XML 输出契约。
 export USE_ES=0
 export MODE=hybrid
@@ -1774,7 +1774,7 @@ export HIPRAG_SEARCH_TOP_K=3
 export HIPRAG_MAX_STEPS=4
 scripts/baselines/run_baseline_method.sh hiprag mix mix
 
-# 论文正式 GraphRAG-R1 baseline：复用 Signpost chunks / semantic_llm extractions / questions，
+# 技术说明正式 GraphRAG-R1 baseline：复用 Signpost chunks / semantic_llm extractions / questions，
 # 构建 GraphRAG-R1-owned agentic graph retrieval artifacts，保留 <think>/<answer> 和 <|begin_of_query|> 检索标签契约。
 export USE_ES=0
 export MODE=hybrid
@@ -1845,8 +1845,8 @@ export RERANK_URL=http://127.0.0.1:8033/v1/rerank
 export RERANK_MODEL=/data/srl/llama-nemotron-rerank-1b-v2
 scripts/baselines/run_cluerag_method.sh "$DATASET" "$NAMESPACE"
 
-# 论文正式 ClueRAG baseline：统一使用 Signpost evidence-grounded 生成约束。
-# 这一步复用上一条 cluerag 的 retrieval_results，只重跑 final generation；上一条 cluerag 默认 prompt 结果不进论文。
+# 技术说明正式 ClueRAG baseline：统一使用 Signpost evidence-grounded 生成约束。
+# 这一步复用上一条 cluerag 的 retrieval_results，只重跑 final generation；上一条 cluerag 默认 prompt 结果不进技术说明。
 export CLUERAG_GENERATION_ONLY=1
 export CLUERAG_PROMPT_STYLE=signpost_fewshot
 export CLUERAG_METHOD_NAME=cluerag_prompt_normalized
@@ -1857,7 +1857,7 @@ unset CLUERAG_PROMPT_STYLE
 unset CLUERAG_METHOD_NAME
 unset CLUERAG_SOURCE_OUTPUT_DIR
 
-# 论文正式 AGRAG baseline：复用 Signpost chunks / semantic_llm extractions / questions。
+# 技术说明正式 AGRAG baseline：复用 Signpost chunks / semantic_llm extractions / questions。
 # 非首次执行复用 outputs/${DATASET}/baselines/agrag/index.pkl，只重跑 PPR + MCMI 子图检索、hybrid chunk retrieval 和 final generation。
 export USE_ES=1
 export MODE=hybrid
@@ -1874,7 +1874,7 @@ export AGRAG_EMBED_BATCH_SIZE=32
 export EMBEDDING_PROVIDER=ecnu
 scripts/baselines/run_baseline_method.sh agrag mix mix
 
-# 论文正式 LinearRAG baseline：复用 Signpost chunks / semantic_llm extractions / questions。
+# 技术说明正式 LinearRAG baseline：复用 Signpost chunks / semantic_llm extractions / questions。
 # 非首次执行复用 outputs/${DATASET}/baselines/linearrag/index.pkl，只重跑 sentence bridging + PPR、hybrid chunk retrieval 和 final generation。
 export USE_ES=1
 export MODE=hybrid
@@ -1897,7 +1897,7 @@ export LINEARRAG_PASSAGE_NODE_WEIGHT=0.05
 export LINEARRAG_DAMPING=0.5
 scripts/baselines/run_baseline_method.sh linearrag mix mix
 
-# 论文正式 HiPRAG baseline：复用 Signpost chunks / questions。
+# 技术说明正式 HiPRAG baseline：复用 Signpost chunks / questions。
 # 非首次执行复用 outputs/${DATASET}/baselines/hiprag/index.pkl，只重跑 agentic chunk retrieval 和 final generation，保留 <think>/<search>/<context>/<answer> XML 输出契约。
 export USE_ES=0
 export MODE=hybrid
@@ -1913,7 +1913,7 @@ export HIPRAG_SEARCH_TOP_K=3
 export HIPRAG_MAX_STEPS=4
 scripts/baselines/run_baseline_method.sh hiprag mix mix
 
-# 论文正式 GraphRAG-R1 baseline：复用 Signpost chunks / semantic_llm extractions / questions。
+# 技术说明正式 GraphRAG-R1 baseline：复用 Signpost chunks / semantic_llm extractions / questions。
 # 非首次执行复用 outputs/${DATASET}/baselines/graphrag_r1/index.pkl，只重跑 agentic graph retrieval 和 final generation，保留 <think>/<answer> 和 <|begin_of_query|> 检索标签契约。
 export USE_ES=0
 export MODE=hybrid
@@ -2001,8 +2001,8 @@ export RERANK_URL=http://127.0.0.1:8033/v1/rerank
 export RERANK_MODEL=/data/srl/llama-nemotron-rerank-1b-v2
 scripts/baselines/run_cluerag_method.sh "$DATASET" "$NAMESPACE"
 
-# 论文正式 ClueRAG baseline：统一使用 Signpost evidence-grounded 生成约束。
-# 这一步复用上一条 cluerag 的 retrieval_results，只重跑 final generation；上一条 cluerag 默认 prompt 结果不进论文。
+# 技术说明正式 ClueRAG baseline：统一使用 Signpost evidence-grounded 生成约束。
+# 这一步复用上一条 cluerag 的 retrieval_results，只重跑 final generation；上一条 cluerag 默认 prompt 结果不进技术说明。
 export CLUERAG_GENERATION_ONLY=1
 export CLUERAG_PROMPT_STYLE=signpost_fewshot
 export CLUERAG_METHOD_NAME=cluerag_prompt_normalized
@@ -2013,7 +2013,7 @@ unset CLUERAG_PROMPT_STYLE
 unset CLUERAG_METHOD_NAME
 unset CLUERAG_SOURCE_OUTPUT_DIR
 
-# 论文正式 AGRAG baseline：复用 Signpost chunks / semantic_llm extractions / questions，
+# 技术说明正式 AGRAG baseline：复用 Signpost chunks / semantic_llm extractions / questions，
 # 构建 AGRAG-owned entity/relation/passage graph，使用 PPR + MCMI 子图和 hybrid chunk retrieval。
 export USE_ES=1
 export MODE=hybrid
@@ -2030,7 +2030,7 @@ export AGRAG_EMBED_BATCH_SIZE=32
 export EMBEDDING_PROVIDER=ecnu
 scripts/baselines/run_baseline_method.sh agrag graphrag-bench-medical graphrag-bench-medical
 
-# 论文正式 LinearRAG baseline：复用 Signpost chunks / semantic_llm extractions / questions，
+# 技术说明正式 LinearRAG baseline：复用 Signpost chunks / semantic_llm extractions / questions，
 # 构建 LinearRAG-owned relation-free entity/sentence/passage graph，使用 sentence bridging + PPR + hybrid chunk retrieval。
 export USE_ES=1
 export MODE=hybrid
@@ -2053,7 +2053,7 @@ export LINEARRAG_PASSAGE_NODE_WEIGHT=0.05
 export LINEARRAG_DAMPING=0.5
 scripts/baselines/run_baseline_method.sh linearrag graphrag-bench-medical graphrag-bench-medical
 
-# 论文正式 HiPRAG baseline：复用 Signpost chunks / questions，
+# 技术说明正式 HiPRAG baseline：复用 Signpost chunks / questions，
 # 构建 HiPRAG-owned 本地 agentic chunk retrieval index，保留 <think>/<search>/<context>/<answer> XML 输出契约。
 export USE_ES=0
 export MODE=hybrid
@@ -2069,7 +2069,7 @@ export HIPRAG_SEARCH_TOP_K=3
 export HIPRAG_MAX_STEPS=4
 scripts/baselines/run_baseline_method.sh hiprag graphrag-bench-medical graphrag-bench-medical
 
-# 论文正式 GraphRAG-R1 baseline：复用 Signpost chunks / semantic_llm extractions / questions，
+# 技术说明正式 GraphRAG-R1 baseline：复用 Signpost chunks / semantic_llm extractions / questions，
 # 构建 GraphRAG-R1-owned agentic graph retrieval artifacts，保留 <think>/<answer> 和 <|begin_of_query|> 检索标签契约。
 export USE_ES=0
 export MODE=hybrid
@@ -2140,8 +2140,8 @@ export RERANK_URL=http://127.0.0.1:8033/v1/rerank
 export RERANK_MODEL=/data/srl/llama-nemotron-rerank-1b-v2
 scripts/baselines/run_cluerag_method.sh "$DATASET" "$NAMESPACE"
 
-# 论文正式 ClueRAG baseline：统一使用 Signpost evidence-grounded 生成约束。
-# 这一步复用上一条 cluerag 的 retrieval_results，只重跑 final generation；上一条 cluerag 默认 prompt 结果不进论文。
+# 技术说明正式 ClueRAG baseline：统一使用 Signpost evidence-grounded 生成约束。
+# 这一步复用上一条 cluerag 的 retrieval_results，只重跑 final generation；上一条 cluerag 默认 prompt 结果不进技术说明。
 export CLUERAG_GENERATION_ONLY=1
 export CLUERAG_PROMPT_STYLE=signpost_fewshot
 export CLUERAG_METHOD_NAME=cluerag_prompt_normalized
@@ -2152,7 +2152,7 @@ unset CLUERAG_PROMPT_STYLE
 unset CLUERAG_METHOD_NAME
 unset CLUERAG_SOURCE_OUTPUT_DIR
 
-# 论文正式 AGRAG baseline：复用 Signpost chunks / semantic_llm extractions / questions。
+# 技术说明正式 AGRAG baseline：复用 Signpost chunks / semantic_llm extractions / questions。
 # 非首次执行复用 outputs/${DATASET}/baselines/agrag/index.pkl，只重跑 PPR + MCMI 子图检索、hybrid chunk retrieval 和 final generation。
 export USE_ES=1
 export MODE=hybrid
@@ -2169,7 +2169,7 @@ export AGRAG_EMBED_BATCH_SIZE=32
 export EMBEDDING_PROVIDER=ecnu
 scripts/baselines/run_baseline_method.sh agrag graphrag-bench-medical graphrag-bench-medical
 
-# 论文正式 LinearRAG baseline：复用 Signpost chunks / semantic_llm extractions / questions。
+# 技术说明正式 LinearRAG baseline：复用 Signpost chunks / semantic_llm extractions / questions。
 # 非首次执行复用 outputs/${DATASET}/baselines/linearrag/index.pkl，只重跑 sentence bridging + PPR、hybrid chunk retrieval 和 final generation。
 export USE_ES=1
 export MODE=hybrid
@@ -2192,7 +2192,7 @@ export LINEARRAG_PASSAGE_NODE_WEIGHT=0.05
 export LINEARRAG_DAMPING=0.5
 scripts/baselines/run_baseline_method.sh linearrag graphrag-bench-medical graphrag-bench-medical
 
-# 论文正式 HiPRAG baseline：复用 Signpost chunks / questions。
+# 技术说明正式 HiPRAG baseline：复用 Signpost chunks / questions。
 # 非首次执行复用 outputs/${DATASET}/baselines/hiprag/index.pkl，只重跑 agentic chunk retrieval 和 final generation，保留 <think>/<search>/<context>/<answer> XML 输出契约。
 export USE_ES=0
 export MODE=hybrid
@@ -2208,7 +2208,7 @@ export HIPRAG_SEARCH_TOP_K=3
 export HIPRAG_MAX_STEPS=4
 scripts/baselines/run_baseline_method.sh hiprag graphrag-bench-medical graphrag-bench-medical
 
-# 论文正式 GraphRAG-R1 baseline：复用 Signpost chunks / semantic_llm extractions / questions。
+# 技术说明正式 GraphRAG-R1 baseline：复用 Signpost chunks / semantic_llm extractions / questions。
 # 非首次执行复用 outputs/${DATASET}/baselines/graphrag_r1/index.pkl，只重跑 agentic graph retrieval 和 final generation，保留 <think>/<answer> 和 <|begin_of_query|> 检索标签契约。
 export USE_ES=0
 export MODE=hybrid
@@ -2285,8 +2285,8 @@ export RERANK_URL=http://127.0.0.1:8033/v1/rerank
 export RERANK_MODEL=/data/srl/llama-nemotron-rerank-1b-v2
 scripts/baselines/run_cluerag_method.sh "$DATASET" "$NAMESPACE"
 
-# 论文正式 ClueRAG baseline：统一使用 Signpost evidence-grounded 生成约束。
-# 这一步复用上一条 cluerag 的 retrieval_results，只重跑 final generation；上一条 cluerag 默认 prompt 结果不进论文。
+# 技术说明正式 ClueRAG baseline：统一使用 Signpost evidence-grounded 生成约束。
+# 这一步复用上一条 cluerag 的 retrieval_results，只重跑 final generation；上一条 cluerag 默认 prompt 结果不进技术说明。
 export CLUERAG_GENERATION_ONLY=1
 export CLUERAG_PROMPT_STYLE=signpost_fewshot
 export CLUERAG_METHOD_NAME=cluerag_prompt_normalized
@@ -2297,7 +2297,7 @@ unset CLUERAG_PROMPT_STYLE
 unset CLUERAG_METHOD_NAME
 unset CLUERAG_SOURCE_OUTPUT_DIR
 
-# 论文正式 AGRAG baseline：复用 Signpost chunks / semantic_llm extractions / questions，
+# 技术说明正式 AGRAG baseline：复用 Signpost chunks / semantic_llm extractions / questions，
 # 构建 AGRAG-owned entity/relation/passage graph，使用 PPR + MCMI 子图和 hybrid chunk retrieval。
 export USE_ES=1
 export MODE=hybrid
@@ -2314,7 +2314,7 @@ export AGRAG_EMBED_BATCH_SIZE=32
 export EMBEDDING_PROVIDER=ecnu
 scripts/baselines/run_baseline_method.sh agrag graphrag-bench-novel graphrag-bench-novel
 
-# 论文正式 LinearRAG baseline：复用 Signpost chunks / semantic_llm extractions / questions，
+# 技术说明正式 LinearRAG baseline：复用 Signpost chunks / semantic_llm extractions / questions，
 # 构建 LinearRAG-owned relation-free entity/sentence/passage graph，使用 sentence bridging + PPR + hybrid chunk retrieval。
 export USE_ES=1
 export MODE=hybrid
@@ -2337,7 +2337,7 @@ export LINEARRAG_PASSAGE_NODE_WEIGHT=0.05
 export LINEARRAG_DAMPING=0.5
 scripts/baselines/run_baseline_method.sh linearrag graphrag-bench-novel graphrag-bench-novel
 
-# 论文正式 HiPRAG baseline：复用 Signpost chunks / questions，
+# 技术说明正式 HiPRAG baseline：复用 Signpost chunks / questions，
 # 构建 HiPRAG-owned 本地 agentic chunk retrieval index，保留 <think>/<search>/<context>/<answer> XML 输出契约。
 export USE_ES=0
 export MODE=hybrid
@@ -2353,7 +2353,7 @@ export HIPRAG_SEARCH_TOP_K=3
 export HIPRAG_MAX_STEPS=4
 scripts/baselines/run_baseline_method.sh hiprag graphrag-bench-novel graphrag-bench-novel
 
-# 论文正式 GraphRAG-R1 baseline：复用 Signpost chunks / semantic_llm extractions / questions，
+# 技术说明正式 GraphRAG-R1 baseline：复用 Signpost chunks / semantic_llm extractions / questions，
 # 构建 GraphRAG-R1-owned agentic graph retrieval artifacts，保留 <think>/<answer> 和 <|begin_of_query|> 检索标签契约。
 export USE_ES=0
 export MODE=hybrid
@@ -2424,8 +2424,8 @@ export RERANK_URL=http://127.0.0.1:8033/v1/rerank
 export RERANK_MODEL=/data/srl/llama-nemotron-rerank-1b-v2
 scripts/baselines/run_cluerag_method.sh "$DATASET" "$NAMESPACE"
 
-# 论文正式 ClueRAG baseline：统一使用 Signpost evidence-grounded 生成约束。
-# 这一步复用上一条 cluerag 的 retrieval_results，只重跑 final generation；上一条 cluerag 默认 prompt 结果不进论文。
+# 技术说明正式 ClueRAG baseline：统一使用 Signpost evidence-grounded 生成约束。
+# 这一步复用上一条 cluerag 的 retrieval_results，只重跑 final generation；上一条 cluerag 默认 prompt 结果不进技术说明。
 export CLUERAG_GENERATION_ONLY=1
 export CLUERAG_PROMPT_STYLE=signpost_fewshot
 export CLUERAG_METHOD_NAME=cluerag_prompt_normalized
@@ -2436,7 +2436,7 @@ unset CLUERAG_PROMPT_STYLE
 unset CLUERAG_METHOD_NAME
 unset CLUERAG_SOURCE_OUTPUT_DIR
 
-# 论文正式 AGRAG baseline：复用 Signpost chunks / semantic_llm extractions / questions。
+# 技术说明正式 AGRAG baseline：复用 Signpost chunks / semantic_llm extractions / questions。
 # 非首次执行复用 outputs/${DATASET}/baselines/agrag/index.pkl，只重跑 PPR + MCMI 子图检索、hybrid chunk retrieval 和 final generation。
 export USE_ES=1
 export MODE=hybrid
@@ -2453,7 +2453,7 @@ export AGRAG_EMBED_BATCH_SIZE=32
 export EMBEDDING_PROVIDER=ecnu
 scripts/baselines/run_baseline_method.sh agrag graphrag-bench-novel graphrag-bench-novel
 
-# 论文正式 LinearRAG baseline：复用 Signpost chunks / semantic_llm extractions / questions。
+# 技术说明正式 LinearRAG baseline：复用 Signpost chunks / semantic_llm extractions / questions。
 # 非首次执行复用 outputs/${DATASET}/baselines/linearrag/index.pkl，只重跑 sentence bridging + PPR、hybrid chunk retrieval 和 final generation。
 export USE_ES=1
 export MODE=hybrid
@@ -2476,7 +2476,7 @@ export LINEARRAG_PASSAGE_NODE_WEIGHT=0.05
 export LINEARRAG_DAMPING=0.5
 scripts/baselines/run_baseline_method.sh linearrag graphrag-bench-novel graphrag-bench-novel
 
-# 论文正式 HiPRAG baseline：复用 Signpost chunks / questions。
+# 技术说明正式 HiPRAG baseline：复用 Signpost chunks / questions。
 # 非首次执行复用 outputs/${DATASET}/baselines/hiprag/index.pkl，只重跑 agentic chunk retrieval 和 final generation，保留 <think>/<search>/<context>/<answer> XML 输出契约。
 export USE_ES=0
 export MODE=hybrid
@@ -2492,7 +2492,7 @@ export HIPRAG_SEARCH_TOP_K=3
 export HIPRAG_MAX_STEPS=4
 scripts/baselines/run_baseline_method.sh hiprag graphrag-bench-novel graphrag-bench-novel
 
-# 论文正式 GraphRAG-R1 baseline：复用 Signpost chunks / semantic_llm extractions / questions。
+# 技术说明正式 GraphRAG-R1 baseline：复用 Signpost chunks / semantic_llm extractions / questions。
 # 非首次执行复用 outputs/${DATASET}/baselines/graphrag_r1/index.pkl，只重跑 agentic graph retrieval 和 final generation，保留 <think>/<answer> 和 <|begin_of_query|> 检索标签契约。
 export USE_ES=0
 export MODE=hybrid
@@ -2747,7 +2747,7 @@ python -m signpost.benchmark.final_metrics \
 登记内容必须包括：
 1. method name
 2. 是否保留 baseline 自己的输出格式
-3. 进入论文的 prediction 文件名
+3. 进入技术说明的 prediction 文件名
 4. 完整 system/user prompt 模板
 5. 哪些默认/官方 prompt 结果被弃用
 ```
@@ -2812,20 +2812,20 @@ Vanilla LLM has no retrieved evidence. For paper comparability, it should still 
 
 ### 11.2 ClueRAG / Thought-Answer 输出格式 prompt
 
-论文不使用 ClueRAG 默认 final generation prompt 的结果。`outputs/<dataset>/predictions/cluerag.jsonl` 只作为历史/中间产物保留，不进入任何论文表格。论文中的 ClueRAG baseline 使用统一生成约束后的结果：
+技术说明不使用 ClueRAG 默认 final generation prompt 的结果。`outputs/<dataset>/predictions/cluerag.jsonl` 只作为历史/中间产物保留，不进入任何技术说明表格。技术说明中的 ClueRAG baseline 使用统一生成约束后的结果：
 
 ```text
 cluerag_prompt_normalized
 ```
 
-这个正式论文 baseline 只允许替换 final generation prompt 的任务说明与 few-shot 示例部分：
+这个正式技术说明 baseline 只允许替换 final generation prompt 的任务说明与 few-shot 示例部分：
 
 - 不重建 ClueRAG 图；
 - 不改 ClueRAG 检索；
 - 不改 rerank；
 - 不改 retrieved chunks；
 - 不改 `Thought:` / `Answer:` 输出格式；
-- 不把 `outputs/<dataset>/predictions/cluerag.jsonl` 写入论文；论文使用 `outputs/<dataset>/predictions/cluerag_prompt_normalized.jsonl`。
+- 不把 `outputs/<dataset>/predictions/cluerag.jsonl` 写入技术说明；技术说明使用 `outputs/<dataset>/predictions/cluerag_prompt_normalized.jsonl`。
 - 保留 few-shot，但使用 evidence-grounded 的 Greensgrow 示例，而不是 ClueRAG 原始 Wikipedia 示例。
 
 ClueRAG 原始 prompt 的关键输出格式约束是：
@@ -2868,7 +2868,7 @@ Thought: ...
 Answer: ...
 ```
 
-论文正式 ClueRAG baseline 输出：
+技术说明正式 ClueRAG baseline 输出：
 
 ```text
 outputs/<dataset>/predictions/cluerag_prompt_normalized.jsonl
@@ -2877,7 +2877,7 @@ outputs/<dataset>/metrics/cluerag_prompt_normalized.basic_eval.json
 outputs/<dataset>/metrics/cluerag_prompt_normalized.query_metrics.json
 ```
 
-论文写法建议：
+技术说明写法建议：
 
 ```text
 For ClueRAG, we keep its graph construction, retrieval, reranking, and Thought/Answer output contract unchanged, but replace its final generation instruction with the same evidence-grounded answer constraints used by Signpost. The default ClueRAG generation prompt is not reported in the main results.
@@ -2885,7 +2885,7 @@ For ClueRAG, we keep its graph construction, retrieval, reranking, and Thought/A
 
 ### 11.3 AGRAG / Thought-Answer 输出格式 prompt
 
-论文中的 AGRAG baseline 使用：
+技术说明中的 AGRAG baseline 使用：
 
 ```text
 agrag
@@ -2916,7 +2916,7 @@ AGRAG 检索口径：
 - 用 MCMI-style greedy expansion 生成 reasoning subgraph；
 - 与 hybrid chunk retrieval 融合后进入 final generation。
 
-AGRAG 原始 HippoRAG-style QA prompt 使用 `Thought:` / `Answer:` 输出契约。正式 adapter 保留这个输出契约，只迁移 Signpost evidence-grounded 回答约束。论文正式输出：
+AGRAG 原始 HippoRAG-style QA prompt 使用 `Thought:` / `Answer:` 输出契约。正式 adapter 保留这个输出契约，只迁移 Signpost evidence-grounded 回答约束。技术说明正式输出：
 
 ```text
 outputs/<dataset>/predictions/agrag.jsonl
@@ -2968,7 +2968,7 @@ Thought:
 
 ### 11.4 LinearRAG / Thought-Answer 输出格式 prompt
 
-论文中的 LinearRAG baseline 使用：
+技术说明中的 LinearRAG baseline 使用：
 
 ```text
 linearrag
@@ -3003,7 +3003,7 @@ LinearRAG 检索口径：
 - 用 passage dense score + activated entity score 形成 PPR personalization；
 - 用 personalized PageRank 排序 passage nodes，并与 hybrid chunk retrieval 融合后进入 final generation。
 
-LinearRAG 官方 QA prompt 使用 `Thought:` / `Answer:` 输出契约。正式 adapter 保留这个输出契约，只迁移 Signpost evidence-grounded 回答约束。论文正式输出：
+LinearRAG 官方 QA prompt 使用 `Thought:` / `Answer:` 输出契约。正式 adapter 保留这个输出契约，只迁移 Signpost evidence-grounded 回答约束。技术说明正式输出：
 
 ```text
 outputs/<dataset>/predictions/linearrag.jsonl
@@ -3055,7 +3055,7 @@ Thought:
 
 ### 11.5 HiPRAG / XML Agentic Search 输出格式 prompt
 
-论文中的 HiPRAG baseline 使用：
+技术说明中的 HiPRAG baseline 使用：
 
 ```text
 hiprag
@@ -3085,7 +3085,7 @@ HiPRAG 检索口径：
 - 在线阶段保留 HiPRAG agentic search 形态：`<think>` / `<step>` / `<reasoning>` / `<search>` / `<context>` / `<conclusion>` / `<answer>`；
 - 搜索工具只返回私有语料 chunks，final answer 必须受 Signpost evidence-grounded 约束。
 
-HiPRAG 官方 prompt 使用 XML agent 输出契约。正式 adapter 保留这个输出契约，只迁移 Signpost evidence-grounded 回答约束。论文正式输出：
+HiPRAG 官方 prompt 使用 XML agent 输出契约。正式 adapter 保留这个输出契约，只迁移 Signpost evidence-grounded 回答约束。技术说明正式输出：
 
 ```text
 outputs/<dataset>/predictions/hiprag.jsonl
@@ -3151,7 +3151,7 @@ Now close the HiPRAG reasoning trace and write the final <answer>. Use only the 
 
 ### 11.6 GraphRAG-R1 / XML Agentic Graph Retrieval 输出格式 prompt
 
-论文中的 GraphRAG-R1 baseline 使用：
+技术说明中的 GraphRAG-R1 baseline 使用：
 
 ```text
 graphrag_r1
@@ -3183,7 +3183,7 @@ GraphRAG-R1 检索口径：
 - 在线阶段保留 GraphRAG-R1 agentic retrieval 形态：`<think>` / `<|begin_of_query|>` / `<|begin_of_documents|>` / `<answer>`；
 - graph retrieval 返回 private corpus graph facts 和 chunks，final answer 必须受 Signpost evidence-grounded 约束。
 
-GraphRAG-R1 官方 prompt 使用 XML agent 输出契约和 query/document 检索标签。正式 adapter 保留这个输出契约，只迁移 Signpost evidence-grounded 回答约束。论文正式输出：
+GraphRAG-R1 官方 prompt 使用 XML agent 输出契约和 query/document 检索标签。正式 adapter 保留这个输出契约，只迁移 Signpost evidence-grounded 回答约束。技术说明正式输出：
 
 ```text
 outputs/<dataset>/predictions/graphrag_r1.jsonl
@@ -3259,7 +3259,7 @@ Now close the GraphRAG-R1 reasoning trace and write the final <answer>. Use only
 
 ### 11.6.1 MemGraphRAG / Thought-Answer 输出格式 prompt
 
-论文中的 MemGraphRAG baseline 使用：
+技术说明中的 MemGraphRAG baseline 使用：
 
 ```text
 memgraphrag
@@ -3345,7 +3345,7 @@ export REUSE_BASELINE_INDEX=1
 scripts/baselines/run_baseline_method.sh memgraphrag agriculture agriculture
 ```
 
-MemGraphRAG 官方 QA 代码读取 retrieved passages，输出 `Thought:` / `Answer:`。正式 adapter 保留这个输出契约，只迁移 Signpost evidence-grounded 回答约束。论文正式输出：
+MemGraphRAG 官方 QA 代码读取 retrieved passages，输出 `Thought:` / `Answer:`。正式 adapter 保留这个输出契约，只迁移 Signpost evidence-grounded 回答约束。技术说明正式输出：
 
 ```text
 outputs/<dataset>/predictions/memgraphrag.jsonl
@@ -3459,14 +3459,14 @@ outputs/<dataset>/predictions/signpost.no_vertical_cues.jsonl
 outputs/<dataset>/predictions/signpost.no_horizontal_cues.jsonl
 outputs/<dataset>/predictions/vanilla_llm.jsonl
 outputs/<dataset>/predictions/hybrid_rag.jsonl
-outputs/<dataset>/predictions/cluerag.jsonl                     # 中间/历史产物，不进论文
-outputs/<dataset>/predictions/cluerag_prompt_normalized.jsonl   # 论文正式 ClueRAG baseline
-outputs/<dataset>/predictions/agrag.jsonl                       # 论文正式 AGRAG baseline
-outputs/<dataset>/predictions/linearrag.jsonl                   # 论文正式 LinearRAG baseline
-outputs/<dataset>/predictions/hiprag.jsonl                      # 论文正式 HiPRAG baseline
-outputs/<dataset>/predictions/graphrag_r1.jsonl                 # 论文正式 GraphRAG-R1 baseline
+outputs/<dataset>/predictions/cluerag.jsonl                     # 中间/历史产物，不进技术说明
+outputs/<dataset>/predictions/cluerag_prompt_normalized.jsonl   # 技术说明正式 ClueRAG baseline
+outputs/<dataset>/predictions/agrag.jsonl                       # 技术说明正式 AGRAG baseline
+outputs/<dataset>/predictions/linearrag.jsonl                   # 技术说明正式 LinearRAG baseline
+outputs/<dataset>/predictions/hiprag.jsonl                      # 技术说明正式 HiPRAG baseline
+outputs/<dataset>/predictions/graphrag_r1.jsonl                 # 技术说明正式 GraphRAG-R1 baseline
 outputs/<dataset>/predictions/graphrag_r1_hipporag2.jsonl       # GraphRAG-R1 + official HippoRAG2 v4 baseline，不覆盖 graphrag_r1
-outputs/<dataset>/predictions/memgraphrag.jsonl                 # 论文正式 MemGraphRAG baseline
+outputs/<dataset>/predictions/memgraphrag.jsonl                 # 技术说明正式 MemGraphRAG baseline
 
 outputs/<dataset>/logs/stage_timing.jsonl
 outputs/<dataset>/logs/*.query.jsonl

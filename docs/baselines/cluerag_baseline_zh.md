@@ -6,7 +6,7 @@
 > 但会按 ClueRAG 自己的 chunk / knowledge unit / entity 多层图组织重新建图，
 > 并写入独立 ClueRAG ES index，不读取 Signpost unified/navigation graph。
 > 本文后面保留的 `RUN_OFFICIAL=1` / `official_outputs` 内容仅用于
-> `official_oceanbase` 可选诊断路径，不作为论文主表默认流程。
+> `official_oceanbase` 可选诊断路径，不作为技术说明主表默认流程。
 
 本文档说明 Clue-RAG 作为 Signpost 外部 baseline 的目录结构、输入输出、环境配置和运行命令。
 
@@ -156,7 +156,7 @@ outputs/<dataset>/metrics/cluerag.basic_eval.json
 outputs/<dataset>/metrics/cluerag.query_metrics.json
 ```
 
-注意：上述 `cluerag.jsonl` 使用默认 ClueRAG/adapter final prompt，只作为 graph/retrieval 中间流程的历史产物保留，不进入论文表格。论文中的 ClueRAG baseline 使用统一生成约束后的输出：
+注意：上述 `cluerag.jsonl` 使用默认 ClueRAG/adapter final prompt，只作为 graph/retrieval 中间流程的历史产物保留，不进入技术说明表格。技术说明中的 ClueRAG baseline 使用统一生成约束后的输出：
 
 ```text
 outputs/<dataset>/predictions/cluerag_prompt_normalized.jsonl
@@ -313,7 +313,7 @@ REUSE_GRAPH=1 scripts/baselines/run_cluerag_method.sh agriculture agriculture
 
 ### 5.2 shared_local 函数级排查
 
-`shared_local` 只用于本地或 H200 临时排查，不作为论文主结果：
+`shared_local` 只用于本地或 H200 临时排查，不作为技术说明主结果：
 
 ```bash
 LIMIT=3 CLUERAG_BACKEND=shared_local RERANK_URL= \

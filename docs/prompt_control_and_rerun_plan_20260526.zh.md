@@ -4,7 +4,7 @@
 
 ## 1. 目标
 
-这次要把进入论文比较的最终回答生成约束统一到 Signpost 主实验的回答约束，减少 prompt 差异带来的控制变量问题。
+这次要把进入技术说明比较的最终回答生成约束统一到 Signpost 主实验的回答约束，减少 prompt 差异带来的控制变量问题。
 
 统一原则：
 
@@ -18,7 +18,7 @@
 7. 输出格式不强制统一；各方法可以保留自己的 JSON、plain text、Thought/Answer、XML/tag 格式。
 ```
 
-注意：Vanilla LLM 没有 retrieval evidence。若严格套用 “strictly based on evidence”，它会系统性输出 `Insufficient evidence`。如果论文仍需要 Vanilla LLM 作为“无检索但允许参数知识”的 baseline，就不能说它与 RAG 方法有完全相同的 evidence-grounded 约束；只能统一语言、完整性、无 citation、无 filler 等 answer style 约束。下面给出两个可选口径，需人工确认。
+注意：Vanilla LLM 没有 retrieval evidence。若严格套用 “strictly based on evidence”，它会系统性输出 `Insufficient evidence`。如果技术说明仍需要 Vanilla LLM 作为“无检索但允许参数知识”的 baseline，就不能说它与 RAG 方法有完全相同的 evidence-grounded 约束；只能统一语言、完整性、无 citation、无 filler 等 answer style 约束。下面给出两个可选口径，需人工确认。
 
 ## 2. 当前 prompt 与拟修改 prompt
 
@@ -88,7 +88,7 @@ Question:
 {question}
 ```
 
-建议：论文主表若强调 controlled evidence-grounded generation，应使用方案 A；若保留经典 Vanilla LLM 对照，应使用方案 B 并在论文中说明它不具备 retrieval evidence。
+建议：技术说明主表若强调 controlled evidence-grounded generation，应使用方案 A；若保留经典 Vanilla LLM 对照，应使用方案 B 并在技术说明中说明它不具备 retrieval evidence。
 
 ### 2.2 Hybrid RAG
 
@@ -208,7 +208,7 @@ Evidence:
 
 ### 2.4 需要一并检查但本轮暂不改的 baseline
 
-如果后续要求所有论文 baseline 都统一 prompt，还需要逐个处理：
+如果后续要求所有技术说明 baseline 都统一 prompt，还需要逐个处理：
 
 ```text
 cluerag_prompt_normalized
@@ -429,5 +429,5 @@ TargetUnitF1 = 2PR/(P+R)
 这个方案可复现，但不符合“recall 使用 targetunit”的要求。
 ```
 
-建议：论文主指标改用方案 2；临时快速检查可以先输出方案 1 的 TargetUnitRecall 和 legacy precision/F1，明确标注 legacy。
+建议：技术说明主指标改用方案 2；临时快速检查可以先输出方案 1 的 TargetUnitRecall 和 legacy precision/F1，明确标注 legacy。
 

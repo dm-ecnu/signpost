@@ -1,6 +1,6 @@
 # v8 精确定版实验计划与执行步骤
 
-本文档比 `v8_experiment_runbook.zh.md` 更收敛，只保留 v8 论文中明确写到的 baseline，不再使用 “best GraphRAG”“best agentic” 这类模糊表述。
+本文档比 `v8_experiment_runbook.zh.md` 更收敛，只保留 v8 技术说明中明确写到的 baseline，不再使用 “best GraphRAG”“best agentic” 这类模糊表述。
 
 ## 1. 最终 baseline 名单
 
@@ -123,7 +123,7 @@ Signpost
 
 ## 4. legal_test Signpost 闭环
 
-`legal_test` 只用于 smoke，不进入论文表格。目标是确认 F3-F17 全链路可运行，并且每一步产物可核对。
+`legal_test` 只用于 smoke，不进入技术说明表格。目标是确认 F3-F17 全链路可运行，并且每一步产物可核对。
 
 工作目录：
 
@@ -784,9 +784,9 @@ outputs/<dataset>/metrics/method_summaries.json
 outputs/<dataset>/metrics/cost_quality.json
 ```
 
-论文表格映射：
+技术说明表格映射：
 
-| 论文内容 | 文件来源 |
+| 技术说明内容 | 文件来源 |
 |---|---|
 | Dataset statistics | `documents.jsonl`, `chunks.jsonl`, `questions.jsonl`, `graph.unified.json`, `index_metrics.json` |
 | Main quality | `<method>.basic_eval.json`, optional LLM judge |

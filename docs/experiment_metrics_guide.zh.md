@@ -1,6 +1,6 @@
-# ICDE 实验指标与日志说明
+# 项目实验指标与日志说明
 
-本文档说明本次为 ICDE 实验补充的指标代码。它只负责测评、记账和汇总，不实现检索剪枝，也不实现 baseline。
+本文档说明本次为 项目实验补充的指标代码。它只负责测评、记账和汇总，不实现检索剪枝，也不实现 baseline。
 
 如果你只是想先弄懂“这些指标为什么要测、先看哪些数”，建议先看更口语化的入门文档：
 
@@ -121,7 +121,7 @@ F15_agent_batch
 - p95
 - min/max
 
-其中 `p95 latency` 是尾延迟指标，论文 online efficiency 表里应该保留。
+其中 `p95 latency` 是尾延迟指标，技术说明 online efficiency 表里应该保留。
 
 ### 2.4 Evaluation only
 
@@ -228,7 +228,7 @@ evidence
 contexts
 ```
 
-这个指标是 weak evidence metric。它不能替代人工证据标注，但可以在数据库论文中补充非 LLM 的检索质量信号。
+这个指标是 weak evidence metric。它不能替代人工证据标注，但可以在数据库技术说明中补充非 LLM 的检索质量信号。
 
 ## 4. Stage timing 日志怎么记录
 
@@ -397,9 +397,9 @@ datasets/processed/{dataset}/
 
 仍然保留。
 
-新增 benchmark 指标层不会替代 F16，而是扩展论文实验需要的成本、延迟、证据和图结构指标。推荐流程是：
+新增 benchmark 指标层不会替代 F16，而是扩展技术说明实验需要的成本、延迟、证据和图结构指标。推荐流程是：
 
 1. 先用 F16 校验 prediction 格式和基础 EM/F1。
 2. 再用 `query_metrics.py` 生成统一质量+成本 summary。
 3. 用 `index_metrics.py` 生成离线索引和图结构 summary。
-4. 用 `cost_quality.py` 生成论文成本分析图表所需数据。
+4. 用 `cost_quality.py` 生成技术说明成本分析图表所需数据。

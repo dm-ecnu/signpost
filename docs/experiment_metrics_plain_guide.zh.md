@@ -1,10 +1,10 @@
-# ICDE 实验指标人话版说明
+# 项目实验指标人话版说明
 
 这份文档不按代码结构讲，而是按“实验到底想证明什么”来讲。你可以先只看这份，等真正要查字段细节时，再看 `experiment_metrics_guide.zh.md`。
 
 ## 0. 先说结论：我们到底要测什么？
 
-这篇论文不是只要测“答案对不对”。我们还要回答审稿人最可能问的几个问题：
+这篇技术说明不是只要测“答案对不对”。我们还要回答审稿人最可能问的几个问题：
 
 1. **质量问题**：Signpost 答案是不是更准？
 2. **在线成本问题**：Signpost 回答一个问题时，是不是用了很多 token、工具调用和时间？
@@ -102,7 +102,7 @@ conda run -n signpost-re python -m signpost.benchmark.query_metrics \
 }
 ```
 
-论文表里可以写：
+技术说明表里可以写：
 
 | Method | EM | F1 |
 | --- | ---: | ---: |
@@ -160,7 +160,7 @@ conda run -n signpost-re python -m signpost.benchmark.query_metrics \
 | `median` | 中位数，典型问题多慢 |
 | `p95` | 最慢 5% 的问题多慢 |
 
-数据库/系统论文很重视 p95，因为真实系统里“少数特别慢的问题”也很重要。
+数据库/系统技术说明很重视 p95，因为真实系统里“少数特别慢的问题”也很重要。
 
 ### 2.4 怎么跑？
 
@@ -191,7 +191,7 @@ conda run -n signpost-re python -m signpost.benchmark.query_metrics \
 }
 ```
 
-论文里可以写：
+技术说明里可以写：
 
 | Method | Tokens / Query | Tool Calls / Query | Mean Latency | P95 Latency |
 | --- | ---: | ---: | ---: | ---: |
@@ -209,7 +209,7 @@ conda run -n signpost-re python -m signpost.benchmark.query_metrics \
 
 > Signpost 建图和建索引到底花了多少成本？
 
-这是 ICDE 论文必须说清楚的地方。因为 Signpost 的语义视图需要 LLM 抽取实体关系，不能假装这部分是免费的。
+这是 项目技术说明必须说清楚的地方。因为 Signpost 的语义视图需要 LLM 抽取实体关系，不能假装这部分是免费的。
 
 ### 3.2 哪些阶段算离线？
 
@@ -493,7 +493,7 @@ Pareto frontier 用来回答：
 
 最后没有被别人支配的方法，就在 Pareto frontier 上。
 
-论文图里可以画：
+技术说明图里可以画：
 
 ```text
 x 轴：online tokens/query
@@ -633,7 +633,7 @@ cost_per_extra_correct_tokens
 | 9 | `graph edge_type_ratio` | 多视图图是否真的建出来 |
 | 10 | `amortized_tokens` | 索引成本摊到每题后是多少 |
 
-这 10 个数基本能支撑论文的主线：
+这 10 个数基本能支撑技术说明的主线：
 
 > Signpost 通过更贵的离线多视图图索引，换取更好的答案质量和更有指导性的在线 agent 检索；它的成本需要被量化，并随查询量摊销分析。
 

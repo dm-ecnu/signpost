@@ -3,10 +3,10 @@
 本文档是 `external_baseline_metrics_prompts_zh.md` 的完整口径版。这里不再只写摘要，而是尽量逐项说明：
 
 1. 每个 baseline 的每个指标到底怎么算。
-2. 哪些指标能从代码确认，哪些只能从论文确认，哪些当前无法确认。
+2. 哪些指标能从代码确认，哪些只能从技术说明确认，哪些当前无法确认。
 3. 能在当前本地仓库中定位到的原始 prompt，按源码原文整理。
 
-注意：正式实验仍以 Signpost 统一 `basic_eval` / `query_metrics` 为主。这里整理的是外部 baseline 的官方论文/代码口径，主要用于写 method card、附录和公平性说明。
+注意：正式实验仍以 Signpost 统一 `basic_eval` / `query_metrics` 为主。这里整理的是外部 baseline 的官方技术说明/代码口径，主要用于写 method card、附录和公平性说明。
 
 ## 1. ClueRAG
 
@@ -14,9 +14,9 @@
 
 #### Accuracy / Acc.
 
-来源：论文。
+来源：技术说明。
 
-是否能从当前代码确认：不能完整确认。论文定义明确，但当前下载的 `baselines/ClueRAG/main.py` 引用了 `calculate_metric_scores`，而 `baselines/ClueRAG/utils/utils.py` 中没有该函数。
+是否能从当前代码确认：不能完整确认。技术说明定义明确，但当前下载的 `baselines/ClueRAG/main.py` 引用了 `calculate_metric_scores`，而 `baselines/ClueRAG/utils/utils.py` 中没有该函数。
 
 中文解释：
 
@@ -41,9 +41,9 @@
 
 #### F1
 
-来源：论文。
+来源：技术说明。
 
-是否能从当前代码确认：不能完整确认。论文说明是 generated answer 与 gold answer 的 token-level overlap F1，但当前代码缺少对应实现。
+是否能从当前代码确认：不能完整确认。技术说明说明是 generated answer 与 gold answer 的 token-level overlap F1，但当前代码缺少对应实现。
 
 中文解释：
 
@@ -89,14 +89,14 @@ k 取 2、5、10。
 
 #### Offline / Online Token Cost
 
-来源：论文 + 部分代码 metadata。
+来源：技术说明 + 部分代码 metadata。
 
 是否能从当前代码确认：只能部分确认。
 
 中文解释：
 
 ```text
-论文要求统计 LLM prompt tokens + completion tokens。
+技术说明要求统计 LLM prompt tokens + completion tokens。
 offline token cost 指离线索引/知识单元抽取/实体抽取等阶段产生的 token。
 online token cost 指每个 query 检索和生成阶段产生的 token。
 ```
@@ -105,7 +105,7 @@ online token cost 指每个 query 检索和生成阶段产生的 token。
 
 ```text
 当前代码能记录部分 LLM metadata，但由于官方评测入口不完整，
-无法确认论文表格中的 token cost 是否完全由当前代码复现。
+无法确认技术说明表格中的 token cost 是否完全由当前代码复现。
 ```
 
 ### 1.2 原始 Prompt
@@ -216,7 +216,7 @@ Question: {question}
 
 #### Contain Accuracy / Contain-Acc.
 
-来源：代码 `baselines/LinearRAG/src/evaluate.py`，论文也报告该指标。
+来源：代码 `baselines/LinearRAG/src/evaluate.py`，技术说明也报告该指标。
 
 是否能从当前代码确认：可以确认。
 
@@ -238,7 +238,7 @@ Question: {question}
 
 #### LLM Accuracy / GPT-Acc.
 
-来源：代码 `baselines/LinearRAG/src/evaluate.py`，论文也报告该指标。
+来源：代码 `baselines/LinearRAG/src/evaluate.py`，技术说明也报告该指标。
 
 是否能从当前代码确认：可以确认。
 
@@ -255,14 +255,14 @@ prompt 要求 evaluator 只返回 correct 或 incorrect。
 
 #### Context Relevance
 
-来源：论文。
+来源：技术说明。
 
 是否能从当前代码确认：无法确认。
 
 中文解释：
 
 ```text
-论文说该指标衡量 question 与 retrieved passages 的语义相关性。
+技术说明说该指标衡量 question 与 retrieved passages 的语义相关性。
 也就是检索出来的上下文是否和问题相关。
 ```
 
@@ -276,14 +276,14 @@ prompt 要求 evaluator 只返回 correct 或 incorrect。
 
 #### Evidence Recall
 
-来源：论文。
+来源：技术说明。
 
 是否能从当前代码确认：无法确认。
 
 中文解释：
 
 ```text
-论文说该指标衡量 retrieved contents 是否包含回答问题所需的全部证据。
+技术说明说该指标衡量 retrieved contents 是否包含回答问题所需的全部证据。
 直观上，如果答案需要 3 条证据，而检索结果覆盖了其中 2 条，则 recall 应反映这种覆盖程度。
 ```
 
@@ -351,7 +351,7 @@ Please evaluate if the generated answer is correct by comparing it with the gold
 
 #### ACC. / Accuracy
 
-来源：论文；旧分类脚本有 sklearn 实现；GraphRAG-Bench QA wrapper 依赖外部 `metrics`。
+来源：技术说明；旧分类脚本有 sklearn 实现；GraphRAG-Bench QA wrapper 依赖外部 `metrics`。
 
 是否能从当前代码确认：只能部分确认。
 
@@ -362,7 +362,7 @@ Please evaluate if the generated answer is correct by comparing it with the gold
   Accuracy = 预测标签等于标准标签的样本数 / 总样本数。
 
 在生成式 QA / summarization / creative generation 等任务中：
-  论文说由 LLM 打分，分数为 0、0.5 或 1。
+  技术说明说由 LLM 打分，分数为 0、0.5 或 1。
   0 表示错误，0.5 表示部分正确，1 表示完全正确。
 ```
 
@@ -376,17 +376,17 @@ Please evaluate if the generated answer is correct by comparing it with the gold
 
 #### REC. / Recall
 
-来源：论文；旧分类代码有 sklearn weighted recall。
+来源：技术说明；旧分类代码有 sklearn weighted recall。
 
 是否能从当前代码确认：只能部分确认。
 
 中文解释：
 
 ```text
-论文定义：
+技术说明定义：
 Recall = TP / (TP + FN)
 
-如果是多类别分类，论文说明使用 macro recall。
+如果是多类别分类，技术说明说明使用 macro recall。
 也就是先分别计算每个类别的 recall，再对类别取平均。
 ```
 
@@ -395,12 +395,12 @@ Recall = TP / (TP + FN)
 ```text
 旧分类脚本使用 sklearn recall_score(..., average="weighted")。
 weighted recall 会按每个类别的样本数量加权平均，不是 macro recall。
-所以论文口径和当前旧分类脚本不完全一致。
+所以技术说明口径和当前旧分类脚本不完全一致。
 ```
 
 #### ROUGE-L / ROG.
 
-来源：论文；GraphRAG-Bench wrapper 调用外部 `rouge_score`。
+来源：技术说明；GraphRAG-Bench wrapper 调用外部 `rouge_score`。
 
 是否能从当前代码确认：只能确认概念，无法确认完整实现。
 
@@ -421,7 +421,7 @@ LCS 越长，说明生成答案和标准答案的顺序重合内容越多。
 
 #### Coverage / COV.
 
-来源：论文；GraphRAG-Bench wrapper 调用外部 `coverage_score`。
+来源：技术说明；GraphRAG-Bench wrapper 调用外部 `coverage_score`。
 
 是否能从当前代码确认：无法确认完整实现。
 
@@ -441,7 +441,7 @@ Coverage 衡量生成回答是否覆盖参考证据中的必要信息。
 
 #### Faithfulness / FS.
 
-来源：论文；GraphRAG-Bench wrapper 调用外部 `faithfulness`。
+来源：技术说明；GraphRAG-Bench wrapper 调用外部 `faithfulness`。
 
 是否能从当前代码确认：无法确认完整实现。
 
@@ -674,7 +674,7 @@ NER prompt：
 
 #### CEM / Cover Exact Match
 
-来源：代码 `baselines/HiPRAG/reward.py`，论文也报告。
+来源：代码 `baselines/HiPRAG/reward.py`，技术说明也报告。
 
 是否能从当前代码确认：可以确认。
 
@@ -732,7 +732,7 @@ NER prompt：
 
 #### OSR / Over-search Rate
 
-来源：论文 + `baselines/HiPRAG/analysis.py`。
+来源：技术说明 + `baselines/HiPRAG/analysis.py`。
 
 是否能从当前代码确认：可以确认公式，但具体判定依赖 LLM judge。
 
@@ -754,7 +754,7 @@ oversearch 表示不需要搜索但模型进行了搜索的 step 数。
 
 #### USR / Under-search Rate
 
-来源：论文 + `baselines/HiPRAG/analysis.py`。
+来源：技术说明 + `baselines/HiPRAG/analysis.py`。
 
 是否能从当前代码确认：可以确认公式，但具体判定依赖 LLM judge。
 
@@ -769,7 +769,7 @@ undersearch 表示本应搜索但模型没有搜索的 step 数。
 
 #### Avg. #Searches
 
-来源：论文。
+来源：技术说明。
 
 是否能从当前代码确认：可以从输出格式统计。
 
@@ -929,7 +929,7 @@ AGENT_PROMPT_BASE / V1 / V2 也是源码中存在的完整长 prompt 变体。
 
 #### Precision / Recall / F1
 
-来源：代码；论文主指标也包含 F1。
+来源：代码；技术说明主指标也包含 F1。
 
 是否能从当前代码确认：可以确认。
 
@@ -960,7 +960,7 @@ F1 = 2 * Precision * Recall / (Precision + Recall)
 
 #### SBERT Similarity
 
-来源：代码 + 论文。
+来源：代码 + 技术说明。
 
 是否能从当前代码确认：可以确认。
 
@@ -976,7 +976,7 @@ F1 = 2 * Precision * Recall / (Precision + Recall)
 
 #### ROUGE
 
-来源：代码支持，但论文主表不一定使用。
+来源：代码支持，但技术说明主表不一定使用。
 
 是否能从当前代码确认：可以确认。
 
@@ -990,7 +990,7 @@ F1 = 2 * Precision * Recall / (Precision + Recall)
 
 #### ACCL / LLM-as-Judge Accuracy
 
-来源：论文 + 代码 `baselines/GraphRAG-R1/eval/eval_online.py`。
+来源：技术说明 + 代码 `baselines/GraphRAG-R1/eval/eval_online.py`。
 
 是否能从当前代码确认：可以确认。
 
@@ -1040,7 +1040,7 @@ reasoning_tokens:
 
 #### #Calls / #Token / ACCF
 
-来源：论文。
+来源：技术说明。
 
 是否能从当前代码确认：只能部分确认。
 
@@ -1061,7 +1061,7 @@ ACCF:
 
 ```text
 当前 eval/calc_rule.py 没有完整 ACCF 实现。
-论文中 ACCF 的格式判定细节需要结合训练/evaluator 代码进一步确认。
+技术说明中 ACCF 的格式判定细节需要结合训练/evaluator 代码进一步确认。
 ```
 
 ### 5.2 原始 Prompt
@@ -1276,7 +1276,7 @@ You are a critical component of a high-stakes question-answering system used by 
 
 ```text
 ClueRAG:
-  论文 QA Acc/F1 定义能确认，但当前代码实现缺失，不能直接复现官方 QA 指标。
+  技术说明 QA Acc/F1 定义能确认，但当前代码实现缺失，不能直接复现官方 QA 指标。
   检索 Recall@k 可从代码确认。
 
 LinearRAG:
@@ -1284,7 +1284,7 @@ LinearRAG:
   Context Relevance 和 Evidence Recall 当前无法从代码确认。
 
 AGRAG:
-  论文指标定义能大致确认。
+  技术说明指标定义能大致确认。
   GraphRAG-Bench QA wrapper 依赖外部 metrics，Coverage/Faithfulness/answer_correctness 的完整实现无法从当前仓库确认。
 
 HiPRAG:

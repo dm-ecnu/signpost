@@ -61,11 +61,11 @@ datasets/processed/<dataset>/questions.jsonl
 Baseline 图/index 存储按原方法口径处理：
 
 ```text
-如果原论文/官方实现使用数据库或外部图存储来保存图/index：
+如果原技术说明/官方实现使用数据库或外部图存储来保存图/index：
   H200 适配时用该 baseline 自己的独立 ES index 替代数据库，index 命名必须带 baseline method 和 dataset，例如 baseline-<method>-<dataset>-graph。
   该 ES index 只能写入该 baseline 自己从共享产物构建出的节点、边、triple、passage-link、retrieval metadata 等对象。
 
-如果原论文/官方实现不使用数据库，而是本地内存、文件、pickle/json/jsonl、networkx/igraph 等方式建图：
+如果原技术说明/官方实现不使用数据库，而是本地内存、文件、pickle/json/jsonl、networkx/igraph 等方式建图：
   保留其自有建图和存储方式，不强制迁移到 ES。
   产物必须写在 outputs/<dataset>/baselines/<method>/ 或 baseline adapter 自己目录下，不能混入 Signpost 主流程产物。
 ```
@@ -134,7 +134,7 @@ CLUERAG_EMBED_BATCH_SIZE=32
 
 如果 8001 embedding 服务返回 HTTP 500、`Connection refused` 或退出，不能继续提交新的 embedding-heavy baseline。必须先按 `docs/h200_remaining_datasets_tmux_runbook.zh.md` 的 8001 中断恢复流程盘点 tmux、重启服务、确认 smoke test，再只补跑失败 stage/baseline。失败的 `stage_timing.jsonl` 记录保留作审计。
 
-9. Baseline 可以并发跑，但论文主口径使用 LLM calls/tokens；wall-clock 仍保留。若要比较 wall-clock，避免多个实验共享同一模型服务并发污染。正式 H200 上需要 embedding 的任务不建议并发，避免 8001 稳定性和 wall time 被污染。
+9. Baseline 可以并发跑，但技术说明主口径使用 LLM calls/tokens；wall-clock 仍保留。若要比较 wall-clock，避免多个实验共享同一模型服务并发污染。正式 H200 上需要 embedding 的任务不建议并发，避免 8001 稳定性和 wall time 被污染。
 
 10. 不能覆盖其他 baseline 的结果。覆盖该 baseline 自己的结果可以接受，但每次下载归档时要保存 run 时间或压缩包名。
 
@@ -163,7 +163,7 @@ runbook 更新内容至少包括：
 
 ```text
 每个相关数据集的正式运行命令
-该 baseline 哪些产物只是中间/历史产物，哪些 prediction 进入论文
+该 baseline 哪些产物只是中间/历史产物，哪些 prediction 进入技术说明
 该 baseline final generation 阶段的完整 prompt
 该 baseline 是否保留自己的输出格式，以及如何迁移 Signpost evidence-grounded 约束
 完整性检查清单中的 predictions/logs/metrics/run_metrics 文件
@@ -206,7 +206,7 @@ runbook 更新内容至少包括：
 
 ## 3. 统一 final generation prompt 口径
 
-论文中的所有 baseline 最终答案生成阶段都要使用 Signpost 的 evidence-grounded 约束。允许保留 baseline 自己的输出格式。
+技术说明中的所有 baseline 最终答案生成阶段都要使用 Signpost 的 evidence-grounded 约束。允许保留 baseline 自己的输出格式。
 
 ### 3.1 Signpost JSON 输出格式方法
 
@@ -265,7 +265,7 @@ Question: {question}
 
 ## 4. ClueRAG 当前正式口径
 
-ClueRAG 的论文 baseline 是：
+ClueRAG 的技术说明 baseline 是：
 
 ```text
 cluerag_prompt_normalized
@@ -283,13 +283,13 @@ cluerag
 outputs/<dataset>/baselines/cluerag/shared_outputs/COSINE_1.00/retrieval_results.json
 ```
 
-论文中不使用：
+技术说明中不使用：
 
 ```text
 outputs/<dataset>/predictions/cluerag.jsonl
 ```
 
-论文中使用：
+技术说明中使用：
 
 ```text
 outputs/<dataset>/predictions/cluerag_prompt_normalized.jsonl
@@ -317,7 +317,7 @@ export RERANK_URL=http://127.0.0.1:8033/v1/rerank
 export RERANK_MODEL=/data/srl/llama-nemotron-rerank-1b-v2
 scripts/baselines/run_cluerag_method.sh "$DATASET" "$NAMESPACE"
 
-# Step 2: 论文正式 ClueRAG baseline，复用 retrieval，只重跑 final generation。
+# Step 2: 技术说明正式 ClueRAG baseline，复用 retrieval，只重跑 final generation。
 export CLUERAG_GENERATION_ONLY=1
 export CLUERAG_PROMPT_STYLE=signpost_fewshot
 export CLUERAG_METHOD_NAME=cluerag_prompt_normalized
@@ -355,13 +355,13 @@ ClaimCoverage@5 0.5463
 Tokens/query 2926.61
 ```
 
-旧 `cluerag` 默认 prompt 结果已弃用，不写入论文。
+旧 `cluerag` 默认 prompt 结果已弃用，不写入技术说明。
 
 ## 5.1 AGRAG 当前本地接入与 H200 最小迁移说明
 
 ### GraphRAG-R1 HippoRAG2 v4 补充口径
 
-新增 `graphrag_r1_hipporag2`，用于 ICDE 论文中更严格的 GraphRAG-R1 baseline：
+新增 `graphrag_r1_hipporag2`，用于 项目技术说明中更严格的 GraphRAG-R1 baseline：
 
 ```text
 released GraphRAG-R1 policy
@@ -610,7 +610,7 @@ AGRAG 正式运行命令写在：
 docs/h200_remaining_datasets_tmux_runbook.zh.md
 ```
 
-注意：AGRAG 当前按其 adapter 自有方式在 `outputs/<dataset>/baselines/agrag/` 构建本地图和 triples，不使用 Signpost graph ES index。若后续 baseline 原论文使用数据库/外部图存储，则在 H200 上用该 baseline 独立 ES index 替代；AGRAG 不属于必须强制迁移到 ES 的情况。
+注意：AGRAG 当前按其 adapter 自有方式在 `outputs/<dataset>/baselines/agrag/` 构建本地图和 triples，不使用 Signpost graph ES index。若后续 baseline 原技术说明使用数据库/外部图存储，则在 H200 上用该 baseline 独立 ES index 替代；AGRAG 不属于必须强制迁移到 ES 的情况。
 
 ## 5.2 LinearRAG 当前本地接入与 H200 最小迁移说明
 
@@ -886,7 +886,7 @@ outputs/<dataset>/baselines/hiprag/run_status.json
 <answer>...</answer>
 ```
 
-只迁移 Signpost evidence-grounded 回答约束，不改成 JSON。HiPRAG 搜索工具基于共享 `chunks.jsonl` 构建 baseline-owned 本地 chunk retrieval index；正式命令默认 `USE_ES=0`，避免读取 Signpost chunk ES index。若后续为了诊断设置 `USE_ES=1`，必须在论文口径外单独标记。
+只迁移 Signpost evidence-grounded 回答约束，不改成 JSON。HiPRAG 搜索工具基于共享 `chunks.jsonl` 构建 baseline-owned 本地 chunk retrieval index；正式命令默认 `USE_ES=0`，避免读取 Signpost chunk ES index。若后续为了诊断设置 `USE_ES=1`，必须在技术说明口径外单独标记。
 
 本次 HiPRAG 最小迁移文件清单：
 
@@ -1091,7 +1091,7 @@ outputs/<dataset>/baselines/graphrag_r1/run_status.json
 <|begin_of_documents|>...<|end_of_documents|>
 ```
 
-只迁移 Signpost evidence-grounded 回答约束，不改成 JSON。GraphRAG-R1 图检索基于共享 `semantic_llm.extractions.jsonl` 构建 baseline-owned entity/relation/passage graph；正式命令默认 `USE_ES=0`，避免读取 Signpost chunk ES index。若后续为了诊断设置 `USE_ES=1`，必须在论文口径外单独标记。
+只迁移 Signpost evidence-grounded 回答约束，不改成 JSON。GraphRAG-R1 图检索基于共享 `semantic_llm.extractions.jsonl` 构建 baseline-owned entity/relation/passage graph；正式命令默认 `USE_ES=0`，避免读取 Signpost chunk ES index。若后续为了诊断设置 `USE_ES=1`，必须在技术说明口径外单独标记。
 
 本次 GraphRAG-R1 最小迁移文件清单：
 
@@ -1448,7 +1448,7 @@ bash -n scripts/baselines/run_baseline_method.sh：通过
 LIMIT=0 EMBEDDING_PROVIDER=hash MEMGRAPHRAG_SCHEMA_MIN_COUNT=1 MEMGRAPHRAG_SYNONYMY_EDGES=0 BASELINE_QUERY_WORKERS=1 bash scripts/baselines/run_baseline_method.sh memgraphrag agriculture agriculture：通过
 ```
 
-smoke 只验证管线，不作为论文结果；正式 H200 运行必须使用 `EMBEDDING_PROVIDER=ecnu` 和 H200 本地 embedding/chat 服务。
+smoke 只验证管线，不作为技术说明结果；正式 H200 运行必须使用 `EMBEDDING_PROVIDER=ecnu` 和 H200 本地 embedding/chat 服务。
 
 本地打包命令：
 
@@ -1589,9 +1589,9 @@ Baseline 控制变量要求：
 3. 不重新切 chunk，不重新抽实体；baseline 自己的图/index 可以基于共享产物构建。
 4. 所有 baseline final generation 必须使用 Signpost 的 evidence-grounded 回答约束；如果 baseline 有自己的输出格式，保留其输出格式，只迁移回答约束。
 5. 输出统一写 predictions/*.jsonl、logs/*.query.jsonl、metrics/*.json，并记录 per-query LLM calls/tokens/tool/retrieved chunks/rerank/embedding，以及 baseline-level offline/online/total cost。
-6. ClueRAG 的论文 baseline 是 cluerag_prompt_normalized，不使用旧 cluerag 默认 prompt 的结果。旧 cluerag 只作为 ClueRAG graph/retrieval 中间步骤。
+6. ClueRAG 的技术说明 baseline 是 cluerag_prompt_normalized，不使用旧 cluerag 默认 prompt 的结果。旧 cluerag 只作为 ClueRAG graph/retrieval 中间步骤。
 7. 每个数据集必须先跑 Signpost pipeline、Signpost full 和 ablations，再跑 baseline。
-8. 每处理好一个 baseline，必须更新 docs/h200_remaining_datasets_tmux_runbook.zh.md：只加入每个数据集的正式运行流程、该 baseline final generation 的完整 prompt、进入论文的 prediction 文件和完整性检查清单；不要把最小迁移包/上传/解压/回滚说明写进 runbook。
+8. 每处理好一个 baseline，必须更新 docs/h200_remaining_datasets_tmux_runbook.zh.md：只加入每个数据集的正式运行流程、该 baseline final generation 的完整 prompt、进入技术说明的 prediction 文件和完整性检查清单；不要把最小迁移包/上传/解压/回滚说明写进 runbook。
 9. 本地接入不等于 H200 已接入。每个新 baseline 必须在 docs/baselines/baseline_control_requirements_and_handoff.zh.md 提供最小 H200 迁移包和手动上传/解压/环境配置/py_compile/正式运行命令；正式运行命令必须可直接复制执行，显式写出 dataset 和 namespace；只打包该 baseline 新增或必要修改文件，不能打包整个项目，避免影响 H200 正在跑的 tmux 进程。
 10. baseline 自己的图/index 不能读 Signpost 图/index。若原方法使用数据库或外部图存储，H200 适配用该 baseline 独立 ES index；若原方法不用数据库，则保持其本地文件/内存图方式，但必须记录建图时间和图/index 指标。
 

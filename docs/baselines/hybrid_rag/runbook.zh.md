@@ -1,8 +1,8 @@
 # Hybrid RAG Baseline Runbook
 
-`hybrid_rag` 是正式论文中的 flat retrieval 控制组。它使用 BM25+dense hybrid chunk retrieval，再把 top-k chunks 拼接给 chat model 生成答案。
+`hybrid_rag` 是正式技术说明中的 flat retrieval 控制组。它使用 BM25+dense hybrid chunk retrieval，再把 top-k chunks 拼接给 chat model 生成答案。
 
-旧入口 `vanilla_rag` 保留兼容，但正式实验、论文表格和结果文件统一使用 `hybrid_rag`。
+旧入口 `vanilla_rag` 保留兼容，但正式实验、技术说明表格和结果文件统一使用 `hybrid_rag`。
 
 本文档只写 `hybrid_rag` 自己额外需要什么环境、怎么在本地用 ECNU 真实模型和本地 ES 验收、以及搬到 H200 后如何切换模型 endpoint。Signpost/H200 已经配置好的总环境不在本文重复。
 

@@ -18,7 +18,7 @@ outputs/<dataset>/metrics/graphrag_r1_hipporag2.query_metrics.json
 outputs/<dataset>/baselines/graphrag_r1_hipporag2/
 ```
 
-论文口径：
+技术说明口径：
 
 ```text
 GraphRAG-R1 uses the released GraphRAG-R1 policy and the official HippoRAG2 retrieval server.

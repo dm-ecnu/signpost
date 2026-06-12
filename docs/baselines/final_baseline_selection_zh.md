@@ -1,4 +1,4 @@
-# Signpost ICDE 2027 最终 Baseline 选择与可实现性核查
+# Signpost final Baseline 选择与可实现性核查
 
 本文档固化当前版本的 baseline 决策。目标不是简单追新，而是让每个 baseline 对应一个明确的反事实问题：
 
@@ -18,14 +18,14 @@
 4. 代码开源，理论上可复现。
 5. 能接入私有文档 QA 设置，至少能通过 wrapper 转换成统一输入输出。
 
-`Vanilla LLM` 和 `Hybrid RAG` 是控制组，不适用第 2-4 条论文筛选标准，但必须保留，否则无法判断 Signpost 是否只是超过了弱下界。
+`Vanilla LLM` 和 `Hybrid RAG` 是控制组，不适用第 2-4 条技术说明筛选标准，但必须保留，否则无法判断 Signpost 是否只是超过了弱下界。
 
 ## 2. 最终主表 Baseline
 
-| 类别 | 方法 | arXiv >= 2025.07 | 2026 顶会长文 | 开源可复现 | 论文链接 | GitHub / 代码 | 实验目的 | 当前可实现性判断 |
+| 类别 | 方法 | arXiv >= 2025.07 | 2026 顶会长文 | 开源可复现 | 技术说明链接 | GitHub / 代码 | 实验目的 | 当前可实现性判断 |
 |---|---|---:|---:|---:|---|---|---|---|
 | No retrieval control | Vanilla LLM / CoT optional | N/A | N/A | yes, in-house | N/A | 本项目 | 检验模型参数知识和直接生成能力是否足够。 | 已实现。CoT 可作为可选诊断，不建议主表单独多一行。 |
-| Flat retrieval control | Hybrid RAG | N/A | N/A | yes, in-house | N/A | 本项目 | 控制 BM25+dense flat retrieval 能力，证明 Signpost 不是靠更强底层 retriever。 | 基本已实现；现有代码名是 `vanilla_rag`，正式实验应固定 `MODE=hybrid USE_ES=1`，并在论文中命名为 `Hybrid RAG`。 |
+| Flat retrieval control | Hybrid RAG | N/A | N/A | yes, in-house | N/A | 本项目 | 控制 BM25+dense flat retrieval 能力，证明 Signpost 不是靠更强底层 retriever。 | 基本已实现；现有代码名是 `vanilla_rag`，正式实验应固定 `MODE=hybrid USE_ES=1`，并在技术说明中命名为 `Hybrid RAG`。 |
 | Multi-granularity GraphRAG | Clue-RAG | yes, 2025.07 | yes, ICDE 2026 | yes | https://arxiv.org/abs/2507.08445 | https://github.com/Feesuu/ClueRAG | 检验 chunk / knowledge unit / entity 多粒度图索引是否已经足够。 | 推荐主 baseline。需要把 `documents.jsonl` 或统一 chunks 转成 Clue-RAG 官方输入，记录其 graph build token/time。 |
 | Topology / hierarchy GraphRAG | LinearRAG | yes, 2025.10 | yes, ICLR 2026 main poster | yes | https://arxiv.org/abs/2510.10114 | https://github.com/DEEP-PolyU/LinearRAG | 检验更好的层次化或拓扑化组织是否已经足以解决多跳私有知识库检索。 | 推荐主 baseline。需要先做 legal_test smoke，确认官方 pipeline 能换成本地 Llama/Nemotron。 |
 | PPR / associative GraphRAG | AGRAG | yes, 2025.11 | yes, ICDE 2026 | yes | https://arxiv.org/abs/2511.05549 | https://github.com/Wyb0627/AGRAG | 检验 PPR、MCMI 子图和高阶关联检索能否替代 Signpost 的导航机制。 | 推荐主 baseline。与 Signpost 关系近，必须比较；需要记录 TF-IDF/entity extraction、relation extraction、MCMI retrieval 的离线和在线成本。 |
@@ -64,7 +64,7 @@
 
 所有方法必须满足同一实验口径：
 
-1. 使用同一批数据集：`Agriculture-full` 和 `Legal-full` 为主；如果 Legal-full 外部 baseline 成本无法承受，至少要完成 Legal smoke 并在论文中说明限制。
+1. 使用同一批数据集：`Agriculture-full` 和 `Legal-full` 为主；如果 Legal-full 外部 baseline 成本无法承受，至少要完成 Legal smoke 并在技术说明中说明限制。
 2. 使用同一批问题：`datasets/processed/<dataset>/questions.jsonl`。
 3. 外部 baseline 允许使用自己的 chunk/index pipeline，但其 preprocessing、index build、LLM extraction、embedding、storage 都计入该 baseline 的 offline cost。
 4. 外部 baseline 不允许使用 Signpost 的 signpost annotations、online signpost recommendations 或 enriched observation。
@@ -99,8 +99,8 @@ Embedding: http://localhost:8001/v1/embeddings, model=/data/srl/nemotron-8b
 
 这些代码不需要推倒重写，但需要做两个口径调整：
 
-1. **论文命名改为 Hybrid RAG。**
-   现有 `vanilla_rag` 在 `USE_ES=1 MODE=hybrid EMBEDDING_PROVIDER=ecnu` 时，本质就是 BM25+dense hybrid retrieval + generator。正式实验和论文表格应命名为 `Hybrid RAG`。
+1. **技术说明命名改为 Hybrid RAG。**
+   现有 `vanilla_rag` 在 `USE_ES=1 MODE=hybrid EMBEDDING_PROVIDER=ecnu` 时，本质就是 BM25+dense hybrid retrieval + generator。正式实验和技术说明表格应命名为 `Hybrid RAG`。
 
 2. **代码可以保留 `vanilla_rag` 入口，但建议增加 alias。**
    为避免历史脚本断裂，可以保留：
@@ -115,7 +115,7 @@ scripts/baselines/run_baseline_method.sh vanilla_rag <dataset> <namespace>
 scripts/baselines/run_baseline_method.sh hybrid_rag <dataset> <namespace>
 ```
 
-   该 alias 内部复用 `vanilla_rag` 实现，但输出 method name 改为 `hybrid_rag`，文件名改为 `hybrid_rag.jsonl`。这样论文表格、metrics 文件和方法名一致。
+   该 alias 内部复用 `vanilla_rag` 实现，但输出 method name 改为 `hybrid_rag`，文件名改为 `hybrid_rag.jsonl`。这样技术说明表格、metrics 文件和方法名一致。
 
 本地 smoke 可以继续用 `USE_ES=0 MODE=bm25`，但正式结果必须用 `USE_ES=1 MODE=hybrid`。
 

@@ -1,11 +1,10 @@
-# Signpost: Method Map (paper ↔ code)
+# Signpost: Method-to-Code Map
 
-Maps the ICDE 2027 Signpost paper's concepts, symbols, and algorithms to the
-implementation in `signpost/`. Paper section/algorithm/equation labels are in the
-left column; verified `file:symbol` locations in the middle. All paths are
+Maps the Signpost concepts, symbols, and algorithms to the
+implementation in `signpost/`. Stable method labels are in the left column; verified `file:symbol` locations are in the middle. All paths are
 relative to `signpost/`.
 
-The paper's two-stage story: **OFFLINE** construct source-backed objects + typed
+The method has two stages: **OFFLINE** construct source-backed objects + typed
 links and compile per-object signpost views `σ(o)=⟨C_v,C_h,C_s,C_p⟩`
 (`MaterializeSignposts`, Alg. 2); **ONLINE** serve a query by following typed cues
 with bounded source reads (`ServeSignpostQuery`, Alg. 3) under an O(b) per-step
@@ -13,7 +12,7 @@ exposure bound.
 
 ## Core abstractions (§3)
 
-| Paper concept (§/Alg/Eq) | Code location (file:symbol) | Note |
+| Method concept (§/Alg/Eq) | Code location (file:symbol) | Note |
 | --- | --- | --- |
 | Evidence-bounded query execution, Problem 1 (§3.1, eq:cost) | (formulation; no single symbol) — cost accounting in `agent/batch.py` (`llm_calls`, token sums) | Objective is realized by the fixed-controller cost contract, not a solver. |
 | Signpost sketch `σ(o)=⟨C_v,C_h,C_s,C_p⟩` (§3.2, eq:approach-sketch) | `retrieval/offline_signpost.py:build_offline_signpost` | Returns `{vertical, horizontal, semantic, provenance}` ≙ `C_v/C_h/C_s/C_p` (zoom/read/jump/verify). |
@@ -24,7 +23,7 @@ exposure bound.
 
 ## Offline construction (§3.3 substrate, §4 materialization)
 
-| Paper concept (§/Alg) | Code location (file:symbol) | Note |
+| Method concept (§/Alg) | Code location (file:symbol) | Note |
 | --- | --- | --- |
 | Heading recognition (Alg. 1) | `chunking/headers.py:recognize_headers` | Deterministic Markdown/Chinese/English/dotted patterns + optional LLM path. |
 | Source-line-preserving tree `T_d` (Alg. 1) | `chunking/tree.py:build_document_tree` | Stack parser. |
@@ -43,7 +42,7 @@ exposure bound.
 
 ## Online serving (§5)
 
-| Paper concept (§/Alg) | Code location (file:symbol) | Note |
+| Method concept (§/Alg) | Code location (file:symbol) | Note |
 | --- | --- | --- |
 | `ServeSignpostQuery` (Alg. 3), budgeted controller (§5.1) | `agent/supervisor.py:Supervisor`, `research_with_chaining` | Decompose → per-subquestion search + chain → synthesize. **2 LLM calls total.** |
 | Supervisor decomposition into ≤3 subquestions (Alg. 3 line 1, §5.1) | `agent/supervisor.py:decompose`, `deterministic_decompose` | LLM with deterministic fallback. |
@@ -62,29 +61,29 @@ exposure bound.
 
 ## Evaluation harness (§5 experiments)
 
-| Paper concept | Code location (file:symbol) | Note |
+| Method concept | Code location (file:symbol) | Note |
 | --- | --- | --- |
 | Frozen answer-supporting (silver) evidence `E_q^*` (§5 setup) | `evaluation/silver_builder.py` (decompose → ground) | In-repo reference impl of target-units + silver-chunks. |
 | Iso-call attribution control (equal LLM-call budget, untyped neighbors) | `baselines/iso_call.py` | Rules out "more calls" as the source of gains. |
 | Metric aggregation / bootstrap stats | `benchmark/stats.py`, `benchmark/final_metrics.py`, `evaluation/metrics.py` | — |
 
-## Honest scope / paper-vs-code deltas
+## Honest scope / method-vs-implementation deltas
 
-These are real, verified reconciliations between the paper's idealized model and
+These are real, verified reconciliations between the method description and
 the artifact. They do not change measured behavior but a careful reader should
 know them.
 
-1. **Relation objects `V_r` are stored as EDGES, not graph nodes.** The paper
+1. **Relation objects `V_r` are stored as EDGES, not graph nodes.** The method description
    defines `V = V_c ∪ V_s ∪ V_e ∪ V_r` with reified relation *nodes*. In code,
    `graph/unified.py` admits node types `{chunk, summary, entity}` only (see the
    `node_type not in {"chunk","summary","entity"}` validation), and relation
    aggregates are emitted as semantic edges (`graph/semantic.py`, `edge_type
    "semantic_relation"`). `offline_signpost.py:_relation_signpost` therefore
    resolves an **edge** (not a node) into a `result_type:"relation"` cue. The
-   jump/verify cue families and provenance behave as the paper describes; only
+   jump/verify cue families and provenance behave as the benchmark setup describes; only
    the storage form of `V_r` differs.
 
-2. **Sketches are COMPUTED AT QUERY TIME, not stored inline in ES.** The paper's
+2. **Sketches are COMPUTED AT QUERY TIME, not stored inline in ES.** The method description's
    physical-schema prose says each object record holds "four cue arrays" and a
    serialized sketch payload. In the artifact, `build_offline_signpost(graph, o)`
    recomputes `σ(o)` deterministically from the unified graph at
@@ -106,7 +105,7 @@ know them.
    `file:Lstart-Lend` ranges derived from chunk/section/relation source
    locators (`offline_signpost.py:_locate`, `_merge_locates`;
    `cue_coverage.py:_parse_line_span`). They are as fine-grained as the stored
-   chunk/occurrence line ranges, not sub-line or token-offset spans. The paper's
+   chunk/occurrence line ranges, not sub-line or token-offset spans. The method description's
    "occurrence-level source lines" for relations are the per-chunk line ranges of
    each occurrence, merged per file.
 
@@ -116,6 +115,6 @@ know them.
    call inside the loop. The only LLM calls per query are the Supervisor's one
    decomposition and one synthesis (`supervisor.py:research_with_chaining`
    docstring; `decompose` + synthesis). This determinism is exactly what
-   preserves the paper's **"2 LLM calls"** systems claim for the budgeted
+   preserves the method description's **"2 LLM calls"** systems claim for the budgeted
    controller; the ReAct controller (`react/`, `baselines/iso_call.py`) trades
    more calls for adaptivity over the same interface.

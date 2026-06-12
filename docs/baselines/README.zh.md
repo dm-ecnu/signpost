@@ -38,7 +38,7 @@ docs/baselines/<method>/
 docs/baselines/external_baseline_evaluation_audit_zh.md
 ```
 
-外部 baseline 的论文/代码指标公式可复现性，以及各 prompt 的用途和输出格式见：
+外部 baseline 的技术说明/代码指标公式可复现性，以及各 prompt 的用途和输出格式见：
 
 ```text
 docs/baselines/external_baseline_metrics_prompts_zh.md
@@ -70,7 +70,7 @@ docs/baselines/baseline_control_requirements_and_handoff.zh.md
 7. 所有 baseline 的 final generation 使用 Signpost 的 evidence-grounded 回答约束；若 baseline 有自己的输出格式，保留其输出格式，只迁移回答约束。
 ```
 
-第 4 点是强约束。除非某个官方 baseline 无法接入共享实体/关系，否则不应让不同方法各自重新抽取实体后再比较。若必须使用官方抽取器，需要在该 baseline 的 method card 和论文限制中明确说明。
+第 4 点是强约束。除非某个官方 baseline 无法接入共享实体/关系，否则不应让不同方法各自重新抽取实体后再比较。若必须使用官方抽取器，需要在该 baseline 的 method card 和技术说明限制中明确说明。
 
 ## 3. 当前优先闭环顺序
 

@@ -1,9 +1,9 @@
 # Signpost — implemented gaps & how to re-run (2026-06-09)
 
-This snapshot fills the code↔paper gaps found in the audit
+This snapshot fills the code↔method gaps found in the audit
 (`rag/notes/signpost-code-gap-2026-06-09.md`). All additions are real and
 unit-tested (66/66). **The experiments must be re-run** — the numbers in the
-current paper predate these changes.
+current project notes predate these changes.
 
 ## What changed
 
@@ -44,17 +44,17 @@ python3 -m pytest tests/test_sketch_chaining.py tests/test_stats_ci.py tests/tes
   instead make it ~11–13 calls/query; that is a different design and is NOT what
   this implements.)
 - **Silver-evidence construction is now in-repo**
-  (`scripts/build_silver_evidence.py`); the *existing* paper numbers were built
+  (`scripts/build_silver_evidence.py`); the *existing* evaluation numbers were built
   by the external H200 script (`extract_llm_targets_silver.py`), so a re-run
   should regenerate the targets with the in-repo builder and keep them frozen
   across all compared systems. To limit self-reference bias, build with a model
   that is not the evaluated backbone (`--model ecnu-max`) and note that silver
   remains chunk-level (the span-vs-chunk concern from the audit still applies).
-- **Paper text edits (separate from code):** relation objects `V_r` are stored as
+- **Method-note edits (separate from code):** relation objects `V_r` are stored as
   edges, not graph nodes; sketches are computed at query time, not stored inline
   in ES; greedy submodular selection is gated by `SIGNPOST_CUE_SELECT=greedy`
   (default is truncate); provenance locators are chunk-level. Reconcile these in
-  the paper or the code.
+  the benchmark setup or the code.
 
 This changes ruolinsu's agent and invalidates the current numbers — please
 review before the re-run.

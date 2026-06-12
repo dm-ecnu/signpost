@@ -16,7 +16,7 @@
 | F6 语义视图：实体关系图                   | 已完成初版  | 支持 LLM/deterministic 抽取、多轮 gleaning、source mapping、语义边、溯源边、可选统一描述综合。                        |
 | F7 结构视图：文档树与 RAPTOR             | 已完成初版  | 支持文档树自底向上摘要、无层级文档的标准 RAPTOR fallback、结构边、摘要节点溯源和 LLM/deterministic 摘要器。                     |
 | F8 顺序视图：叙事连续性                   | 已完成初版  | 支持同一文档内相邻 chunk 双向顺序边、文档内位置保留、检索命中前后文扩展。                                                    |
-| F9 多视图统一图                       | 已完成初版  | 支持 semantic/structure/sequence 三视图确定性融合、论文三类节点和四类边归一化、本地原子持久化、统一图校验。                        |
+| F9 多视图统一图                       | 已完成初版  | 支持 semantic/structure/sequence 三视图确定性融合、技术说明三类节点和四类边归一化、本地原子持久化、统一图校验。                        |
 | F10 图对象同步到 ES                   | 已完成初版  | 支持 entity/relation/RAPTOR summary 图对象适配、embedding、ES bulk 写入、graph search、可选 chunk 父摘要字段更新。 |
 | F11 离线路标                        | 已完成初版  | 支持 chunk/summary/entity/relation 结果的纵向、横向、溯源和语义邻居线索附着，支持 query 检索结果增强。                      |
 | F12 在线路标：PPR 推荐                 | 已完成初版  | 支持文本场景和图谱场景子图裁剪、Personalized PageRank、组级关联实体推荐和可解释子图统计。                                     |
@@ -274,7 +274,7 @@ conda run -n signpost-re python -m pytest tests/test_parsing.py
 
 F4 将 F3.5 的 `documents.jsonl` 转换成后续 embedding、结构视图、顺序视图和溯源读取可使用的 `chunks.jsonl`，同时输出 `document_trees.jsonl` 保存章节树。
 
-论文中涉及的能力在本阶段对应为：
+技术说明中涉及的能力在本阶段对应为：
 
 - 双路径章节层次识别：
   - 短文档：端到端 Markdown 转换接口。
@@ -286,7 +286,7 @@ F4 将 F3.5 的 `documents.jsonl` 转换成后续 embedding、结构视图、顺
 - 基于文档树的两阶段分块：
   - 阶段一：如果子树 token 数低于预算，则合并为一个 chunk。
   - 阶段二：超预算节点按行边界二次切分，保留 overlap。
-  - 边界 fallback：如果数据集把很长的原文压成单个逻辑行，且这一行本身超过 token 预算，则在该行内部按词继续切分，`merge` 标记为 `split_long_line`。该 fallback 不改变章节识别和文档树，只保证论文中的 token 预算约束在异常长行数据上仍然生效。
+  - 边界 fallback：如果数据集把很长的原文压成单个逻辑行，且这一行本身超过 token 预算，则在该行内部按词继续切分，`merge` 标记为 `split_long_line`。该 fallback 不改变章节识别和文档树，只保证技术说明中的 token 预算约束在异常长行数据上仍然生效。
 - 章节路径编码：
   - 每个 chunk 的 `section_path` 写入字段。
   - chunk 内容前追加章节路径，方便脱离树结构后仍保留层次位置。
@@ -399,7 +399,7 @@ conda run -n signpost-re python -m pytest tests/test_chunking.py
 
 F5 将 F4 输出的 `chunks.jsonl` 写入 Elasticsearch，形成基础文本检索和向量检索能力。该阶段是后续 GraphRAG 语义图构建、结构图同步、图检索和 Agent 检索的底座。
 
-论文中涉及的能力在本阶段对应为：
+技术说明中涉及的能力在本阶段对应为：
 
 - 对 chunk 生成 embedding。
 - 在 ES 中建立 chunk 级索引。
@@ -556,7 +556,7 @@ conda run -n signpost-re python -m signpost.indexing.chunk_index \
 
 F6 从 F4 的 chunks 中抽取实体与实体关系，构建语义视图。该语义图用于建立跨文档概念关联，后续 F9 会与结构视图和顺序视图合并成统一图，F11/F12 会基于其中的实体、关系和溯源边生成路标。
 
-论文中涉及的能力在本阶段对应为：
+技术说明中涉及的能力在本阶段对应为：
 
 - 每个 chunk 独立调用 LLM 抽取实体和关系。
 - 实体记录名称、类型、描述。
@@ -728,9 +728,9 @@ conda run -n signpost-re python -m signpost.indexing.semantic_graph \
 
 ### 目标
 
-F7 从 F4 的 `chunks.jsonl` 和 `document_trees.jsonl` 构建结构视图。该视图对应论文中的文档层级结构与层级摘要，用于表达章节、子章节、chunk 之间的父子关系，并为后续统一图融合、结构检索和路标生成提供可追溯的摘要节点。
+F7 从 F4 的 `chunks.jsonl` 和 `document_trees.jsonl` 构建结构视图。该视图对应技术说明中的文档层级结构与层级摘要，用于表达章节、子章节、chunk 之间的父子关系，并为后续统一图融合、结构检索和路标生成提供可追溯的摘要节点。
 
-论文中涉及的能力在本阶段对应为：
+技术说明中涉及的能力在本阶段对应为：
 
 - 优先使用 F4 生成的文档树，自底向上生成章节摘要。
 - 如果文档没有可识别章节树，回退到标准 RAPTOR 风格的递归聚合。
@@ -896,9 +896,9 @@ conda run -n signpost-re python -m signpost.indexing.structure_graph \
 
 ### 目标
 
-F8 从 F4 的 `chunks.jsonl` 构建顺序视图。该视图对应论文 3.5 节的 `Eseq`：在同一文档内，按照 chunk 的行号位置建立相邻文本块之间的双向边，保持原始叙事顺序，并支持检索命中后的上下文补全。
+F8 从 F4 的 `chunks.jsonl` 构建顺序视图。该视图对应技术说明 3.5 节的 `Eseq`：在同一文档内，按照 chunk 的行号位置建立相邻文本块之间的双向边，保持原始叙事顺序，并支持检索命中后的上下文补全。
 
-论文中涉及的能力在本阶段对应为：
+技术说明中涉及的能力在本阶段对应为：
 
 - 仅在同一文档内部建立顺序边，不跨文档连接。
 - 同一文档内按 `start_line`、`end_line` 和 `chunk_id` 稳定排序。
@@ -1047,7 +1047,7 @@ conda run -n signpost-re python -m signpost.indexing.sequence_graph \
 
 ### 目标
 
-F9 将 F6 语义视图、F7 结构视图和 F8 顺序视图融合为统一的多视图拓扑图，对应论文 3.6 节的形式化定义：
+F9 将 F6 语义视图、F7 结构视图和 F8 顺序视图融合为统一的多视图拓扑图，对应技术说明 3.6 节的形式化定义：
 
 ```text
 V = Vchunk ∪ Vsummary ∪ Ventity
@@ -1222,7 +1222,7 @@ conda run -n signpost-re python -m signpost.graph.merge \
 
 ### 目标
 
-F10 将 F9 的 `graph.unified.json` 中可检索的图对象同步到 Elasticsearch。该阶段对应论文第五章的“Elasticsearch 索引同步”：实体、关系和 RAPTOR 摘要节点通过适配器转换为 ES 文档，embedding 后批量写入，使检索阶段可以同时召回原始文本块和图对象。
+F10 将 F9 的 `graph.unified.json` 中可检索的图对象同步到 Elasticsearch。该阶段对应技术说明第五章的“Elasticsearch 索引同步”：实体、关系和 RAPTOR 摘要节点通过适配器转换为 ES 文档，embedding 后批量写入，使检索阶段可以同时召回原始文本块和图对象。
 
 本阶段解决的问题：
 
@@ -1403,9 +1403,9 @@ conda run -n signpost-re python -m signpost.indexing.graph_es_sync \
 
 ### 目标
 
-F11 为检索结果附着离线路标，对应论文 4.2.1 节的预计算结构化元数据。离线路标不做运行时 PageRank，只从 `graph.unified.json` 中读取已构建好的结构、顺序、语义和溯源关系，为每个检索结果补充导航线索。
+F11 为检索结果附着离线路标，对应技术说明 4.2.1 节的预计算结构化元数据。离线路标不做运行时 PageRank，只从 `graph.unified.json` 中读取已构建好的结构、顺序、语义和溯源关系，为每个检索结果补充导航线索。
 
-论文中涉及的能力在本阶段对应为：
+技术说明中涉及的能力在本阶段对应为：
 
 - 纵向线索：文本块所属父摘要节点；摘要节点的父摘要和子节点列表。
 - 横向线索：文本块的前后相邻 chunk 文件定位。
@@ -1555,7 +1555,7 @@ conda run -n signpost-re python -m signpost.retrieval.offline_signpost \
 
 ### 目标
 
-F12 实现论文 4.2.2 节的在线路标：根据当前检索结果组选择 seed nodes，在面向场景裁剪后的子图上运行 Personalized PageRank，返回 top-k 关联实体作为组级探索建议。
+F12 实现技术说明 4.2.2 节的在线路标：根据当前检索结果组选择 seed nodes，在面向场景裁剪后的子图上运行 Personalized PageRank，返回 top-k 关联实体作为组级探索建议。
 
 本阶段解决的问题：
 
@@ -1659,7 +1659,7 @@ conda run -n signpost-re python -m signpost.retrieval.online_signpost \
 
 ### 目标
 
-F13 将 F5/F10 的 ES 检索、F11 离线路标和 F12 在线路标组合为论文第五章描述的图检索引擎。一次 query 返回文本组和图谱组两个结果组：
+F13 将 F5/F10 的 ES 检索、F11 离线路标和 F12 在线路标组合为技术说明第五章描述的图检索引擎。一次 query 返回文本组和图谱组两个结果组：
 
 ```json
 {
@@ -1810,7 +1810,7 @@ conda run -n signpost-re python -m signpost.retrieval.run \
 
 ### 目标
 
-F14 对应论文中的 ReadFile 工具：当检索结果或离线路标给出文件名和行号范围后，Researcher 可以按坐标回读原始文档片段，获得更精确的证据文本，并可向前或向后扩展局部上下文。
+F14 对应技术说明中的 ReadFile 工具：当检索结果或离线路标给出文件名和行号范围后，Researcher 可以按坐标回读原始文档片段，获得更精确的证据文本，并可向前或向后扩展局部上下文。
 
 本阶段只保留科研实验需要的溯源读取能力，不迁移旧项目中的用户、知识库权限、目录授权和前端文件预览逻辑。
 
@@ -1818,7 +1818,7 @@ F14 对应论文中的 ReadFile 工具：当检索结果或离线路标给出文
 
 - `signpost/retrieval/read_file.py`
   - 提供 `read_file_window()`，按 `file_name`、`start_line`、`end_line` 读取文档片段。
-  - 提供 `read_locate()`，读取 `file.txt:L10-L20` 形式的论文溯源坐标。
+  - 提供 `read_locate()`，读取 `file.txt:L10-L20` 形式的技术说明溯源坐标。
   - 提供 `parse_locate()`，解析 locate 字符串。
   - 提供 `format_file_view()`，输出带行号的可读文本。
   - 提供 CLI：`python -m signpost.retrieval.read_file`。
@@ -1937,9 +1937,9 @@ conda run -n signpost-re python -m signpost.retrieval.read_file \
 
 ### 目标
 
-F15 对应论文第四章的 Supervisor-Researcher 多智能体检索增强框架，形成“查询拆解 -> 路标引导检索 -> 源文档回读 -> 答案综合”的闭环。
+F15 对应技术说明第四章的 Supervisor-Researcher 多智能体检索增强框架，形成“查询拆解 -> 路标引导检索 -> 源文档回读 -> 答案综合”的闭环。
 
-本阶段只保留论文实验需要的 Agent 算法链路，不迁移旧项目中的 Web SSE、Redis 任务恢复、租户隔离、前端事件流和用户权限逻辑。
+本阶段只保留技术说明实验需要的 Agent 算法链路，不迁移旧项目中的 Web SSE、Redis 任务恢复、租户隔离、前端事件流和用户权限逻辑。
 
 ### 对应文件
 
@@ -2080,9 +2080,9 @@ conda run -n signpost-re python -m signpost.agent.batch \
 
 ### 目标
 
-F16 对应论文第五章系统级评估：把不同检索或 Agent 方法的输出统一为稳定 JSONL，供基础指标、GraphRAG-Bench 开放式评分、LLM-as-Judge 生成质量评分和后续测速统计使用。
+F16 对应技术说明第五章系统级评估：把不同检索或 Agent 方法的输出统一为稳定 JSONL，供基础指标、GraphRAG-Bench 开放式评分、LLM-as-Judge 生成质量评分和后续测速统计使用。
 
-本阶段不迁移旧项目的批处理队列、Web UI、评测看板和外部任务管理，只保留论文实验需要的预测文件格式、校验、转换和评估入口。
+本阶段不迁移旧项目的批处理队列、Web UI、评测看板和外部任务管理，只保留技术说明实验需要的预测文件格式、校验、转换和评估入口。
 
 ### 对应文件
 
@@ -2229,9 +2229,9 @@ conda run -n signpost-re python -m signpost.evaluation.llm_judge \
   --dimension answer_correctness
 ```
 
-## ICDE 实验指标补充
+## 项目实验指标补充
 
-为了支撑 `icde_experiment_design*.md` 中的成本-质量实验，新增了 `signpost.benchmark` 指标层。它不实现 baseline，也不实现剪枝，只读取现有工件并生成论文表格/曲线需要的统计量。
+为了支撑 `project_experiment_design*.md` 中的成本-质量实验，新增了 `signpost.benchmark` 指标层。它不实现 baseline，也不实现剪枝，只读取现有工件并生成技术说明表格/曲线需要的统计量。
 
 ### 新增文件
 

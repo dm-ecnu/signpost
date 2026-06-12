@@ -12,7 +12,7 @@ docs/baselines/hybrid_rag/runbook.zh.md
 1. `vanilla_llm`：无检索下界。
 2. `hybrid_rag`：BM25+dense flat retrieval 控制组。
 
-旧入口 `vanilla_rag` 保留兼容，但正式论文和正式实验使用 `hybrid_rag`。
+旧入口 `vanilla_rag` 保留兼容，但正式技术说明和正式实验使用 `hybrid_rag`。
 
 ## 1. 文件目录结构
 
@@ -68,7 +68,7 @@ vanilla_llm
 hybrid_rag
 ```
 
-旧的 `vanilla_rag` 仍可运行，但不建议进入正式论文主表。
+旧的 `vanilla_rag` 仍可运行，但不建议进入正式技术说明主表。
 
 ## 2.1 统一成本口径
 
@@ -298,7 +298,7 @@ python -m scripts.baselines.run_hybrid_rag --help
 scripts/baselines/run_baseline_method.sh vanilla_rag <dataset> <namespace>
 ```
 
-但正式论文和正式结果使用：
+但正式技术说明和正式结果使用：
 
 ```bash
 scripts/baselines/run_baseline_method.sh hybrid_rag <dataset> <namespace>
@@ -311,7 +311,7 @@ vanilla_rag -> outputs/<dataset>/predictions/vanilla_rag.jsonl, metadata.method=
 hybrid_rag  -> outputs/<dataset>/predictions/hybrid_rag.jsonl,  metadata.method=hybrid_rag
 ```
 
-这样既不破坏已有测试和历史实验，又保证论文表格和输出文件名一致。
+这样既不破坏已有测试和历史实验，又保证技术说明表格和输出文件名一致。
 
 ## 8. 下一步
 

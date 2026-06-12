@@ -1,12 +1,12 @@
 # Signpost 重构功能点计划
 
-本文档说明 `signpost_re` 应该复现哪些论文功能点、每个功能点如何重新实现、依赖什么环境、输入输出格式是什么，以及数据应该如何准备。
+本文档说明 `signpost_re` 应该复现哪些技术说明功能点、每个功能点如何重新实现、依赖什么环境、输入输出格式是什么，以及数据应该如何准备。
 
 核心原则：
 
 - 不直接复制旧项目的大块代码。
 - 旧项目 `signpost-main` 只作为参考实现和算法线索。
-- 新项目按论文功能点重新实现，模块边界重新设计。
+- 新项目按技术说明功能点重新实现，模块边界重新设计。
 - 每个功能点都必须能独立运行、独立验证、独立测速。
 - 在数据未整理好之前，先用 `samples/` 下的极小样例验证功能，不依赖完整实验集。
 
@@ -89,7 +89,7 @@ signpost_re/
 - `storage/`：ES、MinIO、Redis、PostgreSQL 的最小封装。
 - `data/`：数据集标准化、JSONL 读写、语料清洗。
 - `parsing/`：文档解析、文本规范化、行号保留、占位符处理。
-- `chunking/`：论文中的文档切块和章节路径处理。
+- `chunking/`：技术说明中的文档切块和章节路径处理。
 - `indexing/`：index 阶段入口和流水线。
 - `graph/`：多视图拓扑图的数据结构、保存、校验。
 - `retrieval/`：普通检索、图检索、Signpost 路标。
@@ -112,7 +112,7 @@ smoke test
 
 ### F0. 配置与实验上下文
 
-论文对应：
+技术说明对应：
 
 - 第五章系统实现中的基础设施层。
 
@@ -164,7 +164,7 @@ python -m signpost.config.smoke --namespace legal
 
 ### F1. 模型客户端
 
-论文对应：
+技术说明对应：
 
 - 实体关系抽取。
 - RAPTOR 摘要生成。
@@ -228,7 +228,7 @@ python -m signpost.llm.smoke --rerank
 
 ### F2. 存储连接
 
-论文对应：
+技术说明对应：
 
 - 第五章基础设施层。
 - ES 文档/向量检索。
@@ -281,7 +281,7 @@ python -m signpost.storage.smoke --db
 
 ### F3. 数据标准化
 
-论文对应：
+技术说明对应：
 
 - 第二章 2.2 文档解析之前的数据组织。
 - 第五章实验数据集与任务设置。
@@ -382,7 +382,7 @@ python -m signpost.data.validate --dataset legal
 
 ### F3.5. 文档解析与文本规范化
 
-论文对应：
+技术说明对应：
 
 - 第二章 2.2 文档解析。
 - 第三章 3.2 章节层次识别的输入前提。
@@ -391,7 +391,7 @@ python -m signpost.data.validate --dataset legal
 
 为什么必须单独列出：
 
-- 论文中的结构视图依赖“可定位的行号”和“较干净的文本”。
+- 技术说明中的结构视图依赖“可定位的行号”和“较干净的文本”。
 - 原始数据可能来自 txt、Markdown、JSONL、教材语料或已经 OCR 后的文本。
 - 如果不先把文档解析结果规范化，后面的章节识别、chunking、溯源读取都会不稳定。
 
@@ -471,7 +471,7 @@ python -m signpost.parsing.validate_documents \
 
 ### F4. 文档切块与章节路径
 
-论文对应：
+技术说明对应：
 
 - 第三章结构视图。
 - 学术文档分块。
@@ -543,7 +543,7 @@ python -m signpost.chunking.validate \
 
 ### F5. Chunk Index
 
-论文对应：
+技术说明对应：
 
 - 基础 RAG 检索。
 - 后续 GraphRAG 从 ES 读取 chunk。
@@ -612,7 +612,7 @@ python -m signpost.retrieval.chunk_search \
 
 ### F6. 语义视图：实体关系图
 
-论文对应：
+技术说明对应：
 
 - 第三章语义视图：知识图谱层构建。
 
@@ -684,7 +684,7 @@ python -m signpost.graph.inspect \
 
 ### F7. 结构视图：文档树与 RAPTOR
 
-论文对应：
+技术说明对应：
 
 - 第三章结构视图。
 - 基于文档树的层次化摘要。
@@ -749,7 +749,7 @@ python -m signpost.graph.inspect \
 
 ### F8. 顺序视图
 
-论文对应：
+技术说明对应：
 
 - 第三章顺序视图。
 - 保持原始叙事顺序，支持上下文补全。
@@ -785,7 +785,7 @@ python -m signpost.indexing.sequence_graph \
 
 ### F9. 多视图统一图
 
-论文对应：
+技术说明对应：
 
 - 第三章多视图拓扑图。
 - 结构视图、语义视图、顺序视图融合。
@@ -833,7 +833,7 @@ python -m signpost.graph.validate \
 
 ### F10. 图对象同步到 ES
 
-论文对应：
+技术说明对应：
 
 - 第五章 Elasticsearch 索引同步。
 - entity、edge、RAPTOR 摘要节点可检索。
@@ -875,7 +875,7 @@ python -m signpost.retrieval.graph_search \
 
 ### F11. 离线路标
 
-论文对应：
+技术说明对应：
 
 - 第四章路标机制。
 - 离线路标：层次、相邻位置、溯源信息。
@@ -936,7 +936,7 @@ python -m signpost.retrieval.offline_signpost \
 
 ### F12. 在线路标：PPR 推荐
 
-论文对应：
+技术说明对应：
 
 - 第四章在线路标。
 - 基于 Personalized PageRank 的关联推荐。
@@ -973,7 +973,7 @@ python -m signpost.retrieval.online_signpost \
 
 ### F13. 图检索引擎
 
-论文对应：
+技术说明对应：
 
 - 第四章路标驱动检索。
 - 第五章图检索引擎。
@@ -1024,7 +1024,7 @@ python -m signpost.retrieval.run \
 
 ### F14. ReadFile / 溯源读取
 
-论文对应：
+技术说明对应：
 
 - Agent 根据路标读取原文片段。
 - 结果保留文件名和行号引用。
@@ -1060,7 +1060,7 @@ python -m signpost.retrieval.read_file \
 
 ### F15. Supervisor-Researcher Agent
 
-论文对应：
+技术说明对应：
 
 - 第四章多智能体检索增强框架。
 
@@ -1108,7 +1108,7 @@ python -m signpost.agent.batch \
 
 ### F16. 预测输出与评估适配
 
-论文对应：
+技术说明对应：
 
 - 第五章系统级评估。
 - LLM-as-Judge。
@@ -1301,7 +1301,7 @@ mini 样例可跑通
 
 2. 后续提供或说明真实数据目录。
 
-3. 告诉我哪些论文功能点优先级更高。
+3. 告诉我哪些技术说明功能点优先级更高。
 
 我会负责：
 

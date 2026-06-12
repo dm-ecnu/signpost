@@ -2,40 +2,40 @@
 
 本文档补充 `external_baseline_evaluation_audit_zh.md`，专门回答两个问题：
 
-1. 论文里出现的指标，能否从论文或代码确认计算方式。
+1. 技术说明里出现的指标，能否从技术说明或代码确认计算方式。
 2. 每个 baseline 使用了哪些 prompt，这些 prompt 分别用于什么阶段。
 
-结论先行：有些指标能从代码精确复现，例如 LinearRAG 的 `Contain Accuracy`、GraphRAG-R1 的规则 `F1/EM/SBERT`、HiPRAG 的 `cover_exact_match`；有些指标只能从论文得到定义，当前下载的官方代码没有完整实现，例如 ClueRAG 论文里的 QA `F1/Acc.`、LinearRAG 的 `Context Relevance/Evidence Recall`、AGRAG 的 `coverage_score/faithfulness` wrapper。
+结论先行：有些指标能从代码精确复现，例如 LinearRAG 的 `Contain Accuracy`、GraphRAG-R1 的规则 `F1/EM/SBERT`、HiPRAG 的 `cover_exact_match`；有些指标只能从技术说明得到定义，当前下载的官方代码没有完整实现，例如 ClueRAG 技术说明里的 QA `F1/Acc.`、LinearRAG 的 `Context Relevance/Evidence Recall`、AGRAG 的 `coverage_score/faithfulness` wrapper。
 
-正式 ICDE 实验仍建议以 Signpost 统一输出和统一评测为主；官方指标只作为 baseline 论文口径说明和附录补充。
+正式 项目实验仍建议以 Signpost 统一输出和统一评测为主；官方指标只作为 baseline 技术说明口径说明和附录补充。
 
 ## 1. 指标可复现性总表
 
 | 方法 | 指标 | 来源 | 计算方式是否明确 | 备注 |
 | --- | --- | --- | --- | --- |
-| ClueRAG | `Accuracy / Acc.` | 论文 | 明确但代码入口缺失 | 论文定义为 gold answer 是否包含在 generated answer 中；当前仓库 `main.py` 引用的 `calculate_metric_scores` 在本地代码中不存在 |
-| ClueRAG | `F1` | 论文 | 明确但代码入口缺失 | 论文称为 generated answer 与 gold answer 的 token-level overlap F1 |
+| ClueRAG | `Accuracy / Acc.` | 技术说明 | 明确但代码入口缺失 | 技术说明定义为 gold answer 是否包含在 generated answer 中；当前仓库 `main.py` 引用的 `calculate_metric_scores` 在本地代码中不存在 |
+| ClueRAG | `F1` | 技术说明 | 明确但代码入口缺失 | 技术说明称为 generated answer 与 gold answer 的 token-level overlap F1 |
 | ClueRAG | `Recall@2/5/10` | 代码 | 明确 | top-k retrieved chunk ids 命中 gold supporting chunks 的比例 |
-| ClueRAG | offline/online token cost | 论文 + 代码 metadata | 部分明确 | 论文要求统计 prompt + completion tokens；当前代码能记录部分 LLM metadata |
-| LinearRAG | `Contain Accuracy` | 代码 + 论文 | 明确 | normalize 后判断 gold 是否为 prediction 子串 |
-| LinearRAG | `LLM/GPT Accuracy` | 代码 + 论文 | 明确 | LLM judge 返回 `correct/incorrect`，平均 0/1 |
-| LinearRAG | `Context Relevance` | 论文 | 概念明确，代码缺完整实现 | 衡量 retrieved passages 与 question 的语义相关性 |
-| LinearRAG | `Evidence Recall` | 论文 | 概念明确，代码缺完整实现 | 衡量 retrieved contents 是否包含回答所需全部证据 |
-| AGRAG | `ACC.` | 论文 + 部分代码 | 部分明确 | 分类任务为 label exact match；其他任务由 LLM 打 0/0.5/1，当前 wrapper 依赖外部 `metrics` |
-| AGRAG | `REC.` | 论文 + 分类代码 | 部分明确 | 论文定义为 TP/(TP+FN)，分类任务使用 macro recall；旧分类脚本使用 sklearn weighted recall |
-| AGRAG | `ROUGE-L` | 论文 + wrapper | 部分明确 | 基于 longest common subsequence；当前代码调用外部 `rouge_score` |
-| AGRAG | `Coverage` | 论文 + wrapper | 概念明确，代码缺实现 | 衡量 response 覆盖 reference evidences 的程度 |
-| AGRAG | `Faithfulness` | 论文 + wrapper | 概念明确，代码缺实现 | answer claims 中被 context 支持的比例 |
-| HiPRAG | `CEM` | 代码 + 论文 | 明确 | normalize 后任一 gold answer 是 prediction 子串即正确 |
+| ClueRAG | offline/online token cost | 技术说明 + 代码 metadata | 部分明确 | 技术说明要求统计 prompt + completion tokens；当前代码能记录部分 LLM metadata |
+| LinearRAG | `Contain Accuracy` | 代码 + 技术说明 | 明确 | normalize 后判断 gold 是否为 prediction 子串 |
+| LinearRAG | `LLM/GPT Accuracy` | 代码 + 技术说明 | 明确 | LLM judge 返回 `correct/incorrect`，平均 0/1 |
+| LinearRAG | `Context Relevance` | 技术说明 | 概念明确，代码缺完整实现 | 衡量 retrieved passages 与 question 的语义相关性 |
+| LinearRAG | `Evidence Recall` | 技术说明 | 概念明确，代码缺完整实现 | 衡量 retrieved contents 是否包含回答所需全部证据 |
+| AGRAG | `ACC.` | 技术说明 + 部分代码 | 部分明确 | 分类任务为 label exact match；其他任务由 LLM 打 0/0.5/1，当前 wrapper 依赖外部 `metrics` |
+| AGRAG | `REC.` | 技术说明 + 分类代码 | 部分明确 | 技术说明定义为 TP/(TP+FN)，分类任务使用 macro recall；旧分类脚本使用 sklearn weighted recall |
+| AGRAG | `ROUGE-L` | 技术说明 + wrapper | 部分明确 | 基于 longest common subsequence；当前代码调用外部 `rouge_score` |
+| AGRAG | `Coverage` | 技术说明 + wrapper | 概念明确，代码缺实现 | 衡量 response 覆盖 reference evidences 的程度 |
+| AGRAG | `Faithfulness` | 技术说明 + wrapper | 概念明确，代码缺实现 | answer claims 中被 context 支持的比例 |
+| HiPRAG | `CEM` | 代码 + 技术说明 | 明确 | normalize 后任一 gold answer 是 prediction 子串即正确 |
 | HiPRAG | format correctness | 代码 | 明确 | 正则检查 `<think><step>...</step></think><answer>...</answer>` |
-| HiPRAG | `OSR/USR` | 论文 + analysis 代码 | 明确但依赖 LLM judge | over-search / all search steps；under-search / all non-search steps |
-| HiPRAG | `Avg. #Searches` | 论文 + 输出结构 | 明确 | 每题 search step 数量平均 |
+| HiPRAG | `OSR/USR` | 技术说明 + analysis 代码 | 明确但依赖 LLM judge | over-search / all search steps；under-search / all non-search steps |
+| HiPRAG | `Avg. #Searches` | 技术说明 + 输出结构 | 明确 | 每题 search step 数量平均 |
 | GraphRAG-R1 | `EM` | 代码 | 明确 | normalize 后 exact match |
 | GraphRAG-R1 | `cover_em_1/2` | 代码 | 明确 | gold tokens 是否被 pred 覆盖；`cover_em_2` 要求连续或子串 |
-| GraphRAG-R1 | `F1 / Precision / Recall` | 代码 + 论文 | 明确 | normalize 后 token Counter overlap |
-| GraphRAG-R1 | `SBERT` | 代码 + 论文 | 明确 | `shibing624/text2vec-base-chinese` embedding cosine |
-| GraphRAG-R1 | `ACCL / LLM judge accuracy` | 代码 + 论文 | 明确 | Qwen judge 返回 True/False |
-| GraphRAG-R1 | `#Calls / #Token / ACCF` | 论文 + 代码输出 | 部分明确 | calls/tokens 来自推理输出；ACCF 是格式完全正确比例 |
+| GraphRAG-R1 | `F1 / Precision / Recall` | 代码 + 技术说明 | 明确 | normalize 后 token Counter overlap |
+| GraphRAG-R1 | `SBERT` | 代码 + 技术说明 | 明确 | `shibing624/text2vec-base-chinese` embedding cosine |
+| GraphRAG-R1 | `ACCL / LLM judge accuracy` | 代码 + 技术说明 | 明确 | Qwen judge 返回 True/False |
+| GraphRAG-R1 | `#Calls / #Token / ACCF` | 技术说明 + 代码输出 | 部分明确 | calls/tokens 来自推理输出；ACCF 是格式完全正确比例 |
 
 ## 2. 指标计算细节
 
@@ -57,7 +57,7 @@ k in {2, 5, 10}
 final score = average over questions
 ```
 
-论文 QA 指标：
+技术说明 QA 指标：
 
 ```text
 Accuracy:
@@ -75,7 +75,7 @@ ClueRAG/main.py imports calculate_metric_scores,
 but baselines/ClueRAG/utils/utils.py does not define it.
 ```
 
-所以 ClueRAG 的论文 `F1/Acc.` 能从论文确认，但不能从当前官方代码直接调用。接入我们的实验时，应转成 Signpost prediction schema，再跑统一 `basic_eval/query_metrics`。
+所以 ClueRAG 的技术说明 `F1/Acc.` 能从技术说明确认，但不能从当前官方代码直接调用。接入我们的实验时，应转成 Signpost prediction schema，再跑统一 `basic_eval/query_metrics`。
 
 ### 2.2 LinearRAG
 
@@ -113,7 +113,7 @@ else: score = 0
 final score = average over samples
 ```
 
-论文里的 retrieval-quality 指标：
+技术说明里的 retrieval-quality 指标：
 
 ```text
 Context Relevance:
@@ -123,7 +123,7 @@ Evidence Recall:
   whether retrieved contents include all evidence required to answer the question.
 ```
 
-当前限制：这两个 retrieval 指标在论文中有定义，但当前 `src/evaluate.py` 没有完整实现；如果要复现，需要额外接入 GraphRAG-Bench/RAGAS 类 evaluator，或转成我们自己的统一检索质量指标。
+当前限制：这两个 retrieval 指标在技术说明中有定义，但当前 `src/evaluate.py` 没有完整实现；如果要复现，需要额外接入 GraphRAG-Bench/RAGAS 类 evaluator，或转成我们自己的统一检索质量指标。
 
 ### 2.3 AGRAG
 
@@ -134,7 +134,7 @@ baselines/AGRAG/GraphRAG_bench/generation_eval_vllm.py
 baselines/AGRAG/baselines/run.py
 ```
 
-论文指标：
+技术说明指标：
 
 ```text
 ACC.:
@@ -171,7 +171,7 @@ Creative Generation:
   answer_correctness, coverage_score, faithfulness
 ```
 
-当前限制：`rouge_score/answer_correctness/coverage_score/faithfulness` 从外部 `metrics` 模块导入，当前下载仓库没有完整实现。因此论文指标的定义能确认，但 QA wrapper 的逐项打分细节不能仅靠当前代码完全复现。
+当前限制：`rouge_score/answer_correctness/coverage_score/faithfulness` 从外部 `metrics` 模块导入，当前下载仓库没有完整实现。因此技术说明指标的定义能确认，但 QA wrapper 的逐项打分细节不能仅靠当前代码完全复现。
 
 旧分类脚本 `baselines/run.py` 使用 sklearn：
 
@@ -486,7 +486,7 @@ GraphRAG-R1 推理 prompt 的关键检索标签：
 
 ```text
 GraphRAG-R1 同时包含 agentic retrieval prompt 和 server-side HippoRAG/OpenIE prompt。
-如果只复现论文推理结果，主要关注 qwen_base/qwen_instruct 与 eval_online。
+如果只复现技术说明推理结果，主要关注 qwen_base/qwen_instruct 与 eval_online。
 如果复现其图检索服务，还必须处理 NER、triple extraction、fact filter、linking instructions。
 ```
 
@@ -494,6 +494,6 @@ GraphRAG-R1 同时包含 agentic retrieval prompt 和 server-side HippoRAG/OpenI
 
 1. 不建议把不同 baseline 的官方指标直接混到主表。ClueRAG `Acc.`、HiPRAG `CEM`、GraphRAG-R1 `cover_em` 都是“宽松包含式”指标，但细节不同。
 2. 主表继续使用 Signpost 已有 `EM / Precision / Recall / F1` 和成本指标，保证所有方法同一套评测逻辑。
-3. 外部 baseline 官方指标可以作为附录：说明“按官方论文口径，该方法还报告了哪些指标”，但需要标明是否可由当前代码复现。
+3. 外部 baseline 官方指标可以作为附录：说明“按官方技术说明口径，该方法还报告了哪些指标”，但需要标明是否可由当前代码复现。
 4. 需要实体或关系输入的 baseline，包括 ClueRAG、LinearRAG、AGRAG、GraphRAG-R1，正式接入时应优先复用 Signpost F6 统一实体/关系抽取产物；否则必须在 method card 中声明偏离。
 5. Prompt 适配时应让 baseline 输出进入我们的统一 prediction schema，而不是修改 Signpost 统一评测逻辑去适配某个 baseline。

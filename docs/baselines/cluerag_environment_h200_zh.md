@@ -410,7 +410,7 @@ outputs/<dataset>/metrics/method_summaries.json
 outputs/<dataset>/metrics/cost_quality.json
 ```
 
-`baseline_cluerag_full` 是论文里可用于 Clue-RAG 总开销的 wall-clock 统计。
+`baseline_cluerag_full` 是技术说明里可用于 Clue-RAG 总开销的 wall-clock 统计。
 
 ### 4.3 内部分阶段时间
 
@@ -482,7 +482,7 @@ online llm calls/query    = (retrieval_metadata.num_requests + generation_metada
 ```text
 1. Embedding 服务通常不返回 token usage；当前记录 wall time 和 embedding call 的阶段开销。
 2. Rerank 服务通常不返回 token usage；当前记录在 retrieval wall time 中。
-3. 如果需要论文中单独报告 embedding/rerank token，可后续用 tokenizer 离线估算，但主实验先以 LLM token、wall time、disk size 为主。
+3. 如果需要技术说明中单独报告 embedding/rerank token，可后续用 tokenizer 离线估算，但主实验先以 LLM token、wall time、disk size 为主。
 ```
 
 ## 5. 本地如何验证能迁移到 H200

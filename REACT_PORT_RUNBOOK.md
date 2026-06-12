@@ -1,13 +1,13 @@
 # ReAct 移植进 signpost_re — 进度与 H200 调试 Runbook（2026-06-09）
 
-> 目标：把师兄完整 ReAct 多智能体（`signpost-main/deepresearch`，对应毕业论文算法4.1/表4.2：ReAct 多步、4 类 cue 序列化给 agent 自主导航、工作记忆压缩）移植进 ICDE 实验用的 `signpost_re`，让论文 §5.1/§4 描述与实际跑的代码一致，然后 5 数据集重跑。
+> 目标：把师兄完整 ReAct 多智能体（`signpost-main/deepresearch`，对应毕业技术说明算法4.1/表4.2：ReAct 多步、4 类 cue 序列化给 agent 自主导航、工作记忆压缩）移植进 项目实验用的 `signpost_re`，让技术说明 §5.1/§4 描述与实际跑的代码一致，然后 5 数据集重跑。
 >
 > 工作基底：`/home/ruolinsu/signpost/code/signpost_re_merged`（= 你给的 v2 权威 + v4 legal baseline 合并；原始两套在 `signpost_re_code_20260609/` 不动，可回退）。
 
 ## 背景结论（已查实）
-- ICDE 论文数据是 `signpost_re`（简化版：Supervisor decompose + Researcher 单次检索只读 provenance locate → ReadFile + synthesize = **2 次 LLM 调用**）跑的。
-- 完整 ReAct（多步、4 cue 喂 agent、压缩）在 `signpost-main/deepresearch`（2026-05-09，师兄毕业论文版），用 `KGSearchResult` 数据结构 + `>` 标记把路标序列化给 LLM。
-- 移植 = 把 `deepresearch` 整栈搬进 `signpost_re`，写适配器把 signpost_re 的 ES 检索结果转成 `KGSearchResult`，LLMCore 接 H200。重跑后 **"2 LLM calls" 会变成 decompose(1)+N×ReAct+synthesize ≈ 表4.2 的 KnowledgeSearch 11-13 次/查询**，论文 2-calls 卖点要改。
+- 项目技术说明数据是 `signpost_re`（简化版：Supervisor decompose + Researcher 单次检索只读 provenance locate → ReadFile + synthesize = **2 次 LLM 调用**）跑的。
+- 完整 ReAct（多步、4 cue 喂 agent、压缩）在 `signpost-main/deepresearch`（2026-05-09，师兄毕业技术说明版），用 `KGSearchResult` 数据结构 + `>` 标记把路标序列化给 LLM。
+- 移植 = 把 `deepresearch` 整栈搬进 `signpost_re`，写适配器把 signpost_re 的 ES 检索结果转成 `KGSearchResult`，LLMCore 接 H200。重跑后 **"2 LLM calls" 会变成 decompose(1)+N×ReAct+synthesize ≈ 表4.2 的 KnowledgeSearch 11-13 次/查询**，技术说明 2-calls 卖点要改。
 
 ## ✅ 已完成（本机静态）
 1. **阶段1：搬入完整 ReAct 栈** → `signpost_re_merged/signpost/react/`：
@@ -41,7 +41,7 @@ python3 -c "from openai import OpenAI; c=OpenAI(base_url='http://localhost:8000/
 
 ## ⚠️ 关键风险
 - H200 的 Llama-3.3-70B-FP8 vLLM **是否支持 OpenAI function-calling（tool_calls）** 未知。不支持则 ReAct 要改 prompt-based（多写一层解析），工作量+1。
-- 重跑会改 tab:online（2→多步多次）、tab:quality/silver/F7 全部数字，论文要重出表+改 §5 的 2-calls 卖点。
+- 重跑会改 tab:online（2→多步多次）、tab:quality/silver/F7 全部数字，技术说明要重出表+改 §5 的 2-calls 卖点。
 - 6.11 前完成有风险，取决于 H200 调试顺利度。
 
 ## 回退

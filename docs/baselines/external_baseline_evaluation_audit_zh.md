@@ -1,6 +1,6 @@
 # 外部 Baseline 官方评测口径审计
 
-本文档只记录外部 baseline 官方代码中的数据格式、评测指标和实体抽取依赖。正式实验仍以 Signpost 统一输出 schema 和统一评测脚本为准；官方指标只用于理解方法原始论文/仓库的实验口径，不直接替代我们的 `basic_eval` 和 `query_metrics`。
+本文档只记录外部 baseline 官方代码中的数据格式、评测指标和实体抽取依赖。正式实验仍以 Signpost 统一输出 schema 和统一评测脚本为准；官方指标只用于理解方法原始技术说明/仓库的实验口径，不直接替代我们的 `basic_eval` 和 `query_metrics`。
 
 ## 1. 已下载仓库快照
 
@@ -14,7 +14,7 @@
 
 ## 2. 统一实验原则
 
-我们的论文实验不应混用各官方仓库的指标作为主表指标。主表建议统一使用 Signpost 已有指标：
+我们的技术说明实验不应混用各官方仓库的指标作为主表指标。主表建议统一使用 Signpost 已有指标：
 
 ```text
 EM, Precision, Recall, F1, latency, retrieval latency, LLM calls, input/output/total tokens, tool calls
@@ -354,13 +354,13 @@ GraphRAG-R1 的 server 目录内包含 HippoRAG/OpenIE 路径，会使用 `extra
 4. ClueRAG 当前仓库评测入口不完整，正式接入前必须先做 adapter smoke，不能直接相信 `main.py` 可跑通。
 5. AGRAG 的 GraphRAG-Bench 评测依赖外部 `metrics` 模块，官方 QA 指标复现实验需要额外环境；我们主实验可先只做统一输出和统一评测。
 
-## 10. 论文补充审计
+## 10. 技术说明补充审计
 
-上一版主要依据官方代码。进一步下载并检索论文后，需要补充：部分论文报告的指标并没有在当前开源代码中完整暴露，尤其是 ClueRAG 的 `F1 / Acc.` 和 LinearRAG 的 retrieval-quality 指标。因此后续写论文或 method card 时应区分“论文报告口径”和“代码可调用口径”。
+上一版主要依据官方代码。进一步下载并检索技术说明后，需要补充：部分技术说明报告的指标并没有在当前开源代码中完整暴露，尤其是 ClueRAG 的 `F1 / Acc.` 和 LinearRAG 的 retrieval-quality 指标。因此后续写技术说明或 method card 时应区分“技术说明报告口径”和“代码可调用口径”。
 
-### 10.1 已下载论文
+### 10.1 已下载技术说明
 
-| 方法 | 论文页面 | 本地 PDF | 本地文本 |
+| 方法 | 技术说明页面 | 本地 PDF | 本地文本 |
 | --- | --- | --- | --- |
 | ClueRAG | `https://arxiv.org/abs/2507.08445` | `docs/baselines/papers/cluerag_2507.08445.pdf` | `docs/baselines/papers/cluerag_2507.08445.txt` |
 | LinearRAG | `https://arxiv.org/abs/2510.10114` | `docs/baselines/papers/linearrag_2510.10114.pdf` | `docs/baselines/papers/linearrag_2510.10114.txt` |
@@ -368,9 +368,9 @@ GraphRAG-R1 的 server 目录内包含 HippoRAG/OpenIE 路径，会使用 `extra
 | HiPRAG | `https://arxiv.org/abs/2510.07794` | `docs/baselines/papers/hiprag_2510.07794.pdf` | `docs/baselines/papers/hiprag_2510.07794.txt` |
 | GraphRAG-R1 | `https://arxiv.org/abs/2507.23581` | `docs/baselines/papers/graphrag_r1_2507.23581.pdf` | `docs/baselines/papers/graphrag_r1_2507.23581.txt` |
 
-### 10.2 ClueRAG 论文指标
+### 10.2 ClueRAG 技术说明指标
 
-ClueRAG 论文 Section 4.1 明确报告两类指标：
+ClueRAG 技术说明 Section 4.1 明确报告两类指标：
 
 ```text
 QA performance:
@@ -384,13 +384,13 @@ Cost efficiency:
 
 `Accuracy` 不是 strict exact match，而是判断 golden answer 是否包含在 generated answer 中。`F1` 是 generated answer 与 golden answer 的 token-level overlap F1，用于平衡 answer completeness 和 correctness。
 
-论文主实验 Table 2 报告 `F1 / Acc.`，Table 3 报告 chunk-selection 策略下的 `F1 / Acc.`，Table 4 报告消融实验 `F1 / Acc.`。Appendix A.1 说明 token cost 统计 prompt tokens + completion tokens；如果方法在线需要 LLM query preprocessing，例如 keyword/entity extraction，这部分 token cost 也计入 online retrieval。
+技术说明主实验 Table 2 报告 `F1 / Acc.`，Table 3 报告 chunk-selection 策略下的 `F1 / Acc.`，Table 4 报告消融实验 `F1 / Acc.`。Appendix A.1 说明 token cost 统计 prompt tokens + completion tokens；如果方法在线需要 LLM query preprocessing，例如 keyword/entity extraction，这部分 token cost 也计入 online retrieval。
 
-这意味着：ClueRAG 论文确实有 F1，不应只按当前代码里能看到的 LLM judge 或 retrieval recall 理解。当前开源代码缺 `calculate_metric_scores`，所以需要我们自己把输出转成 Signpost 统一 schema，再用统一评测算 EM/P/R/F1。
+这意味着：ClueRAG 技术说明确实有 F1，不应只按当前代码里能看到的 LLM judge 或 retrieval recall 理解。当前开源代码缺 `calculate_metric_scores`，所以需要我们自己把输出转成 Signpost 统一 schema，再用统一评测算 EM/P/R/F1。
 
-### 10.3 LinearRAG 论文指标
+### 10.3 LinearRAG 技术说明指标
 
-LinearRAG 论文 Section 4.1 使用四个指标：
+LinearRAG 技术说明 Section 4.1 使用四个指标：
 
 ```text
 End-to-end QA:
@@ -418,13 +418,13 @@ Evidence Recall:
   衡量 retrieved contents 是否包含回答问题所需的全部证据。
 ```
 
-论文 Table 1 报告 `Contain-Acc. / GPT-Acc.`。Medical dataset 因 gold answer 是长描述，只报告 `GPT-Acc.`。Table 2 中的 `Accuracy` 是 `Contain-Acc.` 和 `GPT-Acc.` 的平均值，同时报告 indexing/retrieval time、prompt tokens、completion tokens。Appendix Table 4 报告 GraphRAG-Bench Medical 上不同问题类型的 `Recall / Relevance`。
+技术说明 Table 1 报告 `Contain-Acc. / GPT-Acc.`。Medical dataset 因 gold answer 是长描述，只报告 `GPT-Acc.`。Table 2 中的 `Accuracy` 是 `Contain-Acc.` 和 `GPT-Acc.` 的平均值，同时报告 indexing/retrieval time、prompt tokens、completion tokens。Appendix Table 4 报告 GraphRAG-Bench Medical 上不同问题类型的 `Recall / Relevance`。
 
-当前代码只直接实现 `LLM Accuracy` 和 `Contain Accuracy`。如果要复现论文中的 retrieval-quality 表，需要额外接入 GraphRAG-Bench/RAGAS 风格评测或按统一口径实现。
+当前代码只直接实现 `LLM Accuracy` 和 `Contain Accuracy`。如果要复现技术说明中的 retrieval-quality 表，需要额外接入 GraphRAG-Bench/RAGAS 风格评测或按统一口径实现。
 
-### 10.4 AGRAG 论文指标
+### 10.4 AGRAG 技术说明指标
 
-AGRAG 论文 Section IV 使用 5 个指标：
+AGRAG 技术说明 Section IV 使用 5 个指标：
 
 ```text
 ACC. / Accuracy:
@@ -448,7 +448,7 @@ FS. / Faithfulness:
   用于 creative generation。
 ```
 
-论文还报告效率：
+技术说明还报告效率：
 
 ```text
 Time Cost:
@@ -462,14 +462,14 @@ Token Cost:
 
 代码里的 `generation_eval_vllm.py` 是 GraphRAG-Bench wrapper，按 question type 调 `rouge_score / answer_correctness / coverage_score / faithfulness`。这些函数来自外部 `metrics` 模块，当前仓库没有随附完整实现。
 
-### 10.5 HiPRAG 论文指标
+### 10.5 HiPRAG 技术说明指标
 
-HiPRAG 论文 Section 4.1 使用：
+HiPRAG 技术说明 Section 4.1 使用：
 
 ```text
 CEM / Cover Exact Match:
   检查 ground-truth answer string 是否出现在 generated answer 中。
-  论文选择 CEM 而不是 strict EM，因为 LLM 往往输出较长解释。
+  技术说明选择 CEM 而不是 strict EM，因为 LLM 往往输出较长解释。
 
 OSR / Over-search Rate:
   over-search steps / all identifiable search steps。
@@ -478,7 +478,7 @@ USR / Under-search Rate:
   under-search steps / all identifiable non-search steps。
 ```
 
-论文还报告：
+技术说明还报告：
 
 ```text
 Avg. #Searches:
@@ -493,9 +493,9 @@ Runtime breakdown:
 
 Table 1 是七个 QA benchmark 上的 CEM；Table 2 汇总 `CEM / OSR / USR`；Table 12 报告 `Avg. #Searches`。
 
-### 10.6 GraphRAG-R1 论文指标
+### 10.6 GraphRAG-R1 技术说明指标
 
-GraphRAG-R1 论文 Section 4.1.2 使用三个主指标：
+GraphRAG-R1 技术说明 Section 4.1.2 使用三个主指标：
 
 ```text
 F1 Score:
@@ -505,10 +505,10 @@ SBERT Similarity / SBERT:
   用 SBERT sentence embeddings 计算 generated answer 与 reference 的 cosine similarity。
 
 LLM-as-Judge Accuracy / ACCL:
-  用 LLM judge 判断回答是否正确，论文使用 Qwen3-Turbo 作为 evaluator。
+  用 LLM judge 判断回答是否正确，技术说明使用 Qwen3-Turbo 作为 evaluator。
 ```
 
-论文还报告：
+技术说明还报告：
 
 ```text
 #Calls:
@@ -528,12 +528,12 @@ R_CAF = F1 * a * exp(-b * N)
 N = total number of retrieval operations
 ```
 
-代码里的 `calc_rule.py` 还额外支持 EM、cover EM、ROUGE 等辅助指标，但论文主表不是这些指标。
+代码里的 `calc_rule.py` 还额外支持 EM、cover EM、ROUGE 等辅助指标，但技术说明主表不是这些指标。
 
 ### 10.7 更新后的接入判断
 
-1. ClueRAG 论文确实有 `F1 / Acc.`；当前代码评测入口不完整，所以后续不能只看代码，需要用 Signpost 统一评测复现 F1。
-2. LinearRAG 不只是 `LLM Accuracy / Contain Accuracy`，论文还有 `Context Relevance / Evidence Recall`。这两个可作为补充检索质量指标，但主表仍建议统一用 Signpost EM/P/R/F1。
-3. AGRAG 的指标最接近 GraphRAG-Bench/RAGAS 体系，论文里的 `ACC / REC / ROUGE-L / Coverage / Faithfulness` 不能直接和我们的 token-level F1 混为一谈。
+1. ClueRAG 技术说明确实有 `F1 / Acc.`；当前代码评测入口不完整，所以后续不能只看代码，需要用 Signpost 统一评测复现 F1。
+2. LinearRAG 不只是 `LLM Accuracy / Contain Accuracy`，技术说明还有 `Context Relevance / Evidence Recall`。这两个可作为补充检索质量指标，但主表仍建议统一用 Signpost EM/P/R/F1。
+3. AGRAG 的指标最接近 GraphRAG-Bench/RAGAS 体系，技术说明里的 `ACC / REC / ROUGE-L / Coverage / Faithfulness` 不能直接和我们的 token-level F1 混为一谈。
 4. HiPRAG 和 GraphRAG-R1 都强调 retrieval behavior / tool-call efficiency，应重点记录 calls、tokens、检索轮数和延迟，用来和我们的 online cost 对齐。
-5. 所有 baseline 最终仍必须输出 `outputs/<dataset>/predictions/<method>.jsonl`，进入 Signpost 的统一 `basic_eval` 和 `query_metrics`；官方论文指标只作为附录或 method card 参考。
+5. 所有 baseline 最终仍必须输出 `outputs/<dataset>/predictions/<method>.jsonl`，进入 Signpost 的统一 `basic_eval` 和 `query_metrics`；官方技术说明指标只作为附录或 method card 参考。

@@ -13,7 +13,7 @@ outputs/<dataset>/predictions/
 outputs/<dataset>/metrics/
 ```
 
-其中 `datasets/processed/<dataset>/` 放共享预处理和 Signpost 图索引，`outputs/<dataset>/` 放运行日志、预测结果和可直接进入论文表格的统计文件。
+其中 `datasets/processed/<dataset>/` 放共享预处理和 Signpost 图索引，`outputs/<dataset>/` 放运行日志、预测结果和可直接进入技术说明表格的统计文件。
 
 外部 baseline 不写入 Signpost 的内部索引文件，但为了公平，建议都读取同一份原始文档和问题文件：
 
@@ -81,7 +81,7 @@ outputs/<dataset>/logs/stage_timing.jsonl
 outputs/<dataset>/metrics/index_metrics.json
 ```
 
-这些产物对应论文中的图构建成本、图规模、语义抽取调用数、离线空间开销和 cost-quality 辅助分析。F6 语义抽取的时间、调用次数和 token 必须记录，但按当前 v10 口径作为共享语义标注阶段，不默认计入 Signpost 方法离线成本。
+这些产物对应技术说明中的图构建成本、图规模、语义抽取调用数、离线空间开销和 cost-quality 辅助分析。F6 语义抽取的时间、调用次数和 token 必须记录，但按当前 v10 口径作为共享语义标注阶段，不默认计入 Signpost 方法离线成本。
 
 ### 2.2 Signpost full 方法
 
@@ -162,7 +162,7 @@ outputs/<dataset>/metrics/signpost.<variant>.query_metrics.json
 
 ## 3. legal_test 闭环步骤
 
-`legal_test` 只用于 smoke，不进入论文表格。它的作用是确认 H200 环境、ES、embedding、LLM、索引构建、agent 检索和评估汇总全部连通。
+`legal_test` 只用于 smoke，不进入技术说明表格。它的作用是确认 H200 环境、ES、embedding、LLM、索引构建、agent 检索和评估汇总全部连通。
 
 推荐顺序：
 
@@ -207,7 +207,7 @@ Agriculture-full
 Legal-full
 ```
 
-如果 `Legal-full` 的 F6 语义抽取在实验窗口内完成，就不再使用 legal 子集进入主表。若 F6 无法完成，则用 `Legal-Core` 替代主实验，但这个替代必须在论文中说明。
+如果 `Legal-full` 的 F6 语义抽取在实验窗口内完成，就不再使用 legal 子集进入主表。若 F6 无法完成，则用 `Legal-Core` 替代主实验，但这个替代必须在技术说明中说明。
 
 推荐顺序：
 
@@ -239,7 +239,7 @@ outputs/<dataset>/metrics/<method>.basic_eval.json
 outputs/<dataset>/metrics/<method>.query_metrics.json
 ```
 
-对 Signpost full 和所有消融，质量指标在同一个数据集全集问题上计算。`legal_test` 不进入论文主表。
+对 Signpost full 和所有消融，质量指标在同一个数据集全集问题上计算。`legal_test` 不进入技术说明主表。
 
 离线索引成本使用：
 
@@ -264,7 +264,7 @@ outputs/<dataset>/metrics/method_summaries.json
 outputs/<dataset>/metrics/cost_quality.json
 ```
 
-论文中对应的核心说法是：Signpost 的方法成本主要来自共享语义标注之后的图组织、路标物化和图索引同步；F6 语义抽取成本必须记录，但在主表中作为共享语义标注阶段处理。消融用于证明这不是简单堆叠，而是不同导航线索在证据可达性、回读定位和在线探索成本上分别承担作用。
+技术说明中对应的核心说法是：Signpost 的方法成本主要来自共享语义标注之后的图组织、路标物化和图索引同步；F6 语义抽取成本必须记录，但在主表中作为共享语义标注阶段处理。消融用于证明这不是简单堆叠，而是不同导航线索在证据可达性、回读定位和在线探索成本上分别承担作用。
 
 ## 6. H200 本地模型配置
 

@@ -11,6 +11,13 @@ scope), **read** (adjacent source text), **jump** (semantic relation), and
 retrieves objects already carrying sketches and follows typed cues
 deterministically — no per-hop LLM calls, no per-query graph reconstruction.
 
+## Framework
+
+![Signpost framework](docs/framework.png)
+
+`docs/framework.pdf` is the vector copy for high-resolution viewing.
+
+
 ## Repository layout
 
 | Path | What it is |
@@ -26,7 +33,7 @@ deterministically — no per-hop LLM calls, no per-query graph reconstruction.
 | `scripts/` | Dataset preparation, build-and-score pipelines, evaluation suites |
 | `tests/` | Unit tests; the four suites in the quickstart run fully offline |
 | `GAPS_IMPLEMENTED.md` | What was added on top of the original system + how to re-run experiments |
-| `METHOD_MAP.md` | Paper concept → code file:symbol map, with paper-vs-code deltas |
+| `METHOD_MAP.md` | Method concept → code file:symbol map, with implementation notes |
 
 Vendored third-party baseline repositories (ClueRAG, HiPRAG, …) and benchmark
 corpora are **not** included; fetch them from their upstreams (see
@@ -34,15 +41,15 @@ corpora are **not** included; fetch them from their upstreams (see
 
 ## Datasets & baselines
 
-Citation-backed documentation of the corpora and compared systems in the paper:
+Citation-backed documentation of the corpora and compared systems:
 
 | Doc | What it is |
 |---|---|
-| `DATASETS.md` | The six evaluation workloads — Agriculture, Medical, Novel, Legal, Mix, and the MuSiQue multi-hop set — with official name, one-line description, how to obtain (real upstream URLs), license notes, paper-stated scale, and the in-repo silver-evidence construction (`scripts/build_silver_evidence.py`). Records that reference answers exist but human gold spans do not, and that Medical/Novel are actually fetched from GraphRAG-Bench rather than UltraDomain. |
-| `BASELINES.md` | The eight baselines grouped as the paper groups them (closed-book / flat / index-centric / graph-optimization / single-round graph-memory / multi-round agentic): role, config compared, citation key, and whether code is in-repo or vendored under the gitignored `baselines/` dir. |
-| `CITATIONS.bib` | Real BibTeX for every baseline key, copied verbatim from the paper's `references.bib`. Dataset sources have no key in that bibliography and are marked MISSING rather than invented. |
+| `DATASETS.md` | The six evaluation workloads — Agriculture, Medical, Novel, Legal, Mix, and the MuSiQue multi-hop set — with official name, one-line description, how to obtain (real upstream URLs), license notes, benchmark scale, and the in-repo silver-evidence construction (`scripts/build_silver_evidence.py`). Records that reference answers exist but human gold spans do not, and that Medical/Novel are actually fetched from GraphRAG-Bench rather than UltraDomain. |
+| `BASELINES.md` | The eight baselines grouped as the benchmark setup groups them (closed-book / flat / index-centric / graph-optimization / single-round graph-memory / multi-round agentic): role, config compared, citation key, and whether code is in-repo or vendored under the gitignored `baselines/` dir. |
+| `CITATIONS.bib` | BibTeX entries for the baseline keys used by the project. Dataset sources have no key in that bibliography and are marked MISSING rather than invented. |
 
-## Quick start (reviewers start here)
+## Quick start
 
 Zero-setup check on a fresh clone — no Elasticsearch, no LLM, no corpus, runs in
 seconds (Python 3.11–3.12):
@@ -84,11 +91,9 @@ Credentials are read from the environment — never commit them:
 `docker/docker-compose.yml` starts Postgres, Valkey (Redis), and MinIO;
 Elasticsearch and the LLM endpoint are external (see `docs/environment_setup.md`).
 
-## Paper ↔ code
+## Method ↔ code
 
-`METHOD_MAP.md` maps each paper concept (section / algorithm / equation) to its
-implementing file and symbol, with an honest-scope section on paper-vs-code
-deltas. `GAPS_IMPLEMENTED.md` records what was added on top of the original
+`METHOD_MAP.md` maps each method concept to its implementing file and symbol, with implementation notes. `GAPS_IMPLEMENTED.md` records what was added on top of the original
 system and how to re-run the experiments.
 
 ## Running experiments

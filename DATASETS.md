@@ -1,11 +1,11 @@
 # Datasets
 
-The paper (`sections/05_experiments.tex`, `\label{sec:datasets}`) evaluates on
-six workloads: five domain corpora the paper groups under the **UltraDomain**
+The project benchmark evaluates on
+six workloads: five domain corpora the benchmark setup groups under the **UltraDomain**
 umbrella — **Agriculture**, **Medical**, **Novel**, **Legal**, **Mix** — plus
 the **MuSiQue** multi-hop benchmark used for answer quality only.
 
-> **Provenance honesty note.** The paper prose calls all five domain corpora
+> **Provenance honesty note.** The project notes calls all five domain corpora
 > "UltraDomain corpora". The dataset-preparation code
 > (`scripts/prepare_datasets.py`) shows the actual upstreams: **Agriculture,
 > Legal, and Mix** are pulled from the `TommyChien/UltraDomain` HuggingFace
@@ -19,17 +19,17 @@ the **MuSiQue** multi-hop benchmark used for answer quality only.
 
 The dataset sources are **not cited with BibTeX keys** in
 `references.bib` — neither UltraDomain nor MuSiQue nor GraphRAG-Bench has an
-entry in the paper's bibliography (verified by grep). The canonical references
-below are given for reproducibility, not copied from the paper's `.bib`. The one
+entry in the project bibliography (verified by grep). The canonical references
+below are given for reproducibility, not copied from the project bibliography. The one
 related key that *does* exist in `references.bib` is `trivedi2023ircot` (IRCoT,
-Trivedi et al. 2023) — that is the IRCoT method paper, **not** the MuSiQue
-dataset paper (MuSiQue is Trivedi et al., TACL 2022). Do not conflate them.
+Trivedi et al. 2023) — that is the IRCoT method publication, **not** the MuSiQue
+dataset publication (MuSiQue is Trivedi et al., TACL 2022). Do not conflate them.
 
 See `CITATIONS.bib` for the resolution status of every key.
 
 ## Per-dataset detail
 
-| Dataset | Upstream (as fetched by code) | Type | Paper scale | Obtain |
+| Dataset | Upstream (as fetched by code) | Type | Benchmark scale | Obtain |
 |---|---|---|---|---|
 | Agriculture | `TommyChien/UltraDomain` | Long-document domain QA | 12 docs, 9,156 chunks, 100 Qs, **75,088 objects** | HF resolve URL below |
 | Legal | `TommyChien/UltraDomain` | Long-document domain QA | sensitive case in RQ5 | HF resolve URL below |
@@ -67,7 +67,7 @@ and semantic association).
 ### GraphRAG-Bench (Medical, Novel)
 
 - **Official name:** GraphRAG-Bench.
-- **One line:** A GraphRAG evaluation benchmark; the paper uses its Medical and
+- **One line:** A GraphRAG evaluation benchmark; the benchmark setup uses its Medical and
   Novel domain corpora plus their question splits.
 - **How to obtain:** HuggingFace dataset `GraphRAG-Bench/GraphRAG-Bench`. The
   code fetches corpus + question JSON files directly:
@@ -89,7 +89,7 @@ and semantic association).
 - **Official name:** MuSiQue (Multihop Questions via Single-hop question
   Composition).
 - **One line:** A 2–4 hop multi-hop QA benchmark whose answers require composing
-  several supporting passages; used by the paper for explicit multi-hop answer
+  several supporting passages; used by the benchmark setup for explicit multi-hop answer
   quality only.
 - **How to obtain:** Canonical source is the AllenAI MuSiQue release,
   `https://github.com/StonyBrookNLP/musique` (data download script + Zenodo
@@ -103,17 +103,17 @@ and semantic association).
 - **License:** CC BY 4.0 (per the upstream MuSiQue release); verify on the repo
   before redistribution.
 - **Citation key:** none in `references.bib` for the MuSiQue dataset.
-  (`trivedi2023ircot` exists but is the IRCoT *method* paper, a different work.)
+  (`trivedi2023ircot` exists but is the IRCoT *method* publication, a different work.)
 - **Splits/scale used:** answer-quality rows in Table `tab:quality` (e.g.,
   Signpost `S_LLM`=4.8, J@7=36.0). HiPRAG did not complete on MuSiQue (context
-  overflow), shown as "--" in the paper.
+  overflow), shown as "--" in the evaluation table.
 
 ## Silver evidence (in-repo)
 
 Reference answers exist for every workload, **but human gold supporting spans do
 not**. Evidence-reachability diagnostics (SilverHit@5, SilverRecall@5, MRR,
 ClaimCoverage@5; Table `tab:silver`) are therefore computed over **frozen silver
-evidence** constructed in-repo, not over human gold spans. The paper is explicit
+evidence** constructed in-repo, not over human gold spans. The project notes are explicit
 that these are silver diagnostics, "not human gold-span labels".
 
 - **Builder:** `scripts/build_silver_evidence.py` (calls

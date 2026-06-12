@@ -22,13 +22,13 @@ datasets/processed/legal_lite/
 
 `legal_test` 只用于开发和流程测试。它要足够小，方便快速跑通 F3-F16。
 
-不建议把 `legal_test` 写进论文主实验表。
+不建议把 `legal_test` 写进技术说明主实验表。
 
 ### legal_lite
 
-`legal_lite` 是正式论文里的 Legal-Lite 数据集。它比 `legal_test` 大，但比全量 Legal 小，目标是在可控成本下保留法律文档的结构性。
+`legal_lite` 是正式技术说明里的 Legal-Lite 数据集。它比 `legal_test` 大，但比全量 Legal 小，目标是在可控成本下保留法律文档的结构性。
 
-论文里应该明确写：
+技术说明里应该明确写：
 
 ```text
 Legal-Lite is a document-complete subset of the UltraDomain Legal split.
@@ -129,7 +129,7 @@ chunks: 1236
 
 - 保留完整法律文档结构。
 - 覆盖 lease、loan、credit、security、purchase、servicing、LLC、notes 等不同合同形态。
-- questions 接近 100，适合论文轻量主实验。
+- questions 接近 100，适合技术说明轻量主实验。
 - 预计 chunks 约 1200，F6 LLM 抽取成本明显低于全量 Legal 的 12692 chunks。
 
 ## 4. 子集生成脚本

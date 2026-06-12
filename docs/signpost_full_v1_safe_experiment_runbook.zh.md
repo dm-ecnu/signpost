@@ -134,7 +134,7 @@ curl -s http://localhost:8033/v1/rerank \
 1. 跑 v1 Signpost full 和 v1 ablations：`scripts/run_signpost_ablation_suite_variant.sh <dataset> <namespace> signpost.full_rerank_v1`。
 2. 跑 baseline：`vanilla_llm`、`vanilla_rag`、`hybrid_rag`、`agrag`、`linearrag`、`hiprag`、`graphrag_r1`。
 3. 跑 ClueRAG shared graph/retrieval 中间步骤：`cluerag`。
-4. 跑论文正式 ClueRAG prompt：`cluerag_prompt_normalized`。
+4. 跑技术说明正式 ClueRAG prompt：`cluerag_prompt_normalized`。
 5. 跑 LLM 对比评价：`scripts/build_all_and_score.py --dataset <dataset>`。
 
 命令中 baseline 默认如果 prediction 已存在就跳过；如果缺失则运行。这样 v1 工作区可以复用从 v0 复制来的已完成 baseline，也能补齐缺失 baseline。
@@ -304,5 +304,5 @@ tmux kill-session -t v1-mix
 
 1. 先看 `ans/agriculture`、`ans/mix` 的 LLM 对比评价均分，比较 `signpost.full_rerank_v1` 与 `signpost.full`。
 2. 再看 `metrics/signpost.full_rerank_v1.query_metrics.json` 和 `metrics/signpost.full.query_metrics.json`。
-3. 如果 v1 整体优于 v0，论文只写 v1。
-4. 如果 v1 不稳定或低于 v0，论文继续写 v0，v1 结果保留为失败实验记录，不进入论文主表。
+3. 如果 v1 整体优于 v0，技术说明只写 v1。
+4. 如果 v1 不稳定或低于 v0，技术说明继续写 v0，v1 结果保留为失败实验记录，不进入技术说明主表。
