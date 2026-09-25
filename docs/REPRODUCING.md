@@ -35,7 +35,7 @@ Corpus identifiers: `graphrag-bench-medical_q100` (Medical), `mix`,
 |---|---|---|---|---|
 | Table 1 (`tab:signpost_ref`) | Entry classes and their fields | — (definitional; see `offline_signpost.py`) | — | yes |
 | Figure 1 (`fig:motivation`) | Held-out residency of history-fitted object sets | `analyze_breadth_heldout.py`, `f1_breadth_heldout.py` | raw prediction logs (`data/topb8-outputs/`, 57 MB) | scripts yes; logs not bundled |
-| Table 2 (`tab:physical-cache`) | Eager vs lazy+cache vs no cache; LRU 1%/10%; cold P95; storage share | `benchmark.py` (run), `gen_physical_table.py` (table) | `results/efficiency/<corpus>.{runs.jsonl,manifest.json,complete.json,trace.json}` | yes; MuSiQue row added when its run completes |
+| Table 2 (`tab:physical-cache`) | Eager vs lazy+cache vs no cache; LRU 1%/10%; cold P95; storage share | `benchmark.py` (run), `gen_physical_table.py` (table) | `results/efficiency/<corpus>.{runs.jsonl,manifest.json,complete.json,trace.json}` | yes (six corpora) |
 | Table 3 (`tab:maintenance`) | Dirty-set recompute vs full rebuild, chunk edit batches 0.1–10% | `e4_incremental.py` (run), `analyze_e4.py` (rows) | `results/maintenance/e4_<corpus>.json` | yes |
 | Table 4 (`tab:online`) | Per-query latency, model calls, tokens | `analyze_t0.py`, `analyze_t0b.py` | raw prediction logs (`data/topb8-outputs/`) | scripts yes; logs not bundled |
 | Table 5 (`tab:quality`) | Blind answer quality | `blind_judge.py`, `analyze_blind_tables.py`, `analyze_ci.py` | `results/perquery/formal5_per_query.tsv`, `musique_per_query.tsv` | yes |
