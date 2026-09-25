@@ -56,6 +56,7 @@ are stable across revisions.
 | Which entry classes expose the 3,160 spans read (RQ6) | `e3_follow_rate.py`, `analyze_e3.py` | `results/attribution/` | yes |
 | Maintenance cost model t̂/t_full = a·Σ_{o∈D}\|σ(o)\| / Σ_o\|σ(o)\| (RQ3) | `x4_features.py`, `x4_fit.py` | `x4_<corpus>.json`, `fit5.json`, `fit6.json`, `PREREGISTERED.md` | yes |
 | Serialization-order invariance with canonical load order (RQ6) | `x3_canonical.py` | `results/order/x3_canonical.json` | script yes; results added when the Legal run completes |
+| Distinct-object growth over the traces; questions to build every view (Discussion) | `trace_growth.py` | `results/efficiency/*.trace.json` | yes |
 | RQ6 construction-time / depth pilot (Medical) | `analyze_e1e2.py` | `results/e1e2/*.judged.jsonl`, `audit.json` | results yes; **analysis script not located** |
 
 ## Protocol notes that affect the numbers
