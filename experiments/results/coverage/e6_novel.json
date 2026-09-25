@@ -1,0 +1,389 @@
+{
+  "dataset": "novel",
+  "graph": "/data/srl/signpost_re_v2/datasets/processed/graphrag-bench-novel/graph.unified.json",
+  "objects_counted": 31532,
+  "by_budget": {
+    "1": {
+      "chunk": {
+        "n": 2738,
+        "mean": 3.99,
+        "p50": 4.0,
+        "p95": 4.0,
+        "max": 4
+      },
+      "summary": {
+        "n": 357,
+        "mean": 3.0,
+        "p50": 3.0,
+        "p95": 3.0,
+        "max": 3
+      },
+      "entity": {
+        "n": 12887,
+        "mean": 2.9,
+        "p50": 3.0,
+        "p95": 3.0,
+        "max": 3
+      },
+      "relation": {
+        "n": 15550,
+        "mean": 2.96,
+        "p50": 3.0,
+        "p95": 3.0,
+        "max": 3
+      }
+    },
+    "2": {
+      "chunk": {
+        "n": 2738,
+        "mean": 3.99,
+        "p50": 4.0,
+        "p95": 4.0,
+        "max": 4
+      },
+      "summary": {
+        "n": 357,
+        "mean": 4.97,
+        "p50": 5.0,
+        "p95": 5.0,
+        "max": 5
+      },
+      "entity": {
+        "n": 12887,
+        "mean": 3.79,
+        "p50": 3.0,
+        "p95": 6.0,
+        "max": 6
+      },
+      "relation": {
+        "n": 15550,
+        "mean": 4.01,
+        "p50": 4.0,
+        "p95": 6.0,
+        "max": 6
+      }
+    },
+    "4": {
+      "chunk": {
+        "n": 2738,
+        "mean": 3.99,
+        "p50": 4.0,
+        "p95": 4.0,
+        "max": 4
+      },
+      "summary": {
+        "n": 357,
+        "mean": 8.82,
+        "p50": 9.0,
+        "p95": 9.0,
+        "max": 9
+      },
+      "entity": {
+        "n": 12887,
+        "mean": 4.57,
+        "p50": 3.0,
+        "p95": 12.0,
+        "max": 12
+      },
+      "relation": {
+        "n": 15550,
+        "mean": 5.75,
+        "p50": 6.0,
+        "p95": 8.0,
+        "max": 12
+      }
+    },
+    "8": {
+      "chunk": {
+        "n": 2738,
+        "mean": 3.99,
+        "p50": 4.0,
+        "p95": 4.0,
+        "max": 4
+      },
+      "summary": {
+        "n": 357,
+        "mean": 15.97,
+        "p50": 17.0,
+        "p95": 17.0,
+        "max": 17
+      },
+      "entity": {
+        "n": 12887,
+        "mean": 5.21,
+        "p50": 3.0,
+        "p95": 17.0,
+        "max": 24
+      },
+      "relation": {
+        "n": 15550,
+        "mean": 8.63,
+        "p50": 10.0,
+        "p95": 12.0,
+        "max": 24
+      }
+    },
+    "16": {
+      "chunk": {
+        "n": 2738,
+        "mean": 3.99,
+        "p50": 4.0,
+        "p95": 4.0,
+        "max": 4
+      },
+      "summary": {
+        "n": 357,
+        "mean": 20.56,
+        "p50": 21.0,
+        "p95": 23.0,
+        "max": 24
+      },
+      "entity": {
+        "n": 12887,
+        "mean": 5.69,
+        "p50": 3.0,
+        "p95": 18.0,
+        "max": 48
+      },
+      "relation": {
+        "n": 15550,
+        "mean": 13.1,
+        "p50": 17.0,
+        "p95": 20.0,
+        "max": 48
+      }
+    },
+    "32": {
+      "chunk": {
+        "n": 2738,
+        "mean": 3.99,
+        "p50": 4.0,
+        "p95": 4.0,
+        "max": 4
+      },
+      "summary": {
+        "n": 357,
+        "mean": 23.61,
+        "p50": 21.0,
+        "p95": 39.0,
+        "max": 40
+      },
+      "entity": {
+        "n": 12887,
+        "mean": 5.99,
+        "p50": 3.0,
+        "p95": 18.0,
+        "max": 96
+      },
+      "relation": {
+        "n": 15550,
+        "mean": 19.1,
+        "p50": 17.0,
+        "p95": 35.0,
+        "max": 94
+      }
+    },
+    "64": {
+      "chunk": {
+        "n": 2738,
+        "mean": 3.99,
+        "p50": 4.0,
+        "p95": 4.0,
+        "max": 4
+      },
+      "summary": {
+        "n": 357,
+        "mean": 28.16,
+        "p50": 21.0,
+        "p95": 67.0,
+        "max": 72
+      },
+      "entity": {
+        "n": 12887,
+        "mean": 6.15,
+        "p50": 3.0,
+        "p95": 18.0,
+        "max": 192
+      },
+      "relation": {
+        "n": 15550,
+        "mean": 26.02,
+        "p50": 17.0,
+        "p95": 66.0,
+        "max": 146
+      }
+    },
+    "inf": {
+      "chunk": {
+        "n": 2738,
+        "mean": 3.99,
+        "p50": 4.0,
+        "p95": 4.0,
+        "max": 4
+      },
+      "summary": {
+        "n": 357,
+        "mean": 32.3,
+        "p50": 21.0,
+        "p95": 79.4,
+        "max": 255
+      },
+      "entity": {
+        "n": 12887,
+        "mean": 6.27,
+        "p50": 3.0,
+        "p95": 18.0,
+        "max": 532
+      },
+      "relation": {
+        "n": 15550,
+        "mean": 41.59,
+        "p50": 17.0,
+        "p95": 156.0,
+        "max": 492
+      }
+    }
+  },
+  "coverage": {
+    "1": {
+      "p": {
+        "greedy_over_full": 0.5208,
+        "truncate_over_full": 0.5208,
+        "greedy_over_truncate": 1.0,
+        "lists": 9563,
+        "lists_differing": 0
+      },
+      "s": {
+        "greedy_over_full": 0.5502,
+        "truncate_over_full": 0.3648,
+        "greedy_over_truncate": 1.508,
+        "lists": 18646,
+        "lists_differing": 9758
+      },
+      "v": {
+        "greedy_over_full": 0.3635,
+        "truncate_over_full": 0.3635,
+        "greedy_over_truncate": 1.0,
+        "lists": 351,
+        "lists_differing": 0
+      }
+    },
+    "2": {
+      "p": {
+        "greedy_over_full": 0.6342,
+        "truncate_over_full": 0.6342,
+        "greedy_over_truncate": 1.0,
+        "lists": 4644,
+        "lists_differing": 0
+      },
+      "s": {
+        "greedy_over_full": 0.6863,
+        "truncate_over_full": 0.4975,
+        "greedy_over_truncate": 1.3795,
+        "lists": 15805,
+        "lists_differing": 13342
+      },
+      "v": {
+        "greedy_over_full": 0.5381,
+        "truncate_over_full": 0.5381,
+        "greedy_over_truncate": 1.0,
+        "lists": 341,
+        "lists_differing": 0
+      }
+    },
+    "4": {
+      "p": {
+        "greedy_over_full": 0.7266,
+        "truncate_over_full": 0.7266,
+        "greedy_over_truncate": 1.0,
+        "lists": 2197,
+        "lists_differing": 0
+      },
+      "s": {
+        "greedy_over_full": 0.7916,
+        "truncate_over_full": 0.6324,
+        "greedy_over_truncate": 1.2518,
+        "lists": 13169,
+        "lists_differing": 12958
+      },
+      "v": {
+        "greedy_over_full": 0.7321,
+        "truncate_over_full": 0.7321,
+        "greedy_over_truncate": 1.0,
+        "lists": 319,
+        "lists_differing": 0
+      }
+    },
+    "8": {
+      "p": {
+        "greedy_over_full": 0.82,
+        "truncate_over_full": 0.82,
+        "greedy_over_truncate": 1.0,
+        "lists": 1069,
+        "lists_differing": 0
+      },
+      "s": {
+        "greedy_over_full": 0.8673,
+        "truncate_over_full": 0.7499,
+        "greedy_over_truncate": 1.1565,
+        "lists": 10436,
+        "lists_differing": 10435
+      },
+      "v": {
+        "greedy_over_full": 0.9282,
+        "truncate_over_full": 0.9282,
+        "greedy_over_truncate": 1.0,
+        "lists": 267,
+        "lists_differing": 0
+      }
+    },
+    "16": {
+      "p": {
+        "greedy_over_full": 0.8278,
+        "truncate_over_full": 0.8278,
+        "greedy_over_truncate": 1.0,
+        "lists": 305,
+        "lists_differing": 0
+      },
+      "s": {
+        "greedy_over_full": 0.9186,
+        "truncate_over_full": 0.8375,
+        "greedy_over_truncate": 1.0967,
+        "lists": 7466,
+        "lists_differing": 7466
+      }
+    },
+    "32": {
+      "p": {
+        "greedy_over_full": 0.8656,
+        "truncate_over_full": 0.8656,
+        "greedy_over_truncate": 1.0,
+        "lists": 120,
+        "lists_differing": 0
+      },
+      "s": {
+        "greedy_over_full": 0.9491,
+        "truncate_over_full": 0.8899,
+        "greedy_over_truncate": 1.0665,
+        "lists": 4759,
+        "lists_differing": 4759
+      }
+    },
+    "64": {
+      "p": {
+        "greedy_over_full": 0.8813,
+        "truncate_over_full": 0.8813,
+        "greedy_over_truncate": 1.0,
+        "lists": 30,
+        "lists_differing": 0
+      },
+      "s": {
+        "greedy_over_full": 0.9615,
+        "truncate_over_full": 0.9199,
+        "greedy_over_truncate": 1.0452,
+        "lists": 2374,
+        "lists_differing": 2374
+      }
+    }
+  }
+}

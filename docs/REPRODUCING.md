@@ -3,13 +3,18 @@
 This file maps each table, figure, and in-text result of the PVLDB submission
 to the script that produces it and the frozen result files that script reads.
 
-**Status of this repository (2026-09-25).** The library code that builds and
-serves navigation views (`signpost/retrieval/offline_signpost.py`,
-`signpost/retrieval/signpost_variants.py`) is in this repository. Most of the
-paper's *measurement and analysis* scripts are not yet in it; the
-"In repo" column says which ones are. Scripts marked "not yet" will be added
-under `experiments/` together with their frozen outputs. Until then this file
-is the authoritative list of what produced each number.
+All scripts named below are in `experiments/scripts/` and their frozen
+outputs in `experiments/results/` (see `experiments/README.md`), except where
+the last column says otherwise.
+
+**Builder revision.** The paper's numbers were produced with a server copy of
+`signpost/retrieval/offline_signpost.py` whose four per-type builders are
+identical to the ones committed here; it differs only in memoizing the graph
+index (`_INDEX_CACHE`), which changes latency, not output. The b = 8 cap
+(`_apply_cue_topb_item`) matches the committed version under the default
+`SIGNPOST_CUE_SELECT=truncate`. The RQ6 pilot additionally used two serving
+variants, `online_cues` and `provenance_only`, that are not in the committed
+`signpost_variants.py`.
 
 ## Requirements by experiment family
 
@@ -29,12 +34,12 @@ Corpus identifiers: `graphrag-bench-medical_q100` (Medical), `mix`,
 | Paper item | What it reports | Script | Frozen results | In repo |
 |---|---|---|---|---|
 | Table 1 (`tab:signpost_ref`) | Entry classes and their fields | — (definitional; see `offline_signpost.py`) | — | yes |
-| Figure 1 (`fig:motivation`) | Held-out residency of history-fitted object sets | `analyze_breadth_heldout.py`, `fig/f1_breadth_heldout.py` | per-query access logs (`data/perquery/`) | not yet |
-| Table 2 (`tab:physical-cache`) | Eager vs lazy+cache vs no cache; LRU 1%/10%; cold P95; storage share | `efficiency/benchmark.py` (run), `gen_physical_table.py` (table) | `<corpus>.{runs.jsonl,manifest.json,complete.json,trace.json}` per corpus | not yet |
-| Table 3 (`tab:maintenance`) | Dirty-set recompute vs full rebuild, chunk edit batches 0.1–10% | `e4_incremental.py` (run), `analyze_e4.py` (rows) | `e4_<corpus>.json` | not yet |
-| Table 5 (`tab:quality`) | Blind answer quality | `blind_judge.py`, `analyze_blind_tables.py`, `analyze_ci.py` | `data/perquery/formal5_per_query.tsv`, `musique_per_query.tsv` | not yet |
-| Table 4 (`tab:online`) | Per-query latency, model calls, tokens | `analyze_t0.py`, `analyze_t0b.py` | topb8 prediction JSONL (2026-06-06) | not yet |
-| Table 6 (`tab:ablation`) | Serve-time removals under blind judging | `blind_judge.py`, `analyze_blind_tables.py` | judged bundles | not yet |
+| Figure 1 (`fig:motivation`) | Held-out residency of history-fitted object sets | `analyze_breadth_heldout.py`, `f1_breadth_heldout.py` | raw prediction logs (`data/topb8-outputs/`, 57 MB) | scripts yes; logs not bundled |
+| Table 2 (`tab:physical-cache`) | Eager vs lazy+cache vs no cache; LRU 1%/10%; cold P95; storage share | `benchmark.py` (run), `gen_physical_table.py` (table) | `results/efficiency/<corpus>.{runs.jsonl,manifest.json,complete.json,trace.json}` | yes; MuSiQue row added when its run completes |
+| Table 3 (`tab:maintenance`) | Dirty-set recompute vs full rebuild, chunk edit batches 0.1–10% | `e4_incremental.py` (run), `analyze_e4.py` (rows) | `results/maintenance/e4_<corpus>.json` | yes |
+| Table 4 (`tab:online`) | Per-query latency, model calls, tokens | `analyze_t0.py`, `analyze_t0b.py` | raw prediction logs (`data/topb8-outputs/`) | scripts yes; logs not bundled |
+| Table 5 (`tab:quality`) | Blind answer quality | `blind_judge.py`, `analyze_blind_tables.py`, `analyze_ci.py` | `results/perquery/formal5_per_query.tsv`, `musique_per_query.tsv` | yes |
+| Table 6 (`tab:ablation`) | Serve-time removals under blind judging | `blind_judge.py`, `analyze_blind_tables.py` | `results/perquery/` (raw judge bundles, 22 MB, not bundled) | yes |
 | Table 7 (`tab:e1divergence`) | Query-dependent order/set divergence | `gen_div_table.py` | — | **script not located** |
 
 Table numbers are those of the submitted PDF; the LaTeX labels in parentheses
@@ -44,14 +49,14 @@ are stable across revisions.
 
 | Result (section) | Script | Frozen results | In repo |
 |---|---|---|---|
-| Depth sweep, b ∈ {8,16,32,64,∞}: storage share and relation/entity P95 (RQ1) | `analyze_bsweep.py` | `data/exposure/cue_exposure_<corpus>.json` → `bsweep.json` | not yet |
-| Depth sweep points b ∈ {1,2,4} (RQ1) | — | — | **source not located** |
-| Coverage-greedy vs score-prefix selection at b = 8 (RQ1) | `e6_greedy_vs_truncate.py`, `cue_coverage.py` | `data/e6/` | not yet |
-| Relation-entry P95 for MuSiQue, Table 3 column (RQ3) | `recount_cue_exposure.py` | `cue_exposure_musique.json` | not yet |
-| Which entry classes expose the 3,160 spans read (RQ6) | `e3_follow_rate.py`, `analyze_e3.py` | `data/e3/` | not yet |
-| Maintenance cost model t̂/t_full = a·Σ_{o∈D}\|σ(o)\| / Σ_o\|σ(o)\| (RQ3) | `x4_features.py`, `x4_fit.py` | `x4_<corpus>.json`, `fit5.json`, `fit6.json`, `PREREGISTERED.md` | not yet |
-| Serialization-order invariance with canonical load order (RQ6) | `x3_canonical.py` | `x3_canonical.json` | not yet |
-| RQ6 construction-time / depth pilot (Medical) | `analyze_e1e2.py` | `e1e2/*.judged.jsonl`, `audit.json` | **script not located** |
+| Depth sweep, b ∈ {8,16,32,64,∞}: storage share and relation/entity P95 (RQ1) | `analyze_bsweep.py` | `results/exposure/cue_exposure_<corpus>.json` → `bsweep.json` | yes |
+| Depth sweep, all points b ∈ {1,2,4,8,16,32,64,∞}, six corpora (RQ1) | `x5_depth_sweep.py` | `results/depth/x5_<corpus>.json` | script yes; results added when the run completes |
+| Coverage-greedy vs score-prefix selection at b = 8 (RQ1) | `e6_greedy_vs_truncate.py`, `cue_coverage.py` | `results/coverage/` | yes |
+| Relation-entry P95 for MuSiQue, Table 3 column (RQ3) | `recount_cue_exposure.py` | `cue_exposure_musique.json` | yes |
+| Which entry classes expose the 3,160 spans read (RQ6) | `e3_follow_rate.py`, `analyze_e3.py` | `results/attribution/` | yes |
+| Maintenance cost model t̂/t_full = a·Σ_{o∈D}\|σ(o)\| / Σ_o\|σ(o)\| (RQ3) | `x4_features.py`, `x4_fit.py` | `x4_<corpus>.json`, `fit5.json`, `fit6.json`, `PREREGISTERED.md` | yes |
+| Serialization-order invariance with canonical load order (RQ6) | `x3_canonical.py` | `results/order/x3_canonical.json` | script yes; results added when the Legal run completes |
+| RQ6 construction-time / depth pilot (Medical) | `analyze_e1e2.py` | `results/e1e2/*.judged.jsonl`, `audit.json` | results yes; **analysis script not located** |
 
 ## Protocol notes that affect the numbers
 

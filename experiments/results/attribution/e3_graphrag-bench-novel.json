@@ -1,0 +1,42 @@
+{
+  "dataset": "graphrag-bench-novel",
+  "queries": 100,
+  "served_objects_resolved": 2385,
+  "served_objects_unresolved": 0,
+  "reads_total": 626,
+  "reads_unattributed": 0,
+  "per_class": {
+    "zoom": {
+      "entries_surfaced": 10542,
+      "reads_direct": 309,
+      "reads_onehop": 616,
+      "reads_unique_onehop": 0,
+      "share_reads_onehop": 0.984,
+      "share_reads_unique": 0.0
+    },
+    "read": {
+      "entries_surfaced": 569,
+      "reads_direct": 41,
+      "reads_onehop": 41,
+      "reads_unique_onehop": 0,
+      "share_reads_onehop": 0.0655,
+      "share_reads_unique": 0.0
+    },
+    "jump": {
+      "entries_surfaced": 21549,
+      "reads_direct": 0,
+      "reads_onehop": 511,
+      "reads_unique_onehop": 0,
+      "share_reads_onehop": 0.8163,
+      "share_reads_unique": 0.0
+    },
+    "verify": {
+      "entries_surfaced": 2385,
+      "reads_direct": 626,
+      "reads_onehop": 626,
+      "reads_unique_onehop": 0,
+      "share_reads_onehop": 1.0,
+      "share_reads_unique": 0.0
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "dataset": "mix",
+  "queries": 130,
+  "served_objects_resolved": 2651,
+  "served_objects_unresolved": 0,
+  "reads_total": 633,
+  "reads_unattributed": 0,
+  "per_class": {
+    "zoom": {
+      "entries_surfaced": 6688,
+      "reads_direct": 429,
+      "reads_onehop": 613,
+      "reads_unique_onehop": 0,
+      "share_reads_onehop": 0.9684,
+      "share_reads_unique": 0.0
+    },
+    "read": {
+      "entries_surfaced": 535,
+      "reads_direct": 142,
+      "reads_onehop": 142,
+      "reads_unique_onehop": 0,
+      "share_reads_onehop": 0.2243,
+      "share_reads_unique": 0.0
+    },
+    "jump": {
+      "entries_surfaced": 15449,
+      "reads_direct": 0,
+      "reads_onehop": 475,
+      "reads_unique_onehop": 0,
+      "share_reads_onehop": 0.7504,
+      "share_reads_unique": 0.0
+    },
+    "verify": {
+      "entries_surfaced": 2651,
+      "reads_direct": 633,
+      "reads_onehop": 633,
+      "reads_unique_onehop": 0,
+      "share_reads_onehop": 1.0,
+      "share_reads_unique": 0.0
+    }
+  }
+}

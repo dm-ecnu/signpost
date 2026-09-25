@@ -1,0 +1,74 @@
+{
+  "dataset": "mix",
+  "graph": "datasets/processed/mix/graph.unified.json",
+  "graph_sha256": "e402f38e95e2d916c83cf87e77ab88d6afdad996bcc65fed00fcf96dfdab0a69",
+  "script_sha256": "d0b8ade5c3ee487dca0673926a2c4e9f300e8efe43af7199f656e661c95cc134",
+  "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.35",
+  "python": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+  "objects": 28966,
+  "chunks": 1287,
+  "weights_seconds": 1.3526109354570508,
+  "totals": {
+    "bytes": 98296538,
+    "entries": 589202,
+    "degree": 572144
+  },
+  "e4_checked": true,
+  "batches": [
+    {
+      "edit_fraction": 0.001,
+      "units_edited": 1,
+      "dirty_objects": 45,
+      "dirty_share": 0.0015535455361458262,
+      "bytes_share": 0.00132418702274133,
+      "entries_share": 0.0014782706100793955,
+      "degree_share": 0.0014891356022260131,
+      "measured_share_of_full": 0.0016,
+      "measured_control_share_of_full": 0.0023
+    },
+    {
+      "edit_fraction": 0.005,
+      "units_edited": 6,
+      "dirty_objects": 546,
+      "dirty_share": 0.018849685838569358,
+      "bytes_share": 0.05792944610114346,
+      "entries_share": 0.05328393318420508,
+      "degree_share": 0.05500713107189798,
+      "measured_share_of_full": 0.0381,
+      "measured_control_share_of_full": 0.0228
+    },
+    {
+      "edit_fraction": 0.01,
+      "units_edited": 13,
+      "dirty_objects": 1189,
+      "dirty_share": 0.04104812538838638,
+      "bytes_share": 0.12992000796609948,
+      "entries_share": 0.11290185708806148,
+      "degree_share": 0.11473684946447048,
+      "measured_share_of_full": 0.0828,
+      "measured_control_share_of_full": 0.0466
+    },
+    {
+      "edit_fraction": 0.05,
+      "units_edited": 64,
+      "dirty_objects": 4449,
+      "dirty_share": 0.15359386867361735,
+      "bytes_share": 0.36628550437859775,
+      "entries_share": 0.3657692947410226,
+      "degree_share": 0.3736471937134707,
+      "measured_share_of_full": 0.2876,
+      "measured_control_share_of_full": 0.1726
+    },
+    {
+      "edit_fraction": 0.1,
+      "units_edited": 129,
+      "dirty_objects": 7350,
+      "dirty_share": 0.2537457709038183,
+      "bytes_share": 0.5603213512972349,
+      "entries_share": 0.5405124218858728,
+      "degree_share": 0.5508053916496546,
+      "measured_share_of_full": 0.4335,
+      "measured_control_share_of_full": 0.27
+    }
+  ]
+}

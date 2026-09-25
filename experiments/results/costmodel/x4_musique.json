@@ -1,0 +1,64 @@
+{
+  "dataset": "musique",
+  "graph": "datasets/processed/musique/graph.unified.json",
+  "graph_sha256": "84f8a058739942eb98213090cf36029046433aeca76d01a0e5ff70d1ff285437",
+  "script_sha256": "d0b8ade5c3ee487dca0673926a2c4e9f300e8efe43af7199f656e661c95cc134",
+  "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.35",
+  "python": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+  "objects": 1058932,
+  "chunks": 101967,
+  "weights_seconds": 1427.1517411554232,
+  "totals": {
+    "bytes": 166182559258,
+    "entries": 219808359,
+    "degree": 220046639
+  },
+  "e4_checked": false,
+  "batches": [
+    {
+      "edit_fraction": 0.001,
+      "units_edited": 102,
+      "dirty_objects": 43095,
+      "dirty_share": 0.04069666418618004,
+      "bytes_share": 0.4683879866307505,
+      "entries_share": 0.7011539947850663,
+      "degree_share": 0.7036506792544103
+    },
+    {
+      "edit_fraction": 0.005,
+      "units_edited": 510,
+      "dirty_objects": 109912,
+      "dirty_share": 0.10379514454185916,
+      "bytes_share": 0.708464065613626,
+      "entries_share": 0.8744165366340777,
+      "degree_share": 0.8769259684079974
+    },
+    {
+      "edit_fraction": 0.01,
+      "units_edited": 1020,
+      "dirty_objects": 151728,
+      "dirty_share": 0.14328398801811637,
+      "bytes_share": 0.7996940337203433,
+      "entries_share": 0.918656332810346,
+      "degree_share": 0.9210180256377376
+    },
+    {
+      "edit_fraction": 0.05,
+      "units_edited": 5098,
+      "dirty_objects": 277637,
+      "dirty_share": 0.2621858627371729,
+      "bytes_share": 0.890230963053833,
+      "entries_share": 0.9590295835837617,
+      "degree_share": 0.9606240111670145
+    },
+    {
+      "edit_fraction": 0.1,
+      "units_edited": 10197,
+      "dirty_objects": 366499,
+      "dirty_share": 0.3461024881673233,
+      "bytes_share": 0.9214528458805666,
+      "entries_share": 0.9699585128152474,
+      "degree_share": 0.9710330544971423
+    }
+  ]
+}

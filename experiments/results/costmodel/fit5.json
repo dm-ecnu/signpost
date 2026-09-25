@@ -1,0 +1,2221 @@
+{
+  "fit_corpora": [
+    "mix",
+    "graphrag-bench-medical",
+    "graphrag-bench-novel",
+    "agriculture",
+    "legal"
+  ],
+  "models": {
+    "dirty_share_scaled": {
+      "feature": "dirty_share",
+      "params": {
+        "a": 1.9628684649092638,
+        "c": 0.0
+      },
+      "in_sample": {
+        "mae": 0.10913098811358225,
+        "max_err": 0.49078802486518175,
+        "decisions_ok": 23,
+        "cells": 25
+      },
+      "loco": {
+        "mae": 0.11320527861737022,
+        "max_err": 0.5099252297363398,
+        "decisions_ok": 23,
+        "cells": 25
+      },
+      "loco_cells": [
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.001,
+          "pred": 0.0030632008355728304,
+          "measured": 0.0016,
+          "abs_err": 0.0014632008355728303,
+          "decision_ok": true
+        },
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.005,
+          "pred": 0.037166836804950344,
+          "measured": 0.0381,
+          "abs_err": 0.0009331631950496577,
+          "decision_ok": true
+        },
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.01,
+          "pred": 0.08093657318880212,
+          "measured": 0.0828,
+          "abs_err": 0.0018634268111978741,
+          "decision_ok": true
+        },
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.05,
+          "pred": 0.30284845594363385,
+          "measured": 0.2876,
+          "abs_err": 0.015248455943633832,
+          "decision_ok": true
+        },
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.1,
+          "pred": 0.5003228031435624,
+          "measured": 0.4335,
+          "abs_err": 0.06682280314356237,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.001,
+          "pred": 0.03531778956335631,
+          "measured": 0.025,
+          "abs_err": 0.010317789563356307,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.005,
+          "pred": 0.14093156412300833,
+          "measured": 0.167,
+          "abs_err": 0.026068435876991675,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.01,
+          "pred": 0.2665813923772567,
+          "measured": 0.2793,
+          "abs_err": 0.012718607622743294,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.05,
+          "pred": 0.797367018218852,
+          "measured": 0.6859,
+          "abs_err": 0.11146701821885208,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.1,
+          "pred": 1.0568169338573539,
+          "measured": 0.7729,
+          "abs_err": 0.28391693385735384,
+          "decision_ok": false
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.001,
+          "pred": 0.049853450226240575,
+          "measured": 0.1682,
+          "abs_err": 0.11834654977375941,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.005,
+          "pred": 0.11763173648888225,
+          "measured": 0.141,
+          "abs_err": 0.02336826351111773,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.01,
+          "pred": 0.22387373341296796,
+          "measured": 0.2926,
+          "abs_err": 0.06872626658703207,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.05,
+          "pred": 0.575959835697416,
+          "measured": 0.641,
+          "abs_err": 0.06504016430258397,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.1,
+          "pred": 0.8093561382547221,
+          "measured": 0.7352,
+          "abs_err": 0.07415613825472211,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.001,
+          "pred": 0.04054998125971906,
+          "measured": 0.0354,
+          "abs_err": 0.005149981259719057,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.005,
+          "pred": 0.318636932844459,
+          "measured": 0.5738,
+          "abs_err": 0.255163067155541,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.01,
+          "pred": 0.43263791375033583,
+          "measured": 0.6577,
+          "abs_err": 0.22506208624966412,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.05,
+          "pred": 0.82894325385259,
+          "measured": 0.8362,
+          "abs_err": 0.007256746147410009,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.1,
+          "pred": 1.0748364541658864,
+          "measured": 0.8871,
+          "abs_err": 0.18773645416588636,
+          "decision_ok": false
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.001,
+          "pred": 0.27497477026366024,
+          "measured": 0.7849,
+          "abs_err": 0.5099252297363398,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.005,
+          "pred": 0.4926283514509775,
+          "measured": 0.8791,
+          "abs_err": 0.3864716485490225,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.01,
+          "pred": 0.6216055632124989,
+          "measured": 0.915,
+          "abs_err": 0.2933944367875011,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.05,
+          "pred": 0.9191894507883224,
+          "measured": 0.9592,
+          "abs_err": 0.04001054921167768,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.1,
+          "pred": 1.0836045486739647,
+          "measured": 1.0441,
+          "abs_err": 0.03950454867396469,
+          "decision_ok": true
+        }
+      ]
+    },
+    "bytes_share_identity": {
+      "feature": "bytes_share",
+      "params": {
+        "a": 1.0,
+        "c": 0.0
+      },
+      "in_sample": {
+        "mae": 0.059821399657828005,
+        "max_err": 0.17411873270527045,
+        "decisions_ok": 24,
+        "cells": 25
+      },
+      "loco": {
+        "mae": 0.059821399657828005,
+        "max_err": 0.17411873270527045,
+        "decisions_ok": 24,
+        "cells": 25
+      },
+      "loco_cells": [
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.001,
+          "pred": 0.00132418702274133,
+          "measured": 0.0016,
+          "abs_err": 0.0002758129772586701,
+          "decision_ok": true
+        },
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.005,
+          "pred": 0.05792944610114346,
+          "measured": 0.0381,
+          "abs_err": 0.019829446101143455,
+          "decision_ok": true
+        },
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.01,
+          "pred": 0.12992000796609948,
+          "measured": 0.0828,
+          "abs_err": 0.047120007966099484,
+          "decision_ok": true
+        },
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.05,
+          "pred": 0.36628550437859775,
+          "measured": 0.2876,
+          "abs_err": 0.07868550437859773,
+          "decision_ok": true
+        },
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.1,
+          "pred": 0.5603213512972349,
+          "measured": 0.4335,
+          "abs_err": 0.12682135129723493,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.001,
+          "pred": 0.02621134993026915,
+          "measured": 0.025,
+          "abs_err": 0.0012113499302691469,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.005,
+          "pred": 0.21163339399024372,
+          "measured": 0.167,
+          "abs_err": 0.044633393990243714,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.01,
+          "pred": 0.3311190086897164,
+          "measured": 0.2793,
+          "abs_err": 0.051819008689716395,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.05,
+          "pred": 0.8006167407981052,
+          "measured": 0.6859,
+          "abs_err": 0.11471674079810523,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.1,
+          "pred": 0.8795700294261336,
+          "measured": 0.7729,
+          "abs_err": 0.10667002942613357,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.001,
+          "pred": 0.1885201841757147,
+          "measured": 0.1682,
+          "abs_err": 0.02032018417571471,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.005,
+          "pred": 0.20055016315815258,
+          "measured": 0.141,
+          "abs_err": 0.05955016315815259,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.01,
+          "pred": 0.3904859039122112,
+          "measured": 0.2926,
+          "abs_err": 0.09788590391221119,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.05,
+          "pred": 0.7588662948984486,
+          "measured": 0.641,
+          "abs_err": 0.11786629489844858,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.1,
+          "pred": 0.8472936952682986,
+          "measured": 0.7352,
+          "abs_err": 0.1120936952682986,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.001,
+          "pred": 0.03881275480885216,
+          "measured": 0.0354,
+          "abs_err": 0.003412754808852156,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.005,
+          "pred": 0.5743759164905197,
+          "measured": 0.5738,
+          "abs_err": 0.0005759164905196901,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.01,
+          "pred": 0.6650074083694254,
+          "measured": 0.6577,
+          "abs_err": 0.00730740836942545,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.05,
+          "pred": 0.9080546061794978,
+          "measured": 0.8362,
+          "abs_err": 0.07185460617949779,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.1,
+          "pred": 0.950232991037606,
+          "measured": 0.8871,
+          "abs_err": 0.06313299103760595,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.001,
+          "pred": 0.6107812672947296,
+          "measured": 0.7849,
+          "abs_err": 0.17411873270527045,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.005,
+          "pred": 0.8049439034622932,
+          "measured": 0.8791,
+          "abs_err": 0.07415609653770683,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.01,
+          "pred": 0.8832409068325646,
+          "measured": 0.915,
+          "abs_err": 0.031759093167435415,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.05,
+          "pred": 0.9683212418653833,
+          "measured": 0.9592,
+          "abs_err": 0.009121241865383212,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.1,
+          "pred": 0.9835027366836249,
+          "measured": 1.0441,
+          "abs_err": 0.06059726331637516,
+          "decision_ok": false
+        }
+      ]
+    },
+    "bytes_share_scaled": {
+      "feature": "bytes_share",
+      "params": {
+        "a": 0.9545853365819409,
+        "c": 0.0
+      },
+      "in_sample": {
+        "mae": 0.054546425018533046,
+        "max_err": 0.2018571583815162,
+        "decisions_ok": 24,
+        "cells": 25
+      },
+      "loco": {
+        "mae": 0.07011617385317707,
+        "max_err": 0.24349070999764222,
+        "decisions_ok": 24,
+        "cells": 25
+      },
+      "loco_cells": [
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.001,
+          "pred": 0.0012762792263938223,
+          "measured": 0.0016,
+          "abs_err": 0.0003237207736061778,
+          "decision_ok": true
+        },
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.005,
+          "pred": 0.05583361518098224,
+          "measured": 0.0381,
+          "abs_err": 0.017733615180982237,
+          "decision_ok": true
+        },
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.01,
+          "pred": 0.1252196286569735,
+          "measured": 0.0828,
+          "abs_err": 0.042419628656973504,
+          "decision_ok": true
+        },
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.05,
+          "pred": 0.3530336516965753,
+          "measured": 0.2876,
+          "abs_err": 0.06543365169657528,
+          "decision_ok": true
+        },
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.1,
+          "pred": 0.5400494707198703,
+          "measured": 0.4335,
+          "abs_err": 0.10654947071987031,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.001,
+          "pred": 0.025471857242043483,
+          "measured": 0.025,
+          "abs_err": 0.0004718572420434816,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.005,
+          "pred": 0.20566264666679368,
+          "measured": 0.167,
+          "abs_err": 0.03866264666679367,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.01,
+          "pred": 0.3217772507676717,
+          "measured": 0.2793,
+          "abs_err": 0.042477250767671726,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.05,
+          "pred": 0.7780291889373154,
+          "measured": 0.6859,
+          "abs_err": 0.09212918893731548,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.1,
+          "pred": 0.8547549929143388,
+          "measured": 0.7729,
+          "abs_err": 0.08185499291433873,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.001,
+          "pred": 0.18382937231954807,
+          "measured": 0.1682,
+          "abs_err": 0.015629372319548085,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.005,
+          "pred": 0.1955600180062596,
+          "measured": 0.141,
+          "abs_err": 0.05456001800625962,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.01,
+          "pred": 0.38076972463015585,
+          "measured": 0.2926,
+          "abs_err": 0.08816972463015582,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.05,
+          "pred": 0.7399839718786653,
+          "measured": 0.641,
+          "abs_err": 0.09898397187866526,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.1,
+          "pred": 0.8262110969842058,
+          "measured": 0.7352,
+          "abs_err": 0.09101109698420584,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.001,
+          "pred": 0.03714074698411062,
+          "measured": 0.0354,
+          "abs_err": 0.0017407469841106207,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.005,
+          "pred": 0.5496324776018117,
+          "measured": 0.5738,
+          "abs_err": 0.024167522398188312,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.01,
+          "pred": 0.6363596714133468,
+          "measured": 0.6577,
+          "abs_err": 0.021340328586653134,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.05,
+          "pred": 0.8689366818192709,
+          "measured": 0.8362,
+          "abs_err": 0.03273668181927081,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.1,
+          "pred": 0.9092980714688442,
+          "measured": 0.8871,
+          "abs_err": 0.022198071468844227,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.001,
+          "pred": 0.5414092900023578,
+          "measured": 0.7849,
+          "abs_err": 0.24349070999764222,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.005,
+          "pred": 0.7135191116707111,
+          "measured": 0.8791,
+          "abs_err": 0.16558088832928886,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.01,
+          "pred": 0.7829232130632894,
+          "measured": 0.915,
+          "abs_err": 0.13207678693671066,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.05,
+          "pred": 0.8583402015169537,
+          "measured": 0.9592,
+          "abs_err": 0.10085979848304638,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.1,
+          "pred": 0.8717973960493336,
+          "measured": 1.0441,
+          "abs_err": 0.17230260395066643,
+          "decision_ok": false
+        }
+      ]
+    },
+    "bytes_share_affine": {
+      "feature": "bytes_share",
+      "params": {
+        "a": 0.9944273367974225,
+        "c": -0.02962031140623056
+      },
+      "in_sample": {
+        "mae": 0.053352835078684324,
+        "max_err": 0.20714272240457798,
+        "decisions_ok": 24,
+        "cells": 25
+      },
+      "loco": {
+        "mae": 0.06885249786708623,
+        "max_err": 0.2455267613290003,
+        "decisions_ok": 24,
+        "cells": 25
+      },
+      "loco_cells": [
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.001,
+          "pred": -0.02259722453941786,
+          "measured": 0.0016,
+          "abs_err": 0.02419722453941786,
+          "decision_ok": true
+        },
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.005,
+          "pred": 0.03371021956794951,
+          "measured": 0.0381,
+          "abs_err": 0.0043897804320504885,
+          "decision_ok": true
+        },
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.01,
+          "pred": 0.10532202038763072,
+          "measured": 0.0828,
+          "abs_err": 0.022522020387630723,
+          "decision_ok": true
+        },
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.05,
+          "pred": 0.3404439365283701,
+          "measured": 0.2876,
+          "abs_err": 0.05284393652837005,
+          "decision_ok": true
+        },
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.1,
+          "pred": 0.5334589104562178,
+          "measured": 0.4335,
+          "abs_err": 0.09995891045621785,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.001,
+          "pred": -0.007209657073253245,
+          "measured": 0.025,
+          "abs_err": 0.032209657073253246,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.005,
+          "pred": 0.18132077462012713,
+          "measured": 0.167,
+          "abs_err": 0.014320774620127125,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.01,
+          "pred": 0.3028094284349576,
+          "measured": 0.2793,
+          "abs_err": 0.023509428434957624,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.05,
+          "pred": 0.7801777508595968,
+          "measured": 0.6859,
+          "abs_err": 0.09427775085959689,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.1,
+          "pred": 0.860454600702972,
+          "measured": 0.7729,
+          "abs_err": 0.08755460070297194,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.001,
+          "pred": 0.16636306905354464,
+          "measured": 0.1682,
+          "abs_err": 0.0018369309464553452,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.005,
+          "pred": 0.17845703782018787,
+          "measured": 0.141,
+          "abs_err": 0.03745703782018789,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.01,
+          "pred": 0.36940308350341416,
+          "measured": 0.2926,
+          "abs_err": 0.07680308350341414,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.05,
+          "pred": 0.7397429610156973,
+          "measured": 0.641,
+          "abs_err": 0.09874296101569724,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.1,
+          "pred": 0.8286407238255622,
+          "measured": 0.7352,
+          "abs_err": 0.09344072382556223,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.001,
+          "pred": 0.0012148988941267508,
+          "measured": 0.0354,
+          "abs_err": 0.03418510110587325,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.005,
+          "pred": 0.5416848137260819,
+          "measured": 0.5738,
+          "abs_err": 0.03211518627391807,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.01,
+          "pred": 0.633146658381485,
+          "measured": 0.6577,
+          "abs_err": 0.024553341618514968,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.05,
+          "pred": 0.8784206198841507,
+          "measured": 0.8362,
+          "abs_err": 0.0422206198841506,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.1,
+          "pred": 0.9209854370766387,
+          "measured": 0.8871,
+          "abs_err": 0.033885437076638714,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.001,
+          "pred": 0.5393732386709997,
+          "measured": 0.7849,
+          "abs_err": 0.2455267613290003,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.005,
+          "pred": 0.7170316068526656,
+          "measured": 0.8791,
+          "abs_err": 0.16206839314733434,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.01,
+          "pred": 0.7886731859269851,
+          "measured": 0.915,
+          "abs_err": 0.12632681407301494,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.05,
+          "pred": 0.8665214979638871,
+          "measured": 0.9592,
+          "abs_err": 0.09267850203611294,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.1,
+          "pred": 0.8804125310133128,
+          "measured": 1.0441,
+          "abs_err": 0.16368746898668718,
+          "decision_ok": false
+        }
+      ]
+    },
+    "entries_share_identity": {
+      "feature": "entries_share",
+      "params": {
+        "a": 1.0,
+        "c": 0.0
+      },
+      "in_sample": {
+        "mae": 0.0607832415420752,
+        "max_err": 0.12390374997032982,
+        "decisions_ok": 24,
+        "cells": 25
+      },
+      "loco": {
+        "mae": 0.0607832415420752,
+        "max_err": 0.12390374997032982,
+        "decisions_ok": 24,
+        "cells": 25
+      },
+      "loco_cells": [
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.001,
+          "pred": 0.0014782706100793955,
+          "measured": 0.0016,
+          "abs_err": 0.00012172938992060459,
+          "decision_ok": true
+        },
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.005,
+          "pred": 0.05328393318420508,
+          "measured": 0.0381,
+          "abs_err": 0.015183933184205078,
+          "decision_ok": true
+        },
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.01,
+          "pred": 0.11290185708806148,
+          "measured": 0.0828,
+          "abs_err": 0.030101857088061484,
+          "decision_ok": true
+        },
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.05,
+          "pred": 0.3657692947410226,
+          "measured": 0.2876,
+          "abs_err": 0.07816929474102258,
+          "decision_ok": true
+        },
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.1,
+          "pred": 0.5405124218858728,
+          "measured": 0.4335,
+          "abs_err": 0.10701242188587279,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.001,
+          "pred": 0.027809388820366748,
+          "measured": 0.025,
+          "abs_err": 0.0028093888203667462,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.005,
+          "pred": 0.21723827760325454,
+          "measured": 0.167,
+          "abs_err": 0.05023827760325453,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.01,
+          "pred": 0.34519485652372417,
+          "measured": 0.2793,
+          "abs_err": 0.06589485652372418,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.05,
+          "pred": 0.8037226829484357,
+          "measured": 0.6859,
+          "abs_err": 0.11782268294843579,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.1,
+          "pred": 0.8781967849866098,
+          "measured": 0.7729,
+          "abs_err": 0.10529678498660977,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.001,
+          "pred": 0.18138391842907473,
+          "measured": 0.1682,
+          "abs_err": 0.013183918429074737,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.005,
+          "pred": 0.20899836898839982,
+          "measured": 0.141,
+          "abs_err": 0.06799836898839984,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.01,
+          "pred": 0.40949411513382095,
+          "measured": 0.2926,
+          "abs_err": 0.11689411513382092,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.05,
+          "pred": 0.7649037499703298,
+          "measured": 0.641,
+          "abs_err": 0.12390374997032982,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.1,
+          "pred": 0.8514660454580905,
+          "measured": 0.7352,
+          "abs_err": 0.1162660454580905,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.001,
+          "pred": 0.044816039867976686,
+          "measured": 0.0354,
+          "abs_err": 0.009416039867976685,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.005,
+          "pred": 0.6432667807960808,
+          "measured": 0.5738,
+          "abs_err": 0.06946678079608082,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.01,
+          "pred": 0.7388705842788802,
+          "measured": 0.6577,
+          "abs_err": 0.08117058427888024,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.05,
+          "pred": 0.9141237830383537,
+          "measured": 0.8362,
+          "abs_err": 0.07792378303835368,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.1,
+          "pred": 0.9505113922607391,
+          "measured": 0.8871,
+          "abs_err": 0.06341139226073911,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.001,
+          "pred": 0.8210491617987363,
+          "measured": 0.7849,
+          "abs_err": 0.036149161798736285,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.005,
+          "pred": 0.9256741743781226,
+          "measured": 0.8791,
+          "abs_err": 0.04657417437812261,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.01,
+          "pred": 0.9590547974784251,
+          "measured": 0.915,
+          "abs_err": 0.04405479747842511,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.05,
+          "pred": 0.9874934103313737,
+          "measured": 0.9592,
+          "abs_err": 0.02829341033137367,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.1,
+          "pred": 0.9918765108279975,
+          "measured": 1.0441,
+          "abs_err": 0.05222348917200248,
+          "decision_ok": false
+        }
+      ]
+    },
+    "entries_share_scaled": {
+      "feature": "entries_share",
+      "params": {
+        "a": 0.9160433648953442,
+        "c": 0.0
+      },
+      "in_sample": {
+        "mae": 0.03519066034434662,
+        "max_err": 0.13549810346046787,
+        "decisions_ok": 24,
+        "cells": 25
+      },
+      "loco": {
+        "mae": 0.04587381488434098,
+        "max_err": 0.17956363508471362,
+        "decisions_ok": 24,
+        "cells": 25
+      },
+      "loco_cells": [
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.001,
+          "pred": 0.0013618867436631368,
+          "measured": 0.0016,
+          "abs_err": 0.00023811325633686328,
+          "decision_ok": true
+        },
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.005,
+          "pred": 0.049088902775320534,
+          "measured": 0.0381,
+          "abs_err": 0.010988902775320532,
+          "decision_ok": true
+        },
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.01,
+          "pred": 0.10401312280362708,
+          "measured": 0.0828,
+          "abs_err": 0.021213122803627082,
+          "decision_ok": true
+        },
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.05,
+          "pred": 0.33697237187179097,
+          "measured": 0.2876,
+          "abs_err": 0.04937237187179094,
+          "decision_ok": true
+        },
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.1,
+          "pred": 0.4979580173836313,
+          "measured": 0.4335,
+          "abs_err": 0.06445801738363133,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.001,
+          "pred": 0.025743011717705672,
+          "measured": 0.025,
+          "abs_err": 0.000743011717705671,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.005,
+          "pred": 0.20109638374285668,
+          "measured": 0.167,
+          "abs_err": 0.03409638374285667,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.01,
+          "pred": 0.3195451469208077,
+          "measured": 0.2793,
+          "abs_err": 0.04024514692080772,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.05,
+          "pred": 0.744002055513515,
+          "measured": 0.6859,
+          "abs_err": 0.058102055513514994,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.1,
+          "pred": 0.8129423581508111,
+          "measured": 0.7729,
+          "abs_err": 0.04004235815081103,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.001,
+          "pred": 0.1686916240255624,
+          "measured": 0.1682,
+          "abs_err": 0.0004916240255624094,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.005,
+          "pred": 0.19437376030186998,
+          "measured": 0.141,
+          "abs_err": 0.053373760301869994,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.01,
+          "pred": 0.3808398666712345,
+          "measured": 0.2926,
+          "abs_err": 0.08823986667123446,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.05,
+          "pred": 0.7113798010499618,
+          "measured": 0.641,
+          "abs_err": 0.07037980104996178,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.1,
+          "pred": 0.7918849215241388,
+          "measured": 0.7352,
+          "abs_err": 0.05668492152413884,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.001,
+          "pred": 0.04110860282818199,
+          "measured": 0.0354,
+          "abs_err": 0.005708602828181988,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.005,
+          "pred": 0.5900521037157661,
+          "measured": 0.5738,
+          "abs_err": 0.01625210371576613,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.01,
+          "pred": 0.6777470182556438,
+          "measured": 0.6577,
+          "abs_err": 0.02004701825564381,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.05,
+          "pred": 0.8385022782785078,
+          "measured": 0.8362,
+          "abs_err": 0.002302278278507708,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.1,
+          "pred": 0.8718796980549256,
+          "measured": 0.8871,
+          "abs_err": 0.0152203019450744,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.001,
+          "pred": 0.71564035442847,
+          "measured": 0.7849,
+          "abs_err": 0.06925964557153008,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.005,
+          "pred": 0.8068332872856976,
+          "measured": 0.8791,
+          "abs_err": 0.0722667127143024,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.01,
+          "pred": 0.8359284037026112,
+          "measured": 0.915,
+          "abs_err": 0.0790715962973888,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.05,
+          "pred": 0.8607159802917547,
+          "measured": 0.9592,
+          "abs_err": 0.09848401970824538,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.1,
+          "pred": 0.8645363649152864,
+          "measured": 1.0441,
+          "abs_err": 0.17956363508471362,
+          "decision_ok": false
+        }
+      ]
+    },
+    "entries_share_affine": {
+      "feature": "entries_share",
+      "params": {
+        "a": 0.9617904329498284,
+        "c": -0.03559703591537544
+      },
+      "in_sample": {
+        "mae": 0.03374237134244392,
+        "max_err": 0.12571969713335063,
+        "decisions_ok": 24,
+        "cells": 25
+      },
+      "loco": {
+        "mae": 0.04473673530265869,
+        "max_err": 0.17030710601957033,
+        "decisions_ok": 24,
+        "cells": 25
+      },
+      "loco_cells": [
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.001,
+          "pred": -0.041649990765265404,
+          "measured": 0.0016,
+          "abs_err": 0.0432499907652654,
+          "decision_ok": true
+        },
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.005,
+          "pred": 0.00883556089158808,
+          "measured": 0.0381,
+          "abs_err": 0.02926443910841192,
+          "decision_ok": true
+        },
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.01,
+          "pred": 0.06693430198221487,
+          "measured": 0.0828,
+          "abs_err": 0.015865698017785132,
+          "decision_ok": true
+        },
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.05,
+          "pred": 0.31335817635499036,
+          "measured": 0.2876,
+          "abs_err": 0.025758176354990336,
+          "decision_ok": true
+        },
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.1,
+          "pred": 0.4836485024275228,
+          "measured": 0.4335,
+          "abs_err": 0.05014850242752278,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.001,
+          "pred": -0.012569921787560362,
+          "measured": 0.025,
+          "abs_err": 0.03756992178756036,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.005,
+          "pred": 0.17225391097315815,
+          "measured": 0.167,
+          "abs_err": 0.005253910973158138,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.01,
+          "pred": 0.2970998386190524,
+          "measured": 0.2793,
+          "abs_err": 0.017799838619052433,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.05,
+          "pred": 0.744480757399548,
+          "measured": 0.6859,
+          "abs_err": 0.058580757399548045,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.1,
+          "pred": 0.8171443783949937,
+          "measured": 0.7729,
+          "abs_err": 0.04424437839499362,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.001,
+          "pred": 0.14474605304571297,
+          "measured": 0.1682,
+          "abs_err": 0.023453946954287014,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.005,
+          "pred": 0.1714853037564593,
+          "measured": 0.141,
+          "abs_err": 0.030485303756459303,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.01,
+          "pred": 0.365626628824764,
+          "measured": 0.2926,
+          "abs_err": 0.07302662882476396,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.05,
+          "pred": 0.7097720721857225,
+          "measured": 0.641,
+          "abs_err": 0.06877207218572245,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.1,
+          "pred": 0.7935909016124523,
+          "measured": 0.7352,
+          "abs_err": 0.058390901612452306,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.001,
+          "pred": 0.004096507314563513,
+          "measured": 0.0354,
+          "abs_err": 0.03130349268543649,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.005,
+          "pred": 0.5838057526232108,
+          "measured": 0.5738,
+          "abs_err": 0.010005752623210795,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.01,
+          "pred": 0.6764155615436548,
+          "measured": 0.6577,
+          "abs_err": 0.018715561543654835,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.05,
+          "pred": 0.8461804104152951,
+          "measured": 0.8362,
+          "abs_err": 0.009980410415295071,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.1,
+          "pred": 0.8814284802032633,
+          "measured": 0.8871,
+          "abs_err": 0.005671519796736746,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.001,
+          "pred": 0.7195931720483444,
+          "measured": 0.7849,
+          "abs_err": 0.06530682795165565,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.005,
+          "pred": 0.8140344189479777,
+          "measured": 0.8791,
+          "abs_err": 0.06506558105202231,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.01,
+          "pred": 0.8441659103586693,
+          "measured": 0.915,
+          "abs_err": 0.07083408964133076,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.05,
+          "pred": 0.8698364263444189,
+          "measured": 0.9592,
+          "abs_err": 0.08936357365558112,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.1,
+          "pred": 0.8737928939804297,
+          "measured": 1.0441,
+          "abs_err": 0.17030710601957033,
+          "decision_ok": false
+        }
+      ]
+    },
+    "degree_share_identity": {
+      "feature": "degree_share",
+      "params": {
+        "a": 1.0,
+        "c": 0.0
+      },
+      "in_sample": {
+        "mae": 0.06623546518683766,
+        "max_err": 0.13991607030611863,
+        "decisions_ok": 24,
+        "cells": 25
+      },
+      "loco": {
+        "mae": 0.06623546518683766,
+        "max_err": 0.13991607030611863,
+        "decisions_ok": 24,
+        "cells": 25
+      },
+      "loco_cells": [
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.001,
+          "pred": 0.0014891356022260131,
+          "measured": 0.0016,
+          "abs_err": 0.00011086439777398694,
+          "decision_ok": true
+        },
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.005,
+          "pred": 0.05500713107189798,
+          "measured": 0.0381,
+          "abs_err": 0.01690713107189798,
+          "decision_ok": true
+        },
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.01,
+          "pred": 0.11473684946447048,
+          "measured": 0.0828,
+          "abs_err": 0.03193684946447048,
+          "decision_ok": true
+        },
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.05,
+          "pred": 0.3736471937134707,
+          "measured": 0.2876,
+          "abs_err": 0.0860471937134707,
+          "decision_ok": true
+        },
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.1,
+          "pred": 0.5508053916496546,
+          "measured": 0.4335,
+          "abs_err": 0.11730539164965459,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.001,
+          "pred": 0.027046828255693267,
+          "measured": 0.025,
+          "abs_err": 0.0020468282556932657,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.005,
+          "pred": 0.2304950105487379,
+          "measured": 0.167,
+          "abs_err": 0.06349501054873788,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.01,
+          "pred": 0.35511596827916503,
+          "measured": 0.2793,
+          "abs_err": 0.07581596827916504,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.05,
+          "pred": 0.8132975151108126,
+          "measured": 0.6859,
+          "abs_err": 0.12739751511081265,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.1,
+          "pred": 0.8841775715516481,
+          "measured": 0.7729,
+          "abs_err": 0.11127757155164808,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.001,
+          "pred": 0.20841330559094318,
+          "measured": 0.1682,
+          "abs_err": 0.04021330559094319,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.005,
+          "pred": 0.20555783380784473,
+          "measured": 0.141,
+          "abs_err": 0.06455783380784474,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.01,
+          "pred": 0.40590976776392523,
+          "measured": 0.2926,
+          "abs_err": 0.1133097677639252,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.05,
+          "pred": 0.7809160703061186,
+          "measured": 0.641,
+          "abs_err": 0.13991607030611863,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.1,
+          "pred": 0.864012147939993,
+          "measured": 0.7352,
+          "abs_err": 0.12881214793999307,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.001,
+          "pred": 0.04279321003198026,
+          "measured": 0.0354,
+          "abs_err": 0.007393210031980256,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.005,
+          "pred": 0.6528178209184757,
+          "measured": 0.5738,
+          "abs_err": 0.07901782091847576,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.01,
+          "pred": 0.7443717721559496,
+          "measured": 0.6577,
+          "abs_err": 0.08667177215594968,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.05,
+          "pred": 0.9200807264616563,
+          "measured": 0.8362,
+          "abs_err": 0.08388072646165623,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.1,
+          "pred": 0.9548081752053382,
+          "measured": 0.8871,
+          "abs_err": 0.06770817520533823,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.001,
+          "pred": 0.8228169928553082,
+          "measured": 0.7849,
+          "abs_err": 0.03791699285530814,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.005,
+          "pred": 0.9272718006352163,
+          "measured": 0.8791,
+          "abs_err": 0.04817180063521631,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.01,
+          "pred": 0.9602858652417083,
+          "measured": 0.915,
+          "abs_err": 0.0452858652417083,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.05,
+          "pred": 0.9880474783524152,
+          "measured": 0.9592,
+          "abs_err": 0.02884747835241519,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.1,
+          "pred": 0.992256661639256,
+          "measured": 1.0441,
+          "abs_err": 0.05184333836074406,
+          "decision_ok": false
+        }
+      ]
+    },
+    "degree_share_scaled": {
+      "feature": "degree_share",
+      "params": {
+        "a": 0.9089495810330392,
+        "c": 0.0
+      },
+      "in_sample": {
+        "mae": 0.03862979356149941,
+        "max_err": 0.14218872312575614,
+        "decisions_ok": 24,
+        "cells": 25
+      },
+      "loco": {
+        "mae": 0.05032195514576861,
+        "max_err": 0.18941520967771086,
+        "decisions_ok": 24,
+        "cells": 25
+      },
+      "loco_cells": [
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.001,
+          "pred": 0.0013620837955736244,
+          "measured": 0.0016,
+          "abs_err": 0.0002379162044263757,
+          "decision_ok": true
+        },
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.005,
+          "pred": 0.050313968561376876,
+          "measured": 0.0381,
+          "abs_err": 0.012213968561376874,
+          "decision_ok": true
+        },
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.01,
+          "pred": 0.1049475972350072,
+          "measured": 0.0828,
+          "abs_err": 0.0221475972350072,
+          "decision_ok": true
+        },
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.05,
+          "pred": 0.3417679270161143,
+          "measured": 0.2876,
+          "abs_err": 0.05416792701611428,
+          "decision_ok": true
+        },
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.1,
+          "pred": 0.5038111353721502,
+          "measured": 0.4335,
+          "abs_err": 0.07031113537215017,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.001,
+          "pred": 0.024865114014465627,
+          "measured": 0.025,
+          "abs_err": 0.00013488598553437411,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.005,
+          "pred": 0.2119022852837988,
+          "measured": 0.167,
+          "abs_err": 0.044902285283798804,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.01,
+          "pred": 0.32647077713299383,
+          "measured": 0.2793,
+          "abs_err": 0.047170777132993835,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.05,
+          "pred": 0.7476934171257259,
+          "measured": 0.6859,
+          "abs_err": 0.06179341712572595,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.1,
+          "pred": 0.8128559814046685,
+          "measured": 0.7729,
+          "abs_err": 0.039955981404668495,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.001,
+          "pred": 0.19263702303060123,
+          "measured": 0.1682,
+          "abs_err": 0.024437023030601246,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.005,
+          "pred": 0.1899977021768569,
+          "measured": 0.141,
+          "abs_err": 0.04899770217685692,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.01,
+          "pred": 0.3751835760167667,
+          "measured": 0.2926,
+          "abs_err": 0.08258357601676669,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.05,
+          "pred": 0.7218029894683635,
+          "measured": 0.641,
+          "abs_err": 0.0808029894683635,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.1,
+          "pred": 0.798608935113347,
+          "measured": 0.7352,
+          "abs_err": 0.063408935113347,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.001,
+          "pred": 0.038942975731622045,
+          "measured": 0.0354,
+          "abs_err": 0.0035429757316220445,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.005,
+          "pred": 0.5940818306969656,
+          "measured": 0.5738,
+          "abs_err": 0.020281830696965653,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.01,
+          "pred": 0.6773983965379149,
+          "measured": 0.6577,
+          "abs_err": 0.01969839653791494,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.05,
+          "pred": 0.8372982857549701,
+          "measured": 0.8362,
+          "abs_err": 0.001098285754970063,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.1,
+          "pred": 0.868901201092139,
+          "measured": 0.8871,
+          "abs_err": 0.018198798907861025,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.001,
+          "pred": 0.7087371606559476,
+          "measured": 0.7849,
+          "abs_err": 0.07616283934405244,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.005,
+          "pred": 0.7987097846119688,
+          "measured": 0.8791,
+          "abs_err": 0.08039021538803115,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.01,
+          "pred": 0.8271465993764784,
+          "measured": 0.915,
+          "abs_err": 0.08785340062352165,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.05,
+          "pred": 0.8510591911461665,
+          "measured": 0.9592,
+          "abs_err": 0.10814080885383359,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.1,
+          "pred": 0.8546847903222892,
+          "measured": 1.0441,
+          "abs_err": 0.18941520967771086,
+          "decision_ok": false
+        }
+      ]
+    },
+    "degree_share_affine": {
+      "feature": "degree_share",
+      "params": {
+        "a": 0.9598355468080284,
+        "c": -0.03978596453545691
+      },
+      "in_sample": {
+        "mae": 0.035820753253846496,
+        "max_err": 0.13148274913703284,
+        "decisions_ok": 24,
+        "cells": 25
+      },
+      "loco": {
+        "mae": 0.04775853003583798,
+        "max_err": 0.1790881236433508,
+        "decisions_ok": 24,
+        "cells": 25
+      },
+      "loco_cells": [
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.001,
+          "pred": -0.04749953274000228,
+          "measured": 0.0016,
+          "abs_err": 0.049099532740002276,
+          "decision_ok": true
+        },
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.005,
+          "pred": 0.004674840626685696,
+          "measured": 0.0381,
+          "abs_err": 0.033425159373314306,
+          "decision_ok": true
+        },
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.01,
+          "pred": 0.06290498548080702,
+          "measured": 0.0828,
+          "abs_err": 0.019895014519192983,
+          "decision_ok": true
+        },
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.05,
+          "pred": 0.3153151299713673,
+          "measured": 0.2876,
+          "abs_err": 0.02771512997136727,
+          "decision_ok": true
+        },
+        {
+          "corpus": "mix",
+          "edit_fraction": 0.1,
+          "pred": 0.4880255964784702,
+          "measured": 0.4335,
+          "abs_err": 0.05452559647847022,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.001,
+          "pred": -0.017107882000713205,
+          "measured": 0.025,
+          "abs_err": 0.042107882000713207,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.005,
+          "pred": 0.18101008200219987,
+          "measured": 0.167,
+          "abs_err": 0.014010082002199858,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.01,
+          "pred": 0.3023660466481882,
+          "measured": 0.2793,
+          "abs_err": 0.023066046648188232,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.05,
+          "pred": 0.7485435164043027,
+          "measured": 0.6859,
+          "abs_err": 0.06264351640430277,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-medical",
+          "edit_fraction": 0.1,
+          "pred": 0.817566558597145,
+          "measured": 0.7729,
+          "abs_err": 0.04466655859714497,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.001,
+          "pred": 0.16733639976457473,
+          "measured": 0.1682,
+          "abs_err": 0.0008636002354252548,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.005,
+          "pred": 0.16457697540707095,
+          "measured": 0.141,
+          "abs_err": 0.02357697540707096,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.01,
+          "pred": 0.35818981721617466,
+          "measured": 0.2926,
+          "abs_err": 0.06558981721617463,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.05,
+          "pred": 0.7205823057630268,
+          "measured": 0.641,
+          "abs_err": 0.07958230576302683,
+          "decision_ok": true
+        },
+        {
+          "corpus": "graphrag-bench-novel",
+          "edit_fraction": 0.1,
+          "pred": 0.8008833411271831,
+          "measured": 0.7352,
+          "abs_err": 0.0656833411271831,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.001,
+          "pred": -0.0029530978979996417,
+          "measured": 0.0354,
+          "abs_err": 0.03835309789799964,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.005,
+          "pred": 0.5874371983662771,
+          "measured": 0.5738,
+          "abs_err": 0.013637198366277081,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.01,
+          "pred": 0.6760443847496387,
+          "measured": 0.6577,
+          "abs_err": 0.01834438474963873,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.05,
+          "pred": 0.8460979526509086,
+          "measured": 0.8362,
+          "abs_err": 0.009897952650908537,
+          "decision_ok": true
+        },
+        {
+          "corpus": "agriculture",
+          "edit_fraction": 0.1,
+          "pred": 0.8797076601715444,
+          "measured": 0.8871,
+          "abs_err": 0.007392339828455552,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.001,
+          "pred": 0.713077806763649,
+          "measured": 0.7849,
+          "abs_err": 0.07182219323635108,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.005,
+          "pred": 0.8067409031828949,
+          "measured": 0.8791,
+          "abs_err": 0.07235909681710506,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.01,
+          "pred": 0.836344131432039,
+          "measured": 0.915,
+          "abs_err": 0.07865586856796103,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.05,
+          "pred": 0.8612375633458749,
+          "measured": 0.9592,
+          "abs_err": 0.09796243665412518,
+          "decision_ok": true
+        },
+        {
+          "corpus": "legal",
+          "edit_fraction": 0.1,
+          "pred": 0.8650118763566492,
+          "measured": 1.0441,
+          "abs_err": 0.1790881236433508,
+          "decision_ok": false
+        }
+      ]
+    }
+  }
+}

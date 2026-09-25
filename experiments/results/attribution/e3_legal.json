@@ -1,0 +1,42 @@
+{
+  "dataset": "legal",
+  "queries": 100,
+  "served_objects_resolved": 2858,
+  "served_objects_unresolved": 0,
+  "reads_total": 711,
+  "reads_unattributed": 0,
+  "per_class": {
+    "zoom": {
+      "entries_surfaced": 5535,
+      "reads_direct": 314,
+      "reads_onehop": 660,
+      "reads_unique_onehop": 0,
+      "share_reads_onehop": 0.9283,
+      "share_reads_unique": 0.0
+    },
+    "read": {
+      "entries_surfaced": 1197,
+      "reads_direct": 312,
+      "reads_onehop": 312,
+      "reads_unique_onehop": 0,
+      "share_reads_onehop": 0.4388,
+      "share_reads_unique": 0.0
+    },
+    "jump": {
+      "entries_surfaced": 271876,
+      "reads_direct": 0,
+      "reads_onehop": 663,
+      "reads_unique_onehop": 0,
+      "share_reads_onehop": 0.9325,
+      "share_reads_unique": 0.0
+    },
+    "verify": {
+      "entries_surfaced": 2858,
+      "reads_direct": 711,
+      "reads_onehop": 711,
+      "reads_unique_onehop": 0,
+      "share_reads_onehop": 1.0,
+      "share_reads_unique": 0.0
+    }
+  }
+}

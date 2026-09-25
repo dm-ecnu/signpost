@@ -1,0 +1,42 @@
+{
+  "dataset": "agriculture",
+  "queries": 100,
+  "served_objects_resolved": 2730,
+  "served_objects_unresolved": 0,
+  "reads_total": 669,
+  "reads_unattributed": 0,
+  "per_class": {
+    "zoom": {
+      "entries_surfaced": 8453,
+      "reads_direct": 316,
+      "reads_onehop": 644,
+      "reads_unique_onehop": 0,
+      "share_reads_onehop": 0.9626,
+      "share_reads_unique": 0.0
+    },
+    "read": {
+      "entries_surfaced": 1025,
+      "reads_direct": 274,
+      "reads_onehop": 274,
+      "reads_unique_onehop": 0,
+      "share_reads_onehop": 0.4096,
+      "share_reads_unique": 0.0
+    },
+    "jump": {
+      "entries_surfaced": 53980,
+      "reads_direct": 0,
+      "reads_onehop": 613,
+      "reads_unique_onehop": 0,
+      "share_reads_onehop": 0.9163,
+      "share_reads_unique": 0.0
+    },
+    "verify": {
+      "entries_surfaced": 2730,
+      "reads_direct": 669,
+      "reads_onehop": 669,
+      "reads_unique_onehop": 0,
+      "share_reads_onehop": 1.0,
+      "share_reads_unique": 0.0
+    }
+  }
+}

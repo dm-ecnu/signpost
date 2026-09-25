@@ -1,0 +1,389 @@
+{
+  "dataset": "medical",
+  "graph": "/data/srl/signpost_re_v2/datasets/processed/graphrag-bench-medical/graph.unified.json",
+  "objects_counted": 6034,
+  "by_budget": {
+    "1": {
+      "chunk": {
+        "n": 539,
+        "mean": 4.0,
+        "p50": 4.0,
+        "p95": 4.0,
+        "max": 4
+      },
+      "summary": {
+        "n": 66,
+        "mean": 3.0,
+        "p50": 3.0,
+        "p95": 3.0,
+        "max": 3
+      },
+      "entity": {
+        "n": 2043,
+        "mean": 2.94,
+        "p50": 3.0,
+        "p95": 3.0,
+        "max": 3
+      },
+      "relation": {
+        "n": 3386,
+        "mean": 2.99,
+        "p50": 3.0,
+        "p95": 3.0,
+        "max": 3
+      }
+    },
+    "2": {
+      "chunk": {
+        "n": 539,
+        "mean": 4.0,
+        "p50": 4.0,
+        "p95": 4.0,
+        "max": 4
+      },
+      "summary": {
+        "n": 66,
+        "mean": 5.0,
+        "p50": 5.0,
+        "p95": 5.0,
+        "max": 5
+      },
+      "entity": {
+        "n": 2043,
+        "mean": 4.21,
+        "p50": 4.0,
+        "p95": 6.0,
+        "max": 6
+      },
+      "relation": {
+        "n": 3386,
+        "mean": 4.34,
+        "p50": 4.0,
+        "p95": 6.0,
+        "max": 6
+      }
+    },
+    "4": {
+      "chunk": {
+        "n": 539,
+        "mean": 4.0,
+        "p50": 4.0,
+        "p95": 4.0,
+        "max": 4
+      },
+      "summary": {
+        "n": 66,
+        "mean": 8.92,
+        "p50": 9.0,
+        "p95": 9.0,
+        "max": 9
+      },
+      "entity": {
+        "n": 2043,
+        "mean": 5.47,
+        "p50": 4.0,
+        "p95": 12.0,
+        "max": 12
+      },
+      "relation": {
+        "n": 3386,
+        "mean": 6.37,
+        "p50": 6.0,
+        "p95": 10.0,
+        "max": 12
+      }
+    },
+    "8": {
+      "chunk": {
+        "n": 539,
+        "mean": 4.0,
+        "p50": 4.0,
+        "p95": 4.0,
+        "max": 4
+      },
+      "summary": {
+        "n": 66,
+        "mean": 16.38,
+        "p50": 17.0,
+        "p95": 17.0,
+        "max": 17
+      },
+      "entity": {
+        "n": 2043,
+        "mean": 6.64,
+        "p50": 4.0,
+        "p95": 22.0,
+        "max": 24
+      },
+      "relation": {
+        "n": 3386,
+        "mean": 9.79,
+        "p50": 10.0,
+        "p95": 14.0,
+        "max": 24
+      }
+    },
+    "16": {
+      "chunk": {
+        "n": 539,
+        "mean": 4.0,
+        "p50": 4.0,
+        "p95": 4.0,
+        "max": 4
+      },
+      "summary": {
+        "n": 66,
+        "mean": 21.23,
+        "p50": 21.0,
+        "p95": 23.0,
+        "max": 23
+      },
+      "entity": {
+        "n": 2043,
+        "mean": 7.54,
+        "p50": 4.0,
+        "p95": 27.0,
+        "max": 48
+      },
+      "relation": {
+        "n": 3386,
+        "mean": 15.43,
+        "p50": 18.0,
+        "p95": 22.0,
+        "max": 48
+      }
+    },
+    "32": {
+      "chunk": {
+        "n": 539,
+        "mean": 4.0,
+        "p50": 4.0,
+        "p95": 4.0,
+        "max": 4
+      },
+      "summary": {
+        "n": 66,
+        "mean": 24.14,
+        "p50": 21.0,
+        "p95": 39.0,
+        "max": 39
+      },
+      "entity": {
+        "n": 2043,
+        "mean": 8.18,
+        "p50": 4.0,
+        "p95": 28.0,
+        "max": 96
+      },
+      "relation": {
+        "n": 3386,
+        "mean": 23.72,
+        "p50": 28.0,
+        "p95": 36.0,
+        "max": 72
+      }
+    },
+    "64": {
+      "chunk": {
+        "n": 539,
+        "mean": 4.0,
+        "p50": 4.0,
+        "p95": 4.0,
+        "max": 4
+      },
+      "summary": {
+        "n": 66,
+        "mean": 29.39,
+        "p50": 21.0,
+        "p95": 68.0,
+        "max": 71
+      },
+      "entity": {
+        "n": 2043,
+        "mean": 8.66,
+        "p50": 4.0,
+        "p95": 28.0,
+        "max": 191
+      },
+      "relation": {
+        "n": 3386,
+        "mean": 35.32,
+        "p50": 28.0,
+        "p95": 68.0,
+        "max": 104
+      }
+    },
+    "inf": {
+      "chunk": {
+        "n": 539,
+        "mean": 4.0,
+        "p50": 4.0,
+        "p95": 4.0,
+        "max": 4
+      },
+      "summary": {
+        "n": 66,
+        "mean": 42.82,
+        "p50": 21.0,
+        "p95": 69.5,
+        "max": 542
+      },
+      "entity": {
+        "n": 2043,
+        "mean": 8.84,
+        "p50": 4.0,
+        "p95": 28.0,
+        "max": 330
+      },
+      "relation": {
+        "n": 3386,
+        "mean": 45.5,
+        "p50": 28.0,
+        "p95": 151.0,
+        "max": 239
+      }
+    }
+  },
+  "coverage": {
+    "1": {
+      "p": {
+        "greedy_over_full": 0.5271,
+        "truncate_over_full": 0.5271,
+        "greedy_over_truncate": 1.0,
+        "lists": 3090,
+        "lists_differing": 0
+      },
+      "s": {
+        "greedy_over_full": 0.48,
+        "truncate_over_full": 0.3171,
+        "greedy_over_truncate": 1.5138,
+        "lists": 4165,
+        "lists_differing": 2697
+      },
+      "v": {
+        "greedy_over_full": 0.3559,
+        "truncate_over_full": 0.3559,
+        "greedy_over_truncate": 1.0,
+        "lists": 66,
+        "lists_differing": 0
+      }
+    },
+    "2": {
+      "p": {
+        "greedy_over_full": 0.642,
+        "truncate_over_full": 0.642,
+        "greedy_over_truncate": 1.0,
+        "lists": 1468,
+        "lists_differing": 0
+      },
+      "s": {
+        "greedy_over_full": 0.6367,
+        "truncate_over_full": 0.464,
+        "greedy_over_truncate": 1.3724,
+        "lists": 3709,
+        "lists_differing": 3384
+      },
+      "v": {
+        "greedy_over_full": 0.53,
+        "truncate_over_full": 0.53,
+        "greedy_over_truncate": 1.0,
+        "lists": 65,
+        "lists_differing": 0
+      }
+    },
+    "4": {
+      "p": {
+        "greedy_over_full": 0.7375,
+        "truncate_over_full": 0.7375,
+        "greedy_over_truncate": 1.0,
+        "lists": 679,
+        "lists_differing": 0
+      },
+      "s": {
+        "greedy_over_full": 0.7727,
+        "truncate_over_full": 0.5938,
+        "greedy_over_truncate": 1.3013,
+        "lists": 3257,
+        "lists_differing": 3229
+      },
+      "v": {
+        "greedy_over_full": 0.728,
+        "truncate_over_full": 0.728,
+        "greedy_over_truncate": 1.0,
+        "lists": 63,
+        "lists_differing": 0
+      }
+    },
+    "8": {
+      "p": {
+        "greedy_over_full": 0.8107,
+        "truncate_over_full": 0.8107,
+        "greedy_over_truncate": 1.0,
+        "lists": 286,
+        "lists_differing": 0
+      },
+      "s": {
+        "greedy_over_full": 0.8734,
+        "truncate_over_full": 0.7468,
+        "greedy_over_truncate": 1.1696,
+        "lists": 2780,
+        "lists_differing": 2768
+      },
+      "v": {
+        "greedy_over_full": 0.9247,
+        "truncate_over_full": 0.9247,
+        "greedy_over_truncate": 1.0,
+        "lists": 53,
+        "lists_differing": 0
+      }
+    },
+    "16": {
+      "p": {
+        "greedy_over_full": 0.8226,
+        "truncate_over_full": 0.8226,
+        "greedy_over_truncate": 1.0,
+        "lists": 91,
+        "lists_differing": 0
+      },
+      "s": {
+        "greedy_over_full": 0.9339,
+        "truncate_over_full": 0.8533,
+        "greedy_over_truncate": 1.0944,
+        "lists": 2131,
+        "lists_differing": 2131
+      }
+    },
+    "32": {
+      "p": {
+        "greedy_over_full": 0.862,
+        "truncate_over_full": 0.862,
+        "greedy_over_truncate": 1.0,
+        "lists": 38,
+        "lists_differing": 0
+      },
+      "s": {
+        "greedy_over_full": 0.9676,
+        "truncate_over_full": 0.9231,
+        "greedy_over_truncate": 1.0481,
+        "lists": 1545,
+        "lists_differing": 1545
+      }
+    },
+    "64": {
+      "p": {
+        "greedy_over_full": 0.8677,
+        "truncate_over_full": 0.8677,
+        "greedy_over_truncate": 1.0,
+        "lists": 9,
+        "lists_differing": 0
+      },
+      "s": {
+        "greedy_over_full": 0.988,
+        "truncate_over_full": 0.9707,
+        "greedy_over_truncate": 1.0179,
+        "lists": 951,
+        "lists_differing": 951
+      }
+    }
+  }
+}

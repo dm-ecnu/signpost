@@ -1,0 +1,42 @@
+{
+  "dataset": "graphrag-bench-medical",
+  "queries": 100,
+  "served_objects_resolved": 2109,
+  "served_objects_unresolved": 0,
+  "reads_total": 521,
+  "reads_unattributed": 0,
+  "per_class": {
+    "zoom": {
+      "entries_surfaced": 8856,
+      "reads_direct": 308,
+      "reads_onehop": 517,
+      "reads_unique_onehop": 0,
+      "share_reads_onehop": 0.9923,
+      "share_reads_unique": 0.0
+    },
+    "read": {
+      "entries_surfaced": 480,
+      "reads_direct": 78,
+      "reads_onehop": 78,
+      "reads_unique_onehop": 0,
+      "share_reads_onehop": 0.1497,
+      "share_reads_unique": 0.0
+    },
+    "jump": {
+      "entries_surfaced": 29465,
+      "reads_direct": 0,
+      "reads_onehop": 507,
+      "reads_unique_onehop": 0,
+      "share_reads_onehop": 0.9731,
+      "share_reads_unique": 0.0
+    },
+    "verify": {
+      "entries_surfaced": 2109,
+      "reads_direct": 521,
+      "reads_onehop": 521,
+      "reads_unique_onehop": 0,
+      "share_reads_onehop": 1.0,
+      "share_reads_unique": 0.0
+    }
+  }
+}

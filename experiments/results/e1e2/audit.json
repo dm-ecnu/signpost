@@ -1,0 +1,375 @@
+{
+  "manifest": [
+    {
+      "file": "full__agriculture.judged.jsonl",
+      "sha256": "69825be13b312c7e3dd0f96e19289214096d603569d4cb782d9e97d169754f34",
+      "rows": 100
+    },
+    {
+      "file": "full__graphrag-bench-medical_q100.judged.jsonl",
+      "sha256": "217e13d2a5cbb99d11e612a6fbce181dc7092150619f06172da73a523ab6c327",
+      "rows": 100
+    },
+    {
+      "file": "full__graphrag-bench-novel_q100.judged.jsonl",
+      "sha256": "9aea750589a80a2c076ae1f3885ce5a1831062ea4eea8d1a3d4997302ae1cba2",
+      "rows": 100
+    },
+    {
+      "file": "full__legal_q100.judged.jsonl",
+      "sha256": "d4c697f026d3dc4ed2b704e458dfc1da4d61f8787d9d0cb38c4bbe21d871ab07",
+      "rows": 100
+    },
+    {
+      "file": "full__mix.judged.jsonl",
+      "sha256": "1c757ce2d6667b7c9e51f22dba82a63bcb4fb676760e3ef42752627d2b2d41d0",
+      "rows": 130
+    },
+    {
+      "file": "fullrep2__agriculture.judged.jsonl",
+      "sha256": "062f81e8a815a018ac8b85c1b2fe21845fe9cfbd2a3e03cc3be8090a7980cfc9",
+      "rows": 100
+    },
+    {
+      "file": "fullrep2__graphrag-bench-medical_q100.judged.jsonl",
+      "sha256": "11271168a518d1d21a879078854efb22f49a42b3ad5c105aa5909bb5307d706d",
+      "rows": 100
+    },
+    {
+      "file": "fullrep2__graphrag-bench-novel_q100.judged.jsonl",
+      "sha256": "1b5e9a24731ec2bfa6b992b940e6e91c0c88a1f6b52ccb1958ae811d4e9561c3",
+      "rows": 100
+    },
+    {
+      "file": "fullrep2__legal_q100.judged.jsonl",
+      "sha256": "611c331194c5c0bce2030542cf47c63dcc3eda129a1c49d955307b0600682c1d",
+      "rows": 100
+    },
+    {
+      "file": "fullrep2__mix.judged.jsonl",
+      "sha256": "fce46338e598e9f7457d25c031f01a1e8a8e439e89803af2cde4ffadf678a92d",
+      "rows": 130
+    },
+    {
+      "file": "online_cues__agriculture.judged.jsonl",
+      "sha256": "3f94d9f8d25f387c4bed53091aad4687c8db725f79dad0c92a6f3bf05195c90d",
+      "rows": 100
+    },
+    {
+      "file": "online_cues__graphrag-bench-medical_q100.judged.jsonl",
+      "sha256": "f76cfbec0571f9152777a09b552580b3a629720dabc4895edc65afa937a7769e",
+      "rows": 100
+    },
+    {
+      "file": "online_cues__graphrag-bench-novel_q100.judged.jsonl",
+      "sha256": "d9a5301fa8a3384356ad70d6722e757b1e1d1570d0a6ec71925c41c8b84ed219",
+      "rows": 100
+    },
+    {
+      "file": "online_cues__legal_q100.judged.jsonl",
+      "sha256": "f6471e0b0e2ba1776fba299230c7b66771caa267a5e0599abf78912f8f144b3f",
+      "rows": 100
+    },
+    {
+      "file": "online_cues__mix.judged.jsonl",
+      "sha256": "eec6f3df82377b16907e66144d9ef0f99feb4139949d57f17f70958df4c68fb3",
+      "rows": 130
+    },
+    {
+      "file": "prefix_b8__agriculture.judged.jsonl",
+      "sha256": "e153e0eb1fba40143d8f621c16ee7c30291c3a8c29b1a17a1ee7e3a54c5cbc5f",
+      "rows": 100
+    },
+    {
+      "file": "prefix_b8__graphrag-bench-medical_q100.judged.jsonl",
+      "sha256": "f684bd7b1b7bb3e1412e4407064f4decc88eb810091c201f99f9faed71852405",
+      "rows": 100
+    },
+    {
+      "file": "prefix_b8__graphrag-bench-novel_q100.judged.jsonl",
+      "sha256": "6b0da5afeaad7d0c73360cec6f1fcb8422c72e29ead8904575ab1fa2c831e0b9",
+      "rows": 100
+    },
+    {
+      "file": "prefix_b8__legal_q100.judged.jsonl",
+      "sha256": "ad514cfd9d91f4c680da106c03af2863ef6923cf025ff255ded1b2b6cc1c4c3b",
+      "rows": 100
+    },
+    {
+      "file": "prefix_b8__mix.judged.jsonl",
+      "sha256": "a781af922afa2b50e467384dc6dedaac31cad7fb69cb98827dc973c7c12afed0",
+      "rows": 130
+    },
+    {
+      "file": "provenance_only__agriculture.judged.jsonl",
+      "sha256": "35bac8b42d0ba2c662cc526cfaa478974c73e84c795e3c3da55bed06957827a1",
+      "rows": 100
+    },
+    {
+      "file": "provenance_only__graphrag-bench-medical_q100.judged.jsonl",
+      "sha256": "2296687a1ded3d41517c1e922f5ad583b05472e1a3f3a5f6ff273dfa8a5a4369",
+      "rows": 100
+    },
+    {
+      "file": "provenance_only__graphrag-bench-novel_q100.judged.jsonl",
+      "sha256": "aded91cb7a2f0c97045fd6d3a7a57c212fcdeabb6d01e74b17538173eb20be2a",
+      "rows": 100
+    },
+    {
+      "file": "provenance_only__legal_q100.judged.jsonl",
+      "sha256": "ab944519c5a1bff7057db47ab5fe3fdac1e64e43e126736c8a693a61842d7899",
+      "rows": 100
+    },
+    {
+      "file": "provenance_only__mix.judged.jsonl",
+      "sha256": "b1acb5298fdd41f055ac46151c3979d4c3b2b1d4d9c2fdbaa2514159b7df5179",
+      "rows": 130
+    }
+  ],
+  "paired_query_ids_equal": true,
+  "scale": "0-5; pilot, not main 0-10 panel",
+  "bootstrap_seed": 20260920,
+  "bootstrap_samples": 10000,
+  "results": [
+    {
+      "corpus": "ALL",
+      "comparison": "fullrep2 - full",
+      "n": 530,
+      "difference": 0.06729559748427674,
+      "ci95": [
+        -0.0481132075471698,
+        0.18522012578616356
+      ]
+    },
+    {
+      "corpus": "ALL",
+      "comparison": "online_cues - prefix_b8",
+      "n": 530,
+      "difference": -0.04213836477987423,
+      "ci95": [
+        -0.1619496855345912,
+        0.07641509433962261
+      ]
+    },
+    {
+      "corpus": "ALL",
+      "comparison": "prefix_b8 - full",
+      "n": 530,
+      "difference": 0.07955974842767297,
+      "ci95": [
+        -0.022955974842767273,
+        0.18427672955974844
+      ]
+    },
+    {
+      "corpus": "ALL",
+      "comparison": "provenance_only - full",
+      "n": 530,
+      "difference": 0.049685534591194964,
+      "ci95": [
+        -0.09119496855345913,
+        0.190251572327044
+      ]
+    },
+    {
+      "corpus": "agriculture",
+      "comparison": "fullrep2 - full",
+      "n": 100,
+      "difference": -0.00999999999999997,
+      "ci95": [
+        -0.31499999999999995,
+        0.3166666666666667
+      ]
+    },
+    {
+      "corpus": "agriculture",
+      "comparison": "online_cues - prefix_b8",
+      "n": 100,
+      "difference": -0.01999999999999999,
+      "ci95": [
+        -0.29,
+        0.23
+      ]
+    },
+    {
+      "corpus": "agriculture",
+      "comparison": "prefix_b8 - full",
+      "n": 100,
+      "difference": -0.085,
+      "ci95": [
+        -0.37333333333333335,
+        0.17666666666666664
+      ]
+    },
+    {
+      "corpus": "agriculture",
+      "comparison": "provenance_only - full",
+      "n": 100,
+      "difference": -0.021666666666666654,
+      "ci95": [
+        -0.35666666666666663,
+        0.32
+      ]
+    },
+    {
+      "corpus": "graphrag-bench-medical_q100",
+      "comparison": "fullrep2 - full",
+      "n": 100,
+      "difference": 0.2233333333333333,
+      "ci95": [
+        -0.18000000000000005,
+        0.6466666666666666
+      ]
+    },
+    {
+      "corpus": "graphrag-bench-medical_q100",
+      "comparison": "online_cues - prefix_b8",
+      "n": 100,
+      "difference": -0.013333333333333378,
+      "ci95": [
+        -0.30000000000000004,
+        0.2633333333333333
+      ]
+    },
+    {
+      "corpus": "graphrag-bench-medical_q100",
+      "comparison": "prefix_b8 - full",
+      "n": 100,
+      "difference": 0.2033333333333333,
+      "ci95": [
+        -0.1,
+        0.5333333333333333
+      ]
+    },
+    {
+      "corpus": "graphrag-bench-medical_q100",
+      "comparison": "provenance_only - full",
+      "n": 100,
+      "difference": 0.024999999999999963,
+      "ci95": [
+        -0.38500000000000006,
+        0.45166666666666655
+      ]
+    },
+    {
+      "corpus": "graphrag-bench-novel_q100",
+      "comparison": "fullrep2 - full",
+      "n": 100,
+      "difference": -0.05999999999999996,
+      "ci95": [
+        -0.26166666666666666,
+        0.09833333333333337
+      ]
+    },
+    {
+      "corpus": "graphrag-bench-novel_q100",
+      "comparison": "online_cues - prefix_b8",
+      "n": 100,
+      "difference": 0.21833333333333332,
+      "ci95": [
+        -0.06,
+        0.555
+      ]
+    },
+    {
+      "corpus": "graphrag-bench-novel_q100",
+      "comparison": "prefix_b8 - full",
+      "n": 100,
+      "difference": -0.04499999999999999,
+      "ci95": [
+        -0.24833333333333332,
+        0.1133333333333333
+      ]
+    },
+    {
+      "corpus": "graphrag-bench-novel_q100",
+      "comparison": "provenance_only - full",
+      "n": 100,
+      "difference": 0.05666666666666665,
+      "ci95": [
+        -0.2266666666666666,
+        0.38
+      ]
+    },
+    {
+      "corpus": "legal_q100",
+      "comparison": "fullrep2 - full",
+      "n": 100,
+      "difference": -0.014999999999999975,
+      "ci95": [
+        -0.12333333333333331,
+        0.08833333333333336
+      ]
+    },
+    {
+      "corpus": "legal_q100",
+      "comparison": "online_cues - prefix_b8",
+      "n": 100,
+      "difference": -0.05333333333333334,
+      "ci95": [
+        -0.22666666666666668,
+        0.085
+      ]
+    },
+    {
+      "corpus": "legal_q100",
+      "comparison": "prefix_b8 - full",
+      "n": 100,
+      "difference": 0.03833333333333335,
+      "ci95": [
+        -0.07666666666666665,
+        0.15166666666666667
+      ]
+    },
+    {
+      "corpus": "legal_q100",
+      "comparison": "provenance_only - full",
+      "n": 100,
+      "difference": 0.15500000000000003,
+      "ci95": [
+        0.00666666666666669,
+        0.34666666666666673
+      ]
+    },
+    {
+      "corpus": "mix",
+      "comparison": "fullrep2 - full",
+      "n": 130,
+      "difference": 0.16794871794871796,
+      "ci95": [
+        -0.03846153846153846,
+        0.391025641025641
+      ]
+    },
+    {
+      "corpus": "mix",
+      "comparison": "online_cues - prefix_b8",
+      "n": 130,
+      "difference": -0.2730769230769231,
+      "ci95": [
+        -0.5782051282051283,
+        -0.014102564102564179
+      ]
+    },
+    {
+      "corpus": "mix",
+      "comparison": "prefix_b8 - full",
+      "n": 130,
+      "difference": 0.2384615384615385,
+      "ci95": [
+        0.029487179487179598,
+        0.47948717948717956
+      ]
+    },
+    {
+      "corpus": "mix",
+      "comparison": "provenance_only - full",
+      "n": 130,
+      "difference": 0.03717948717948719,
+      "ci95": [
+        -0.28076923076923077,
+        0.341025641025641
+      ]
+    }
+  ]
+}
