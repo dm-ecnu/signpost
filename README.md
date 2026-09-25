@@ -134,7 +134,7 @@ Signpost is maintained by the ECNU Data Management Group (DM Group), Software
 Engineering Institute, East China Normal University.
 
 For questions, issues, or collaboration, contact Junjie Yao at
-<junjie.yao@sei.encu.edu.cn>.
+<junjie.yao@sei.ecnu.edu.cn>.
 
 ## License
 
