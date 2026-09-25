@@ -2,21 +2,38 @@
 
 [![CI](https://github.com/dm-ecnu/signpost/actions/workflows/ci.yml/badge.svg)](https://github.com/dm-ecnu/signpost/actions/workflows/ci.yml)
 
-Signpost is a materialized action interface for agentic graph RAG serving.
-Offline, it builds source-backed objects (chunks, summaries, entities,
-relations) over a document corpus and compiles, for every retrievable object, a
-*signpost sketch*: four ranked cue lists for the actions **zoom** (broader
-scope), **read** (adjacent source text), **jump** (semantic relation), and
-**verify** (file-line provenance). Online, a fixed two-LLM-call controller
-retrieves objects already carrying sketches and follows typed cues
-deterministically — no per-hop LLM calls, no per-query graph reconstruction.
+Signpost is the artifact for the paper *SignPost: Physical Design of
+Source-Backed Navigation Views for Language-Model Retrieval* (PVLDB
+submission). It treats the neighborhood an agent reads around a retrieved object as a **navigation view** σ(o): a small, per-object
+list of entries drawn from four classes — structural (C_str: enclosing section
+or summary), sequential (C_seq: adjacent source text), semantic (C_sem:
+relations to other objects), and provenance (C_prov: file/line locators). The
+paper studies the physical decisions behind that view:
 
-## Framework
+- **Residency** — eager (precompute every σ(o)) vs lazy construction with an
+  exact object-keyed cache (unbounded, LRU, or none);
+- **Depth** — the per-class entry cap b (b = ∞ vs b = 8);
+- **Construction time** — offline vs at query time, which are byte-identical
+  for query-independent entries;
+- **Maintenance** — recomputing only the dirty set D = ΔV ∪ N(ΔV) after an
+  edit batch vs a full rebuild, with a size-weighted cost model for the choice.
 
-![Signpost framework](docs/framework.png)
+The online controller (two model calls per question) consumes these views; the
+views themselves are built and served without model calls.
 
-`docs/framework.pdf` is the vector copy for high-resolution viewing.
+### Terminology in the code
 
+The code predates the paper's terminology. The table maps each paper term to
+the field that holds it and to the action name used in older docs.
+
+| Paper | Code (`offline_signpost` value) | Older docs |
+|---|---|---|
+| navigation view σ(o) | the `offline_signpost` dict of an object | "signpost sketch" |
+| C_str (structural) | `vertical` (parent/child summaries, child chunks) | `zoom` |
+| C_seq (sequential) | `horizontal` (prev/next chunk) | `read` |
+| C_sem (semantic) | `semantic` (`neighboring_entities`) | `jump` |
+| C_prov (provenance) | `provenance` (`source_chunk_ids`, `source_locates`) | `verify` |
+| depth cap b | `SIGNPOST_CUE_TOPB` and per-class `SIGNPOST_CUE_TOPB_{V,H,S,P}` | `topb` |
 
 ## Repository layout
 
@@ -34,10 +51,12 @@ deterministically — no per-hop LLM calls, no per-query graph reconstruction.
 | `tests/` | Unit tests; the four suites in the quickstart run fully offline |
 | `GAPS_IMPLEMENTED.md` | What was added on top of the original system + how to re-run experiments |
 | `METHOD_MAP.md` | Method concept → code file:symbol map, with implementation notes |
+| `docs/REPRODUCING.md` | Paper table/figure → script → frozen result files |
+| `docs/README.md` | Index of `docs/`; the `*.zh.md` files are internal development notes |
 
 Vendored third-party baseline repositories (ClueRAG, HiPRAG, …) and benchmark
 corpora are **not** included; fetch them from their upstreams (see
-`docs/baseline_harness.zh.md`).
+`BASELINES.md`).
 
 ## Datasets & baselines
 
@@ -63,7 +82,7 @@ make test                     # or: python -m pytest tests/test_sketch_chaining.
 ```
 
 Expected: `79 passed`. These suites exercise the serving mechanisms directly —
-deterministic sketch chaining (Alg. 3), the iso-call attribution baseline,
+deterministic cue following (`sketch_chaining.py`), the iso-call attribution baseline,
 bootstrap CIs, and the in-repo silver-evidence builder — without any external
 service.
 
@@ -96,13 +115,18 @@ Elasticsearch and the LLM endpoint are external (see `docs/environment_setup.md`
 `METHOD_MAP.md` maps each method concept to its implementing file and symbol, with implementation notes. `GAPS_IMPLEMENTED.md` records what was added on top of the original
 system and how to re-run the experiments.
 
-## Running experiments
+## Reproducing the paper
 
-See `GAPS_IMPLEMENTED.md` for the experiment runbook: sketch chaining is on by
-default (`AgentConfig.enable_sketch_chaining=True`); the iso-call baseline runs
-via `scripts/baselines/run_baseline_method.sh iso_call <dataset>`; report
-confidence intervals with `signpost.benchmark.stats.summarize_with_ci` /
-`paired_bootstrap_diff`.
+`docs/REPRODUCING.md` lists, for every table and figure in the paper, the
+script that produces it, the frozen result files it reads, and whether it needs
+a model endpoint. The physical-design experiments (residency, depth,
+construction time, maintenance, serialization order, cost model) make **no
+model, Elasticsearch, or network calls**; they need only a built
+`graph.unified.json` per corpus.
+
+`GAPS_IMPLEMENTED.md` is the older runbook for the end-to-end QA runs
+(controller, iso-call baseline, bootstrap CIs via
+`signpost.benchmark.stats.summarize_with_ci` / `paired_bootstrap_diff`).
 
 ## Contact
 
